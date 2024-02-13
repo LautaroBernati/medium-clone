@@ -14,7 +14,7 @@ export class PersistanceService {
 
   public get(key: string): unknown {
     try {
-      const item = localStorage.getItem(key);
+      const item = localStorage.getItem(this._appKey.concat(key));
 
       return item ? JSON.parse(item) : null;
     } catch (err) {

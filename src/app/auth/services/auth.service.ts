@@ -15,6 +15,12 @@ export class AuthService {
   private readonly _http = inject(HttpClient);
   private readonly _url = environment.apiUrl;
 
+  public getCurrentUser(): Observable<ICurrentUser> {
+    const url = this._url.concat('/user');
+
+    return this._http.get<AuthResponseDTO>(url).pipe(map(this._mapResponse));
+  }
+
   public registerUser(data: IRegisterRequest): Observable<ICurrentUser> {
     const url = this._url.concat('/users');
 
