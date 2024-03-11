@@ -83,10 +83,23 @@ export const getCurrentUserEffect = createEffect(
             return authActions.getcurrentusersuccess({ currentUser });
           }),
           catchError(() => {
-            return of(authActions.getcurrentuserfailure());
+            return of(authActions.logOut());
           }),
         );
       }),
+    ),
+  { functional: true },
+);
+
+export const logOutEffect = createEffect(
+  (actions$ = inject(Actions), persistanceService = inject(PersistanceService)) =>
+    actions$.pipe(
+      ofType(authActions.logOut),
+      tap(() => persistanceService.deleteData()),
+      map(() => {
+        return authActions.logOutSuccess();
+      }),
+      catchError(() => of(authActions.logOutFailure())),
     ),
   { functional: true },
 );

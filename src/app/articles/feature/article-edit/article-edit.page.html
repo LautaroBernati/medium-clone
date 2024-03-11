@@ -1,0 +1,13 @@
+<ng-container *ngIf="data$ | async as data">
+  <ng-container *ngIf="data.article">
+    <art-form-ui
+      [action]="'edit'"
+      [articleToEdit]="data.article"
+      [isLoading]="data.isLoading"
+      [isSubmitting]="data.isSubmitting"
+      (save)="onEdit($event)"
+    ></art-form-ui>
+  </ng-container>
+  <mc-backend-error-messages *ngIf="data.error" [errors]="data.error"></mc-backend-error-messages>
+  <mc-loading *ngIf="data.isLoading"></mc-loading>
+</ng-container>

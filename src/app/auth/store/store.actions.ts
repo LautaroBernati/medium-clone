@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { IRegisterRequest } from '../types/register-request.interface';
 import { ICurrentUser } from '../../shared/types/current-user.interface';
@@ -18,5 +19,9 @@ export const authActions = createActionGroup({
     GetCurrentUser: emptyProps(),
     GetCurrentUserSuccess: props<{ currentUser: ICurrentUser }>(),
     GetCurrentUserFailure: emptyProps(),
+
+    'Log Out': emptyProps(),
+    'Log Out Success': emptyProps(),
+    'Log Out Failure': emptyProps(),
   },
 });

@@ -23,4 +23,18 @@ export class PersistanceService {
       return null;
     }
   }
+
+  public deleteData(): void {
+    const arr = [];
+
+    for (let i = 0; i < localStorage.length; i++) {
+      if (localStorage.key(i)!.substring(0, this._appKey.length) === this._appKey) {
+        arr.push(localStorage.key(i));
+      }
+    }
+
+    for (let i = 0; i < arr.length; i++) {
+      localStorage.removeItem(arr[i]!);
+    }
+  }
 }

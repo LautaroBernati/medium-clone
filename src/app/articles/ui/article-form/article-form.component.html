@@ -1,0 +1,77 @@
+<div class="container">
+  <h1 [ngSwitch]="action">
+    <ng-container *ngSwitchCase="'create'">Create</ng-container>
+    <ng-container *ngSwitchCase="'edit'">Edit</ng-container>
+    <ng-container *ngSwitchDefault>Unknown</ng-container>
+    Article
+  </h1>
+  <hr>
+  <form #formTemplate="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <fieldset class="form-group">
+      <input
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="Title"
+        [formControl]="form.controls.title"
+      />
+    </fieldset>
+    <fieldset class="form-group">
+      <textarea
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="Body"
+        [formControl]="form.controls.body"
+        [rows]="4"
+      ></textarea>
+    </fieldset>
+    <fieldset class="form-group">
+      <input
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="Description"
+        [formControl]="form.controls.description"
+      />
+    </fieldset>
+    <fieldset class="form-group" style="border: 1px solid #dee2e6; padding: 1rem; border-radius: 5px;">
+      <span>
+        <h5>Tags</h5>
+      </span>
+      <div *ngIf="form.controls.tagList.value" style="display: flex; gap: 10px; margin-top: 1rem;">
+        <div *ngFor="let tag of form.controls.tagList.value; index as i;" style="display: flex; gap: 3px;">
+          <input
+            type="text"
+            [value]="tag"
+            [readonly]="true"
+            class="form-control form-control-sm"
+          />
+          <button
+            type="button"
+            [disabled]="action === 'edit' || isLoading"
+            class="btn btn-sm btn-warning"
+            (click)="removeTag(i)"
+          >X</button>
+        </div>
+      </div>
+      <div *ngIf="action === 'create'" style="display: flex; gap: 5px; margin-top: 1rem;">
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          placeholder="New tag"
+          [formControl]="addTagControl"
+        />
+        <button
+          type="button"
+          class="btn btn-lg btn-primary"
+          [disabled]="addTagControl.invalid || !addTagControl.value"
+          (click)="addTag()"
+        >Add tag</button>
+      </div>
+    </fieldset>
+    <ng-container *ngIf="errors">
+      <mc-backend-error-messages [errors]="errors"></mc-backend-error-messages>
+    </ng-container>
+    <button type="submit" class="btn btn-lg btn-primary pull-xs-right" [disabled]="form.invalid || isLoading || isSubmitting">
+      Save
+    </button>
+  </form>
+</div>

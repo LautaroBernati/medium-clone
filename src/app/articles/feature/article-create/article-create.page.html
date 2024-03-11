@@ -1,0 +1,7 @@
+<art-form-ui *ngIf="data$ | async as data"
+  [action]="'create'"
+  [isLoading]="data.isLoading"
+  [isSubmitting]="data.isSubmitting"
+  [errors]="data.errors"
+  (save)="onCreate($event)"
+></art-form-ui>

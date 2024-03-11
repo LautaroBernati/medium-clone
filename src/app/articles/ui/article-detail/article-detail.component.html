@@ -1,0 +1,94 @@
+<ng-container *ngIf="article && !showConfirmation; else confirmation">
+  <div class="article-page">
+    <div class="banner">
+      <div class="container">
+        <h1>{{ article.title }}</h1>
+        <div class="article-meta">
+          <a [routerLink]="['/profiles', article.author.username]">
+            <img [src]="article.author.image" alt="profilePic">
+          </a>
+          <div class="info">
+            <a [routerLink]="['/profiles', article.author.username]">
+              {{ article.author.username }}
+            </a>
+            <span class="data">{{ article.createdAt }}</span>
+          </div>
+          <span>
+            <ng-container *ngIf="article.author.username === user?.username;">
+              <ng-container *ngTemplateOutlet="sameAuthor;"></ng-container>
+            </ng-container>
+            <ng-container *ngIf="!user || article.author.username !== user.username">
+              <ng-container
+                *ngTemplateOutlet="
+                diffAuthor;
+                context: { $implicit: {
+                  username: article.author.username,
+                  isFavorited: article.favorited,
+                  isFollowing: article.author.following
+                } }
+                "
+              ></ng-container>
+            </ng-container>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="container page">
+      <!-- loading... -->
+      <div class="row article-content">
+        <div class="col-xs-12">
+          <div>
+            <p>{{ article.body }}</p>
+          </div>
+          <mc-tag-list [tags]="article.tagList"></mc-tag-list>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ng-container>
+
+<ng-template #confirmation>
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <span>
+      <h1>Are you sure?</h1>
+    </span>
+    <span>
+      <div style="display: flex; align-items: center; justify-content: space-evenly; gap: 2rem">
+        <button type="button" class="btn btn-danger"
+          (click)="deleteArticleEmitter$.emit(true); showConfirmation = false;">
+          Yes
+        </button>
+        <button type="button" class="btn btn-secondary"
+          (click)="showConfirmation = false;">
+          No
+        </button>
+      </div>
+    </span>
+  </div>
+</ng-template>
+
+<ng-template #sameAuthor>
+  <button type="button" class="btn btn-outline-secondary"
+    [disabled]="isLoading"
+    (click)="editArticleEmitter$.emit()">
+    <i class="ion-edit"></i>
+    Edit
+  </button>
+  <button type="button" class="btn btn-outline-danger"
+    [disabled]="isLoading"
+    (click)="showConfirmation = true;">
+    Delete
+  </button>
+</ng-template>
+
+<ng-template #diffAuthor let-data>
+  <button type="button" class="btn btn-secondary" [disabled]="isLoading"
+    (click)="followAuthorEmitter$.emit(data.username)">
+    {{ data.isFollowing ? 'Unfollow' : 'Follow' }}
+  </button>
+  <button type="button" class="btn btn-info" [disabled]="isLoading"
+    (click)="markAsFavoriteEmitter$.emit()">
+    {{ data.isFavorited ? 'Unfavorite' : 'Favorite' }}
+  </button>
+</ng-template>

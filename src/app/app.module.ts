@@ -6,19 +6,27 @@ import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { authFeatureKey, authReducer } from './auth/store/store.reducers';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { provideEffects } from '@ngrx/effects';
+import { EffectsModule, provideEffects } from '@ngrx/effects';
 import * as authEffects from './auth/store/store.effects';
 import * as feedEffects from './shared/components/feed/store/effects';
 import * as popularTagsEffects from './shared/components/popular-tags/store/effects';
+import * as globalEffects from './shared/store/effects';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { TopbarComponent } from './shared/components/top-bar/top-bar.component';
 import { authInterceptor } from './shared/services/auth.interceptor';
 import { feedFeatureKey, feedReducer } from './shared/components/feed/store/reducers';
 import { popularTagsFeatureKey, popularTagsReducer } from './shared/components/popular-tags/store/reducers';
+import { ErrorPagesModule } from './error-pages/feature/error-pages.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, TopbarComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ErrorPagesModule,
+    TopbarComponent,
+    EffectsModule.forRoot(globalEffects),
+  ],
   providers: [
     provideHttpClient(withInterceptors([authInterceptor])),
     provideStore({

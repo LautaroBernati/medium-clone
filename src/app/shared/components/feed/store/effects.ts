@@ -3,6 +3,7 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { switchMap, of, map, catchError } from 'rxjs';
 import { FeedService } from '../services/feed.service';
 import { feedActions } from './actions';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export const getFeedEffect = createEffect(
   (actions$ = inject(Actions), feedService = inject(FeedService)) =>
@@ -13,8 +14,8 @@ export const getFeedEffect = createEffect(
           map((feed) => {
             return feedActions.getFeedSuccess({ feed });
           }),
-          catchError(() => {
-            return of(feedActions.getFeedFailure());
+          catchError((err: HttpErrorResponse) => {
+            return of(feedActions.getFeedFailure(err));
           }),
         );
       }),
