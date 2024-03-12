@@ -5,6 +5,7 @@ import { ArticleDetailRoutingModule } from './article-detail-routing.module';
 import { BackendErrorMessagesComponent } from '../../../shared/components/backend-error-messages/backend-error-messages.component';
 import { ArticleDetailComponent } from '../../ui/article-detail/article-detail.component';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
+import { FavArticleModule } from '../../../shared/components/fav-article/feature/fav-article.module';
 
 @NgModule({
   declarations: [ArticleDetailPage],
@@ -14,6 +15,7 @@ import { LoadingComponent } from '../../../shared/components/loading/loading.com
     BackendErrorMessagesComponent,
     ArticleDetailComponent,
     LoadingComponent,
+    FavArticleModule,
   ],
   exports: [],
   providers: [],

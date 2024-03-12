@@ -89,9 +89,5 @@
     (click)="followAuthorEmitter$.emit(data.username)">
     {{ data.isFollowing ? 'Unfollow' : 'Follow' }}
   </button>
-  <app-fav-article
-    [articleSlug]="data.slug"
-    [isFavorited]="data.isFavorited"
-    [favCount]="data.favCount"
-  ></app-fav-article>
+  <ng-content></ng-content>
 </ng-template>

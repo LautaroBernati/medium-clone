@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable, delay, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 declare type ArticleDTO = {
   article: {
@@ -51,7 +51,6 @@ export class ArticlesService {
   public getArticlesBySlug(slug: string): Observable<Article> {
     return this._http.get<ArticleDTO>(this._url.concat('/' + slug)).pipe(
       map((data) => this._mapToArticle(data)),
-      delay(3000),
     );
   }
 

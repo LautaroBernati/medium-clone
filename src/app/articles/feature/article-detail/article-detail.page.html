@@ -7,6 +7,12 @@
     (deleteArticle)="onDeleteArticle($event)"
     (editArticle)="onEditArticle()"
     (followAuthor)="onFollowAuthor($event)"
-  ></art-article-detail-ui>
+  >
+    <app-fav-article
+      [articleSlug]="data.article.slug"
+      [isFavorited]="data.article.favorited"
+      [favCount]="data.article.favoritesCount"
+    ></app-fav-article>
+  </art-article-detail-ui>
   <mc-loading *ngIf="data.isLoading"></mc-loading>
 </div>

@@ -4,14 +4,14 @@ import { CommonModule } from '@angular/common';
 import { ICurrentUser } from '../../../shared/types/current-user.interface';
 import { RouterModule } from '@angular/router';
 import { TagListComponent } from '../../../shared/components/tag-list/tag-list.component';
-import { FavArticleModule } from '../../../shared/components/fav-article/feature/fav-article.module';
+
 
 @Component({
   selector: 'art-article-detail-ui',
   templateUrl: 'article-detail.component.html',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, RouterModule, TagListComponent, FavArticleModule],
+  imports: [CommonModule, RouterModule, TagListComponent],
 })
 export class ArticleDetailComponent {
   @Input('article') public article: Article | null = null;
