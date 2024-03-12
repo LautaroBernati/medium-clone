@@ -52,7 +52,20 @@ const authFeature = createFeature({
 
     on(authActions.logOut, (state) => ({ ...state })),
     on(authActions.logOutSuccess, (state) => ({ ...state, isLoading: false, currentUser: null })),
-    on(authActions.logOutFailure, () => (initialState)),
+    on(authActions.logOutFailure, () => initialState),
+
+    on(authActions.updateCurrentUser, (state) => ({ ...state, isSubmitting: true })),
+    on(authActions.updateCurrentUserSuccess, (state, { currentUser }) => ({
+      ...state,
+      isSubmitting: false,
+      currentUser,
+    })),
+    on(authActions.updateCurrentUserFailure, (state, { errors }) => ({
+      ...state,
+      isSubmitting: false,
+      validationErrors: errors,
+    })),
+
     on(routerNavigatedAction, (state) => ({ ...state, validationErrors: null })),
   ),
 });

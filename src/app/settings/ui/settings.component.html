@@ -1,0 +1,50 @@
+<div class="container page">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 col-xs-12">
+      <h1 class="text-xs-center">Settings</h1>
+      <hr>
+      <mc-backend-error-messages *ngIf="errors"
+        [errors]="errors"
+      ></mc-backend-error-messages>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <fieldset>
+          <fieldset class="form-group" style="display: flex; flex-direction: column; gap: 1rem;">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              [formControl]="form.controls.image"
+              placeholder="URL of profile picture"
+            />
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              [formControl]="form.controls.username"
+              placeholder="Username"
+            />
+            <textarea
+              type="text"
+              class="form-control form-control-lg"
+              [formControl]="form.controls.bio"
+              placeholder="Biography about you"
+              rows="4"
+            ></textarea>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              [formControl]="form.controls.email"
+              placeholder="Email"
+            />
+          </fieldset>
+          <button type="button" class="btn btn-lg btn-warning" (click)="onLogout()"
+            [disabled]="isSubmitting">
+            Log Out
+          </button>
+          <button type="submit" class="btn btn-lg btn-primary pull-xs-right"
+            [disabled]="form.invalid || isSubmitting">
+            Save
+          </button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>

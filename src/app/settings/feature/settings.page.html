@@ -1,0 +1,9 @@
+<div class="container">
+  <stg-settings-ui *ngIf="(data$ | async) as data"
+    [currentUser]="data.currentUser"
+    [errors]="data.error"
+    [isSubmitting]="data.isSubmitting"
+    (saveSettings)="onSaveSettings($event)"
+    (logout)="onLogout()"
+  ></stg-settings-ui>
+</div>

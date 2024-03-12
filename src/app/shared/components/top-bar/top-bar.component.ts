@@ -22,6 +22,5 @@ export class TopbarComponent {
 
   public onLogout(): void {
     this._store.dispatch(authActions.logOut());
-    this._router.navigate(['/login']);
   }
 }

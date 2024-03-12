@@ -103,3 +103,24 @@ export const logOutEffect = createEffect(
     ),
   { functional: true },
 );
+
+export const redirectAfterLogoutEffect = createEffect(
+  (actions$ = inject(Actions), router = inject(Router)) =>
+    actions$.pipe(
+      ofType(authActions.logOutSuccess),
+      tap(() => router.navigate(['/home'])),
+    ),
+  { functional: true, dispatch: false },
+);
+
+export const updateCurrentUserEffect = createEffect(
+  (actions$ = inject(Actions), authService = inject(AuthService)) =>
+    actions$.pipe(
+      ofType(authActions.updateCurrentUser),
+      switchMap(({ currentUserReq }) => authService.updateCurrentUser(currentUserReq).pipe(
+        map(data => authActions.updateCurrentUserSuccess({ currentUser: data })),
+        catchError((err: HttpErrorResponse) => of(authActions.updateCurrentUserFailure({ errors: err.error.errors }))),
+      )),
+    ),
+  { functional: true },
+);

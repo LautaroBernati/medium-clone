@@ -17,6 +17,7 @@ import { authInterceptor } from './shared/services/auth.interceptor';
 import { feedFeatureKey, feedReducer } from './shared/components/feed/store/reducers';
 import { popularTagsFeatureKey, popularTagsReducer } from './shared/components/popular-tags/store/reducers';
 import { ErrorPagesModule } from './error-pages/feature/error-pages.module';
+import { SettingsModule } from './settings/feature/settings.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,7 @@ import { ErrorPagesModule } from './error-pages/feature/error-pages.module';
     AppRoutingModule,
     ErrorPagesModule,
     TopbarComponent,
+    SettingsModule,
     EffectsModule.forRoot(globalEffects),
   ],
   providers: [
