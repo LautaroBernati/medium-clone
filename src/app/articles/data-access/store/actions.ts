@@ -23,14 +23,6 @@ export const articleActions = createActionGroup({
     'Delete Article Success': emptyProps(),
     'Delete Article Failure': props<{ errors: IBackendErrors }>(),
 
-    'Favorite Article': props<{ slug: string }>(),
-    'Favorite Article Success': props<{ article: Article }>(),
-    'Favorite Article Failure': props<{ errors: IBackendErrors }>(),
-
-    'Unfavorite Article': props<{ slug: string }>(),
-    'Unfavorite Article Success': props<{ article: Article }>(),
-    'Unfavorite Article Failure': props<{ errors: IBackendErrors }>(),
-
     'Follow Author': props<{ username: string }>(),
     'Follow Author Success': emptyProps(),
     'Follow Author Failure': emptyProps(),

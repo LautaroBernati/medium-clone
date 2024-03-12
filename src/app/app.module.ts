@@ -11,6 +11,7 @@ import * as authEffects from './auth/store/store.effects';
 import * as feedEffects from './shared/components/feed/store/effects';
 import * as popularTagsEffects from './shared/components/popular-tags/store/effects';
 import * as globalEffects from './shared/store/effects';
+import * as favArticlesEffects from './shared/components/fav-article/data-access/fav-article.effects';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { TopbarComponent } from './shared/components/top-bar/top-bar.component';
 import { authInterceptor } from './shared/services/auth.interceptor';
@@ -18,6 +19,7 @@ import { feedFeatureKey, feedReducer } from './shared/components/feed/store/redu
 import { popularTagsFeatureKey, popularTagsReducer } from './shared/components/popular-tags/store/reducers';
 import { ErrorPagesModule } from './error-pages/feature/error-pages.module';
 import { SettingsModule } from './settings/feature/settings.module';
+import { ArticlesService } from './articles/data-access/services/articles.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,10 +29,11 @@ import { SettingsModule } from './settings/feature/settings.module';
     ErrorPagesModule,
     TopbarComponent,
     SettingsModule,
-    EffectsModule.forRoot(globalEffects),
+    EffectsModule.forRoot(globalEffects, favArticlesEffects),
   ],
   providers: [
     provideHttpClient(withInterceptors([authInterceptor])),
+    ArticlesService,
     provideStore({
       router: routerReducer,
     }),

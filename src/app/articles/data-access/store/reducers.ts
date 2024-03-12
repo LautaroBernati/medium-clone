@@ -30,10 +30,6 @@ const articleFeature = createFeature({
     on(articleActions.createArticleSuccess, (state, { article }) => ({ ...state, isSubmitting: false, data: article })),
     on(articleActions.createArticleFailure, (state, { errors }) => ({ ...state, isSubmitting: false, errors })),
 
-    on(articleActions.favoriteArticle, (state) => ({ ...state, isLoading: true })),
-    on(articleActions.favoriteArticleSuccess, (state, { article }) => ({ ...state, isLoading: false, data: article })),
-    on(articleActions.favoriteArticleFailure, (state, { errors }) => ({ ...state, isLoading: false, errors })),
-
     on(articleActions.editArticle, (state) => ({ ...state, isSubmitting: true, data: null, errors: null })),
     on(articleActions.editArticleSuccess, (state, { article }) => ({ ...state, isSubmitting: false, data: article })),
     on(articleActions.editArticleFailure, (state, { errors }) => ({ ...state, isSubmitting: false, errors })),
@@ -41,14 +37,6 @@ const articleFeature = createFeature({
     on(articleActions.deleteArticle, (state) => ({ ...state, isLoading: true })),
     on(articleActions.deleteArticleSuccess, () => initialState),
     on(articleActions.deleteArticleFailure, (state) => ({ ...state, isLoading: false })),
-
-    on(articleActions.unfavoriteArticle, (state) => ({ ...state, isLoading: true })),
-    on(articleActions.unfavoriteArticleSuccess, (state, { article }) => ({
-      ...state,
-      isLoading: false,
-      data: article,
-    })),
-    on(articleActions.unfavoriteArticleFailure, (state, { errors }) => ({ ...state, isLoading: false, errors })),
 
     on(articleActions.followAuthor, (state) => ({ ...state, isLoading: true })),
     on(articleActions.followAuthorSuccess, (state) => ({

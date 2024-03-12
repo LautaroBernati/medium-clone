@@ -104,42 +104,6 @@ export const redirectAfterDeleteSuccess = createEffect(
   { functional: true, dispatch: false },
 );
 
-export const favoriteArticleEffect = createEffect(
-  (actions$ = inject(Actions), articlesService = inject(ArticlesService)) =>
-    actions$.pipe(
-      ofType(articleActions.favoriteArticle),
-      switchMap(({ slug }) => {
-        return articlesService.favoriteArticle(slug).pipe(
-          map((article) => {
-            return articleActions.favoriteArticleSuccess({ article });
-          }),
-          catchError((err: HttpErrorResponse) => {
-            return of(articleActions.favoriteArticleFailure({ errors: err.error.errors ?? [] }));
-          }),
-        );
-      }),
-    ),
-  { functional: true },
-);
-
-export const unfavoriteArticleEffect = createEffect(
-  (actions$ = inject(Actions), articlesService = inject(ArticlesService)) =>
-    actions$.pipe(
-      ofType(articleActions.unfavoriteArticle),
-      switchMap(({ slug }) => {
-        return articlesService.unfavoriteArticle(slug).pipe(
-          map((article) => {
-            return articleActions.unfavoriteArticleSuccess({ article });
-          }),
-          catchError((err: HttpErrorResponse) => {
-            return of(articleActions.unfavoriteArticleFailure({ errors: err.error.errors ?? [] }));
-          }),
-        );
-      }),
-    ),
-  { functional: true },
-);
-
 export const followAuthor = createEffect(
   (actions$ = inject(Actions), profilesService = inject(ProfilesService)) =>
     actions$.pipe(

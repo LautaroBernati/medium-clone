@@ -12,12 +12,21 @@ import { environment } from 'src/environments/environment';
 import queryString from 'query-string';
 import { TagListComponent } from '../tag-list/tag-list.component';
 import { IGetFeedResponse } from './types/feed-response.interface';
+import { FavArticleModule } from '../fav-article/feature/fav-article.module';
 
 @Component({
   selector: 'mc-feed',
   templateUrl: 'feed.component.html',
   standalone: true,
-  imports: [CommonModule, RouterModule, ErrorMessageComponent, LoadingComponent, PaginationComponent, TagListComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ErrorMessageComponent,
+    LoadingComponent,
+    PaginationComponent,
+    TagListComponent,
+    FavArticleModule,
+  ],
 })
 export class FeedComponent implements OnInit, OnChanges {
   @Input('apiUrl') public apiUrl: string = '';

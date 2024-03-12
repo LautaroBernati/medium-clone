@@ -11,7 +11,7 @@
             <a [routerLink]="['/profiles', article.author.username]">
               {{ article.author.username }}
             </a>
-            <span class="data">{{ article.createdAt }}</span>
+            <span class="data">{{ article.createdAt | date: 'dd MMM yyyy, hh:mm a' }}</span>
           </div>
           <span>
             <ng-container *ngIf="article.author.username === user?.username;">
@@ -24,6 +24,8 @@
                 context: { $implicit: {
                   username: article.author.username,
                   isFavorited: article.favorited,
+                  favCount: article.favoritesCount,
+                  slug: article.slug,
                   isFollowing: article.author.following
                 } }
                 "
@@ -83,12 +85,13 @@
 </ng-template>
 
 <ng-template #diffAuthor let-data>
-  <button type="button" class="btn btn-secondary" [disabled]="isLoading"
+  <button type="button" class="btn btn-sm btn-secondary" [disabled]="isLoading"
     (click)="followAuthorEmitter$.emit(data.username)">
     {{ data.isFollowing ? 'Unfollow' : 'Follow' }}
   </button>
-  <button type="button" class="btn btn-info" [disabled]="isLoading"
-    (click)="markAsFavoriteEmitter$.emit()">
-    {{ data.isFavorited ? 'Unfavorite' : 'Favorite' }}
-  </button>
+  <app-fav-article
+    [articleSlug]="data.slug"
+    [isFavorited]="data.isFavorited"
+    [favCount]="data.favCount"
+  ></app-fav-article>
 </ng-template>

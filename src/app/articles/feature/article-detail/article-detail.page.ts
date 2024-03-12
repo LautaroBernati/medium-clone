@@ -71,24 +71,4 @@ export class ArticleDetailPage {
   public onFollowAuthor(username: string): void {
     this._store.dispatch(articleActions.followAuthor({ username }));
   }
-
-  public onMarkAsFavorite(): void {
-    combineLatest({
-      slug: this._route.paramMap.pipe(
-        map((params) => params.get('slug')?.toString() ?? null),
-        filter((data): data is string => (!!data && typeof data === 'string')),
-      ),
-      article: this._store.select(selectArticleData).pipe(
-        filter((data): data is Article => !!(data)),
-      ),
-    }).pipe(
-      take(1),
-    ).subscribe(data => {
-      if (!data.article.favorited) {
-        this._store.dispatch(articleActions.favoriteArticle({ slug: data.slug }));
-      } else {
-        this._store.dispatch(articleActions.unfavoriteArticle({ slug: data.slug }));
-      }
-    });
-  }
 }

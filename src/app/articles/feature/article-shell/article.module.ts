@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { ArticleRoutingModule } from './article-routing.module';
-import { ArticlesService } from '../../data-access/services/articles.service';
 import { CommonModule } from '@angular/common';
 import { BackendErrorMessagesComponent } from '../../../shared/components/backend-error-messages/backend-error-messages.component';
 import { ArticleDetailModule } from '../article-detail/article-detail.module';
@@ -20,7 +19,6 @@ import * as articleEffects from '../../data-access/store/effects';
     EffectsModule.forFeature(articleEffects)
   ],
   providers: [
-    ArticlesService,
     ProfilesService,
     provideState(articleFeatureKey, articleReducer),
     // provideEffects(articleEffects),
