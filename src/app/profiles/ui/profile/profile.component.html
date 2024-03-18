@@ -1,0 +1,50 @@
+<div class="profile-page">
+  <div class="user-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-md-10 offset-md-1">
+          <img class="user-img" [src]="userProfile.image" alt="profilePic" />
+          <h4>{{ userProfile.username }}</h4>
+          <p>{{ userProfile.bio }}</p>
+          <div>
+            FOLLOW USER BUTTON
+            <a *ngIf="isCurrentUserProfile" class="btn btn-sm btn-outline-secondary action-btn" routerLink="/settings">
+              Edit Profile Settings
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-10 offset-md-1">
+        <div class="articles-toggler">
+          <ul class="nav nav-pills outline-active">
+            <li class="nav-item">
+              <a type="button"
+                class="nav-link"
+                [ngClass]="{ 'active': activeLink === 'author' }"
+                (click)="authorPostsEmitter$.emit()"
+              >
+                My Posts
+              </a>
+            </li>
+            <li class="nav-item">
+              <a type="button"
+                class="nav-link"
+                [ngClass]="{ 'active': activeLink === 'favorites' }"
+                (click)="favoritedPostsEmitter$.emit()"
+              >
+                Favorite Posts
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Template block inserted from parent component -->
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

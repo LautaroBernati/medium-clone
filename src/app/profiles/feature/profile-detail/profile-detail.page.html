@@ -1,0 +1,15 @@
+<div class="container">
+  <ng-container *ngIf="(data$ | async) as data">
+    <prf-profile-ui
+      [userProfile]="data.profile"
+      [isCurrentUserProfile]="data.isCurrentUserProfile"
+      [isLoading]="data.isLoading"
+      [isSubmitting]="data.isSubmitting"
+      [activeLink]="data.activeLink"
+      (authorPosts)="onAuthorPosts()"
+      (favoritedPosts)="onFavoritedPosts()"
+    >
+      <mc-feed [apiUrl]="data.apiUrl"></mc-feed>
+    </prf-profile-ui>
+  </ng-container>
+</div>

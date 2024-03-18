@@ -34,8 +34,11 @@ const routes: Routes = [
   },
   {
     path: 'articles',
-    // pathMatch: 'full',
     loadChildren: () => import('./articles/feature/article-shell/article.module').then(m => m.ArticleShellModule),
+  },
+  {
+    path: 'profiles',
+    loadChildren: () => import('./profiles/feature/profiles-shell/profiles.module').then(m => m.ProfilesModule),
   },
   {
     path: '',
