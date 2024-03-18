@@ -19,7 +19,7 @@ export abstract class ProfilesMainService {
   private readonly _url = environment.apiUrl + '/profiles';
 
   protected followUser(username: string): Observable<Profile> {
-    return this._http.put<ProfileDTO>(
+    return this._http.post<ProfileDTO>(
       this._url.concat(`/${encodeURIComponent(username)}/follow`),
       undefined
     ).pipe(

@@ -6,6 +6,7 @@ import { BackendErrorMessagesComponent } from '../../../shared/components/backen
 import { ArticleDetailComponent } from '../../ui/article-detail/article-detail.component';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 import { FavArticleModule } from '../../../shared/components/fav-article/feature/fav-article.module';
+import { FollowProfileModule } from '../../../shared/components/follow-profile/feature/follow-profile.module';
 
 @NgModule({
   declarations: [ArticleDetailPage],
@@ -16,6 +17,7 @@ import { FavArticleModule } from '../../../shared/components/fav-article/feature
     ArticleDetailComponent,
     LoadingComponent,
     FavArticleModule,
+    FollowProfileModule,
   ],
   exports: [],
   providers: [],

@@ -20,7 +20,6 @@ export class ArticleDetailComponent {
 
   @Output('editArticle') public readonly editArticleEmitter$ = new EventEmitter();
   @Output('deleteArticle') public readonly deleteArticleEmitter$ = new EventEmitter<boolean>();
-  @Output('followAuthor') public readonly followAuthorEmitter$ = new EventEmitter<string>();
 
   public showConfirmation = false;
 }

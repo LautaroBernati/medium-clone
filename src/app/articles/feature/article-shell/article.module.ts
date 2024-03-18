@@ -3,7 +3,6 @@ import { ArticleRoutingModule } from './article-routing.module';
 import { CommonModule } from '@angular/common';
 import { BackendErrorMessagesComponent } from '../../../shared/components/backend-error-messages/backend-error-messages.component';
 import { ArticleDetailModule } from '../article-detail/article-detail.module';
-import { ProfilesService } from '../../data-access/services/profiles.service';
 import { EffectsModule } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
 import { articleFeatureKey, articleReducer } from '../../data-access/store/reducers';
@@ -19,9 +18,7 @@ import * as articleEffects from '../../data-access/store/effects';
     EffectsModule.forFeature(articleEffects)
   ],
   providers: [
-    ProfilesService,
     provideState(articleFeatureKey, articleReducer),
-    // provideEffects(articleEffects),
   ],
   exports: [],
 })

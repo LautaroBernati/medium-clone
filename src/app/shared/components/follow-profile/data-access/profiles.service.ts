@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Profile, ProfilesMainService } from '../../../shared/services/profiles-main.service';
+import { Profile, ProfilesMainService } from '../../../../shared/services/profiles-main.service';
 
 
 @Injectable()

@@ -22,9 +22,5 @@ export const articleActions = createActionGroup({
     'Delete Article': props<{ slug: string }>(),
     'Delete Article Success': emptyProps(),
     'Delete Article Failure': props<{ errors: IBackendErrors }>(),
-
-    'Follow Author': props<{ username: string }>(),
-    'Follow Author Success': emptyProps(),
-    'Follow Author Failure': emptyProps(),
   },
 });

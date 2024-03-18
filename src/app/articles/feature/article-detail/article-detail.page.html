@@ -6,9 +6,10 @@
     [isLoading]="data.isLoading"
     (deleteArticle)="onDeleteArticle($event)"
     (editArticle)="onEditArticle()"
-    (followAuthor)="onFollowAuthor($event)"
   >
-    <app-fav-article
+  <app-follow-profile followProfile></app-follow-profile>
+
+    <app-fav-article favArticle
       [articleSlug]="data.article.slug"
       [isFavorited]="data.article.favorited"
       [favCount]="data.article.favoritesCount"

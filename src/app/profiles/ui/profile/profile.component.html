@@ -7,7 +7,7 @@
           <h4>{{ userProfile.username }}</h4>
           <p>{{ userProfile.bio }}</p>
           <div>
-            FOLLOW USER BUTTON
+            <ng-content select="[followProfile]"></ng-content>
             <a *ngIf="isCurrentUserProfile" class="btn btn-sm btn-outline-secondary action-btn" routerLink="/settings">
               Edit Profile Settings
             </a>
@@ -43,7 +43,7 @@
         </div>
 
         <!-- Template block inserted from parent component -->
-        <ng-content></ng-content>
+        <ng-content select="[feed]"></ng-content>
       </div>
     </div>
   </div>

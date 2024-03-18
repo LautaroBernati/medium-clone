@@ -20,6 +20,9 @@ import { popularTagsFeatureKey, popularTagsReducer } from './shared/components/p
 import { ErrorPagesModule } from './error-pages/feature/error-pages.module';
 import { SettingsModule } from './settings/feature/settings.module';
 import { ArticlesService } from './articles/data-access/services/articles.service';
+import { followProfileFeatureKey, followProfileReducer } from './shared/components/follow-profile/data-access/follow-profile.reducers';
+import * as profileEffects from './profiles/data-access/store/profiles-store.effects';
+import { ProfilesService } from './profiles/data-access/profiles.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,11 +32,12 @@ import { ArticlesService } from './articles/data-access/services/articles.servic
     ErrorPagesModule,
     TopbarComponent,
     SettingsModule,
-    EffectsModule.forRoot(globalEffects, favArticlesEffects),
+    EffectsModule.forRoot(globalEffects, favArticlesEffects, profileEffects),
   ],
   providers: [
     provideHttpClient(withInterceptors([authInterceptor])),
     ArticlesService,
+    ProfilesService,
     provideStore({
       router: routerReducer,
     }),
@@ -41,6 +45,7 @@ import { ArticlesService } from './articles/data-access/services/articles.servic
     provideState(authFeatureKey, authReducer),
     provideState(feedFeatureKey, feedReducer),
     provideState(popularTagsFeatureKey, popularTagsReducer),
+    provideState(followProfileFeatureKey, followProfileReducer),
     provideEffects(authEffects, feedEffects, popularTagsEffects),
     provideStoreDevtools({
       maxAge: 25,

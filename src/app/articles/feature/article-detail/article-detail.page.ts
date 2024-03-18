@@ -67,8 +67,4 @@ export class ArticleDetailPage {
       });
     }
   }
-
-  public onFollowAuthor(username: string): void {
-    this._store.dispatch(articleActions.followAuthor({ username }));
-  }
 }

@@ -38,13 +38,6 @@ const articleFeature = createFeature({
     on(articleActions.deleteArticleSuccess, () => initialState),
     on(articleActions.deleteArticleFailure, (state) => ({ ...state, isLoading: false })),
 
-    on(articleActions.followAuthor, (state) => ({ ...state, isLoading: true })),
-    on(articleActions.followAuthorSuccess, (state) => ({
-      ...state,
-      data: state.data ? { ...state.data, isFollowing: true } : null,
-    })),
-    on(articleActions.followAuthorFailure, (state) => ({ ...state, isLoading: false })),
-
     on(routerNavigatedAction, () => initialState),
   ),
 });

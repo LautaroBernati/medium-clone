@@ -7,7 +7,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 declare interface IProfileState {
   isLoading: boolean;
-  isSubmitting: boolean;
   data: Profile | null;
   validationErrors: IBackendErrors | null;
   error: HttpErrorResponse | undefined;
@@ -15,7 +14,6 @@ declare interface IProfileState {
 
 const initialState: IProfileState = {
   isLoading: false,
-  isSubmitting: false,
   data: null,
   validationErrors: null,
   error: undefined,
@@ -30,11 +28,24 @@ const profileFeature = createFeature({
     on(profileActions.getProfileFailure, (state, { error }) => ({ ...state, error, isLoading: false })),
 
     on(profileActions.followAuthor, (state) => ({ ...state, isLoading: true })),
-    on(profileActions.followAuthorSuccess, (state) => ({
+    on(profileActions.followAuthorSuccess, (state, { profile }) => ({
       ...state,
-      data: state.data ? { ...state.data, isFollowing: true } : null,
+      data: profile,
+      isLoading: false,
     })),
     on(profileActions.followAuthorFailure, (state) => ({ ...state, isLoading: false })),
+
+    on(profileActions.unfollowAuthor, (state) => ({ ...state, isLoading: true })),
+    on(profileActions.unfollowAuthorSuccess, (state, { profile }) => ({
+      ...state,
+      data: profile,
+      isLoading: false,
+    })),
+    on(profileActions.unfollowAuthorFailure, (state, { errors }) => ({
+      ...state,
+      isLoading: false,
+      validationErrors: errors,
+    })),
 
     on(routerNavigatedAction, () => initialState),
   ),
@@ -45,6 +56,5 @@ export const {
   reducer: profileReducer,
   selectData: selectProfileData,
   selectIsLoading: selectProfileIsLoading,
-  selectIsSubmitting: selectProfileIsSubmitting,
   selectValidationErrors: selectProfileValidationErrors,
 } = profileFeature;

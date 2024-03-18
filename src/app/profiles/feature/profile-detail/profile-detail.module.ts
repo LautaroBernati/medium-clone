@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileDetailRoutingModule } from './profile-detail-routing.module';
 import { ProfileComponent } from '../../ui/profile/profile.component';
 import { FeedComponent } from '../../../shared/components/feed/feed.component';
+import { FollowProfileModule } from '../../../shared/components/follow-profile/feature/follow-profile.module';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { FeedComponent } from '../../../shared/components/feed/feed.component';
     CommonModule,
     ProfileComponent,
     FeedComponent,
+    FollowProfileModule,
   ],
   exports: [ProfileDetailPage],
   providers: [],

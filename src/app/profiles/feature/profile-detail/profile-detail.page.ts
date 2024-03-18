@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, catchError, of, filter, tap, switchMap, shareReplay, combineLatest, BehaviorSubject } from 'rxjs';
 import { profileActions } from '../../data-access/store/profiles-store.actions';
-import { selectProfileData, selectProfileIsLoading, selectProfileIsSubmitting, selectProfileValidationErrors } from '../../data-access/store/profiles-store.reducers';
+import { selectProfileData, selectProfileIsLoading, selectProfileValidationErrors } from '../../data-access/store/profiles-store.reducers';
 import { selectCurrentUser } from '../../../auth/store/store.reducers';
 import { ICurrentUser } from '../../../shared/types/current-user.interface';
 import { Profile } from '../../../shared/services/profiles-main.service';
@@ -56,7 +56,6 @@ export class ProfileDetailPage implements OnDestroy {
     ),
     error: this._store.select(selectProfileValidationErrors),
     isLoading: this._store.select(selectProfileIsLoading),
-    isSubmitting: this._store.select(selectProfileIsSubmitting),
     isCurrentUserProfile: combineLatest({
       currentUser: this._store.select(selectCurrentUser).pipe(
         filter((currentUser): currentUser is ICurrentUser => Boolean(currentUser)),

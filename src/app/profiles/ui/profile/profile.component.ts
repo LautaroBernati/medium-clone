@@ -15,7 +15,6 @@ export class ProfileComponent implements OnInit {
   @Input('userProfile') public userProfile!: Profile;
   @Input('isCurrentUserProfile') public isCurrentUserProfile = false;
   @Input('isLoading') public isLoading = false;
-  @Input('isSubmitting') public isSubmitting = false;
   @Input('activeLink') public activeLink: ProfileLinks = 'author';
 
   @Output('authorPosts') public readonly authorPostsEmitter$ = new EventEmitter();

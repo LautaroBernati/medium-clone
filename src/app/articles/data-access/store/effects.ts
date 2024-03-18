@@ -4,7 +4,6 @@ import { switchMap, of, map, catchError, tap } from 'rxjs';
 import { ArticlesService } from '../services/articles.service';
 import { articleActions } from './actions';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ProfilesService } from '../services/profiles.service';
 import { Router } from '@angular/router';
 
 export const getFeedEffect = createEffect(
@@ -102,22 +101,4 @@ export const redirectAfterDeleteSuccess = createEffect(
       tap(() => router.navigate(['/home'])),
     ),
   { functional: true, dispatch: false },
-);
-
-export const followAuthor = createEffect(
-  (actions$ = inject(Actions), profilesService = inject(ProfilesService)) =>
-    actions$.pipe(
-      ofType(articleActions.followAuthor),
-      switchMap(({ username }) => {
-        return profilesService.followUser(username).pipe(
-          map(() => {
-            return articleActions.followAuthorSuccess();
-          }),
-          catchError(() => {
-            return of(articleActions.followAuthorFailure());
-          }),
-        );
-      }),
-    ),
-  { functional: true },
 );

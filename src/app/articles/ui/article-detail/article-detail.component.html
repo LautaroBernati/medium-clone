@@ -13,25 +13,25 @@
             </a>
             <span class="data">{{ article.createdAt | date: 'dd MMM yyyy, hh:mm a' }}</span>
           </div>
-          <span>
-            <ng-container *ngIf="article.author.username === user?.username;">
-              <ng-container *ngTemplateOutlet="sameAuthor;"></ng-container>
-            </ng-container>
-            <ng-container *ngIf="!user || article.author.username !== user.username">
-              <ng-container
-                *ngTemplateOutlet="
-                diffAuthor;
-                context: { $implicit: {
-                  username: article.author.username,
-                  isFavorited: article.favorited,
-                  favCount: article.favoritesCount,
-                  slug: article.slug,
-                  isFollowing: article.author.following
-                } }
-                "
-              ></ng-container>
-            </ng-container>
-          </span>
+          <ng-container *ngIf="article.author.username === user?.username;">
+            <ng-container *ngTemplateOutlet="sameAuthor;"></ng-container>
+          </ng-container>
+          <ng-container *ngIf="!user || article.author.username !== user.username">
+            <ng-container
+              *ngTemplateOutlet="
+              diffAuthor;
+              context: { $implicit: {
+                username: article.author.username,
+                isFavorited: article.favorited,
+                favCount: article.favoritesCount,
+                slug: article.slug,
+                isFollowing: article.author.following
+              } }
+              "
+            ></ng-container>
+          </ng-container>
+          <!-- <span > -->
+          <!-- </span> -->
         </div>
       </div>
     </div>
@@ -77,6 +77,7 @@
     <i class="ion-edit"></i>
     Edit
   </button>
+  &nbsp;
   <button type="button" class="btn btn-outline-danger"
     [disabled]="isLoading"
     (click)="showConfirmation = true;">
@@ -85,9 +86,7 @@
 </ng-template>
 
 <ng-template #diffAuthor let-data>
-  <button type="button" class="btn btn-sm btn-secondary" [disabled]="isLoading"
-    (click)="followAuthorEmitter$.emit(data.username)">
-    {{ data.isFollowing ? 'Unfollow' : 'Follow' }}
-  </button>
-  <ng-content></ng-content>
+  <ng-content select="[followProfile]"></ng-content>
+  &nbsp;
+  <ng-content select="[favArticle]"></ng-content>
 </ng-template>

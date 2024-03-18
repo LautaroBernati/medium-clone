@@ -4,12 +4,12 @@
       [userProfile]="data.profile"
       [isCurrentUserProfile]="data.isCurrentUserProfile"
       [isLoading]="data.isLoading"
-      [isSubmitting]="data.isSubmitting"
       [activeLink]="data.activeLink"
       (authorPosts)="onAuthorPosts()"
       (favoritedPosts)="onFavoritedPosts()"
     >
-      <mc-feed [apiUrl]="data.apiUrl"></mc-feed>
+      <app-follow-profile followProfile></app-follow-profile>
+      <mc-feed feed [apiUrl]="data.apiUrl"></mc-feed>
     </prf-profile-ui>
   </ng-container>
 </div>
