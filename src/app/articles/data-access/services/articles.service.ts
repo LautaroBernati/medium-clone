@@ -3,6 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, map } from 'rxjs';
 
+declare type Author = {
+  username: string;
+  bio: string;
+  image: string;
+  following: boolean;
+};
+
 declare type ArticleDTO = {
   article: {
     slug: string;
@@ -14,31 +21,38 @@ declare type ArticleDTO = {
     updatedAt: string;
     favorited: boolean;
     favoritesCount: number;
-    author: {
-      username: string;
-      bio: string;
-      image: string;
-      following: boolean;
-    };
+    author: Author;
   };
+};
+
+declare type CommentDTO = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  body: string;
+  author: Author;
+};
+
+export type Comment = Omit<CommentDTO, 'createdAt' | 'updatedAt'> & {
+  [K in 'createdAt' | 'updatedAt']: Date;
 };
 
 /**
  * These are the keys that can be either created or edited.
  */
-export declare type EditableArticle = Omit<
+export type EditableArticle = Omit<
   ArticleDTO['article'],
   'createdAt' | 'updatedAt' | 'favorited' | 'favoritesCount' | 'author' | 'slug'
 >;
 
-export declare type CreateArticleDTO = EditableArticle;
+export type CreateArticleDTO = EditableArticle;
 
 /**
  * Can't edit tags.
  */
-export declare type EditArticleDTO = Omit<CreateArticleDTO, 'tagList'>;
+export type EditArticleDTO = Omit<CreateArticleDTO, 'tagList'>;
 
-export declare type Article = Omit<ArticleDTO['article'], 'createdAt' | 'updatedAt'> & {
+export type Article = Omit<ArticleDTO['article'], 'createdAt' | 'updatedAt'> & {
   createdAt: Date;
   updatedAt: Date;
 };
@@ -88,7 +102,31 @@ export class ArticlesService {
     return this._http.delete<ArticleDTO>(
       this._url.concat(`/${slug}/favorite`),
     ).pipe(
-      map((data) => this._mapToArticle(data)),
+      map((this._mapToArticle)),
+    );
+  }
+
+  public getCommentsBySlug(slug: string): Observable<Comment[]> {
+    return this._http.get<{ comments: Array<CommentDTO> }>(
+      this._url.concat(`/${slug}/comments`),
+    ).pipe(
+      map((data) => data.comments),
+      map((data: CommentDTO[]) => (data.map(this._mapToComment))),
+    );
+  }
+
+  public createArticleComment(articleSlug: string, body: string): Observable<Comment> {
+    return this._http.post<CommentDTO>(
+      this._url.concat(`/${articleSlug}/comments`),
+      { comment: { body }},
+    ).pipe(
+      map(this._mapToComment),
+    );
+  }
+
+  public deleteArticleComment(articleSlug: string, commentId: string): Observable<void> {
+    return this._http.delete<void>(
+      this._url.concat(`/${articleSlug}/comments/${commentId}`),
     );
   }
 
@@ -97,6 +135,14 @@ export class ArticlesService {
       ...dto.article,
       createdAt: new Date(dto.article.createdAt),
       updatedAt: new Date(dto.article.updatedAt),
+    };
+  }
+
+  private _mapToComment(dto: CommentDTO): Comment {
+    return {
+      ...dto,
+      createdAt: new Date(dto.createdAt),
+      updatedAt: new Date(dto.updatedAt),
     };
   }
 }

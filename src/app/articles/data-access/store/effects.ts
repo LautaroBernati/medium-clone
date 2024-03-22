@@ -5,8 +5,9 @@ import { ArticlesService } from '../services/articles.service';
 import { articleActions } from './actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
-export const getFeedEffect = createEffect(
+export const getArticleEffect = createEffect(
   (actions$ = inject(Actions), articlesService = inject(ArticlesService)) =>
     actions$.pipe(
       ofType(articleActions.getArticle),
@@ -22,6 +23,72 @@ export const getFeedEffect = createEffect(
       }),
     ),
   { functional: true },
+);
+
+export const getArticleCommentsEffect = createEffect(
+  (actions$ = inject(Actions), articlesService = inject(ArticlesService)) =>
+    actions$.pipe(
+      ofType(articleActions.getArticleComments),
+      switchMap(({ slug }) => {
+        return articlesService.getCommentsBySlug(slug).pipe(
+          map((comments) => {
+            return articleActions.getArticleCommentsSuccess({ comments });
+          }),
+          catchError((err: HttpErrorResponse) => {
+            return of(articleActions.getArticleCommentsFailure({ errors: err.error.errors ?? [] }));
+          }),
+        );
+      }),
+    ),
+  { functional: true },
+);
+
+export const createArticleCommentEffect = createEffect(
+  (actions$ = inject(Actions), articlesService = inject(ArticlesService)) =>
+    actions$.pipe(
+      ofType(articleActions.createArticleComment),
+      switchMap(({ articleSlug, data }) => {
+        return articlesService.createArticleComment(articleSlug, data).pipe(
+          map((comment) => {
+            return articleActions.createArticleCommentSuccess({ articleSlug, comment });
+          }),
+          catchError((err: HttpErrorResponse) => {
+            return of(articleActions.createArticleCommentFailure({ errors: err.error.errors ?? [] }));
+          }),
+        );
+      }),
+    ),
+  { functional: true },
+);
+
+export const deleteArticleCommentEffect = createEffect(
+  (actions$ = inject(Actions), articlesService = inject(ArticlesService)) =>
+    actions$.pipe(
+      ofType(articleActions.deleteArticleComment),
+      switchMap(({ articleSlug, commentId }) => {
+        return articlesService.deleteArticleComment(articleSlug, commentId).pipe(
+          map(() => {
+            return articleActions.deleteArticleCommentSuccess({ articleSlug });
+          }),
+          catchError((err: HttpErrorResponse) => {
+            return of(articleActions.deleteArticleCommentFailure({ errors: err.error.errors ?? [] }));
+          }),
+        );
+      }),
+    ),
+  { functional: true },
+);
+
+export const reloadAfterCommentSuccessEffect = createEffect(
+  (actions$ = inject(Actions), store = inject(Store)) =>
+    actions$.pipe(
+      ofType(
+        articleActions.createArticleCommentSuccess,
+        articleActions.deleteArticleCommentSuccess,
+      ),
+      tap((data) => store.dispatch(articleActions.getArticleComments({ slug: data.articleSlug }))),
+    ),
+  { functional: true, dispatch: false },
 );
 
 export const createArticleEffect = createEffect(

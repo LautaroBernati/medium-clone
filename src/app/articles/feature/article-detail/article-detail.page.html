@@ -1,19 +1,25 @@
 <div *ngIf="data$ | async as data">
   <mc-backend-error-messages *ngIf="data.error" [errors]="data.error"></mc-backend-error-messages>
-  <art-article-detail-ui *ngIf="data.article"
-    [article]="data.article"
-    [user]="data.currentUser"
-    [isLoading]="data.isLoading"
-    (deleteArticle)="onDeleteArticle($event)"
-    (editArticle)="onEditArticle()"
-  >
-  <app-follow-profile followProfile></app-follow-profile>
-
-    <app-fav-article favArticle
-      [articleSlug]="data.article.slug"
-      [isFavorited]="data.article.favorited"
-      [favCount]="data.article.favoritesCount"
-    ></app-fav-article>
-  </art-article-detail-ui>
+  <ng-container *ngIf="data.article">
+    <art-article-detail-ui
+      [article]="data.article"
+      [user]="data.currentUser"
+      [isLoading]="data.isLoading"
+      (deleteArticle)="onDeleteArticle($event)"
+      (editArticle)="onEditArticle()"
+    >
+      <app-follow-profile followProfile></app-follow-profile>
+      <app-fav-article
+        favArticle
+        [articleSlug]="data.article.slug"
+        [isFavorited]="data.article.favorited"
+        [favCount]="data.article.favoritesCount"
+      ></app-fav-article>
+    </art-article-detail-ui>
+    <div style="display: flex; justify-content: center;">
+      <hr style="width: 90%;">
+    </div>
+    <art-comments-list></art-comments-list>
+  </ng-container>
   <mc-loading *ngIf="data.isLoading"></mc-loading>
 </div>

@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div style="border: 1px solid lightgrey; border-radius: 5px; padding: 1rem;">
+        <form #formTemplate="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+          <fieldset class="form-group">
+            <textarea
+              type="text"
+              class="form-control form-control-lg"
+              placeholder="Write your comment..."
+              [formControl]="form.controls.commentDesc"
+              [readonly]="!!comment || isSubmitting"
+              [rows]="4"
+            ></textarea>
+          </fieldset>
+          <span *ngIf="comment">
+            <p style="padding-left: 0.5rem">{{ comment.createdAt | date: 'yyyy, MMM dd hh:mm a' }}</p>
+          </span>
+          <span style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;">
+            <span>
+              <img *ngIf="comment" style="border-radius: 50%;"
+                [src]="comment.author.image" [width]="50" [height]="50" alt="profilePic">
+            </span>
+            <span style="display: flex; justify-content: flex-end;">
+              <span *ngIf="!!!comment" class="btn-options">
+                <button type="button" class="btn btn-md btn-secondary pull-xs-right"
+                  [disabled]="isLoading || isSubmitting"
+                  (click)="cancelEmitter$.emit()">
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-md btn-primary pull-xs-right"
+                  [disabled]="form.invalid || isLoading || isSubmitting"
+                >
+                  Post Comment
+                </button>
+              </span>
+              <button
+                *ngIf="comment && showAuthorOptions && !showConfirmation"
+                type="button"
+                class="btn btn-md btn-danger pull-xs-right"
+                [disabled]="isLoading || isSubmitting"
+                (click)="showConfirmation = true;"
+              >
+                Delete Comment
+              </button>
+            </span>
+            <span *ngIf="showConfirmation" class="btn-options">
+              <button
+                *ngIf="comment && showAuthorOptions"
+                type="button"
+                class="btn btn-md btn-danger pull-xs-right"
+                [disabled]="isLoading || isSubmitting"
+                (click)="emitDeleteComment(comment.id)"
+              >
+                Confirm
+              </button>
+              <button
+                *ngIf="comment && showAuthorOptions"
+                type="button"
+                class="btn btn-md btn-secondary pull-xs-right"
+                [disabled]="isLoading || isSubmitting"
+                (click)="showConfirmation = false;"
+              >
+                Cancel
+              </button>
+            </span>
+          </span>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

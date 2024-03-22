@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IRegisterRequest } from '../types/register-request.interface';
-import { Observable, delay, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { ICurrentUser } from '../../shared/types/current-user.interface';
 import { environment } from 'src/environments/environment';
 import { ILoginRequest } from '../types/login-request.interface';
@@ -45,7 +45,6 @@ export class AuthService {
       { user },
     ).pipe(
       map(this._mapResponse),
-      delay(1500),
     );
   }
 
