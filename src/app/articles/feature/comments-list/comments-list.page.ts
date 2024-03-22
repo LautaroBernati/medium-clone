@@ -60,7 +60,6 @@ export class CommentsListPage implements OnDestroy {
   public onDeleteComment(id: string): void {
     this._store.select(selectArticleData).pipe(
       take(1),
-      tap(data => console.log(data)),
       filter((article): article is Article => Boolean(article)),
       map(data => data.slug),
     ).subscribe(articleSlug => {
