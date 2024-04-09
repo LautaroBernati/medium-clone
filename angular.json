@@ -22,6 +22,7 @@
             "main": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "baseHref": "/medium-clone/",
             "assets": [
               "src/favicon.ico",
               "src/assets"
