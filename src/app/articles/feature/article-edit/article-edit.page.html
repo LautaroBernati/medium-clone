@@ -1,5 +1,4 @@
 <ng-container *ngIf="(data$ | ngrxPush) as data">
-  {{ data | json }}
   <ng-container *ngIf="data.article">
     <art-form-ui
       [action]="'edit'"

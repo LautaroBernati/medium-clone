@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable, delay, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 declare type Author = {
   username: string;
@@ -86,8 +86,6 @@ export class ArticlesService {
   public deleteArticle(slug: string): Observable<void> {
     return this._http.delete<void>(
       this._url.concat(`/${slug}`),
-    ).pipe(
-      delay(2000),
     );
   }
 
@@ -123,15 +121,12 @@ export class ArticlesService {
       { comment: { body }},
     ).pipe(
       map(this._mapToComment),
-      delay(2000),
     );
   }
 
   public deleteArticleComment(articleSlug: string, commentId: string): Observable<void> {
     return this._http.delete<void>(
       this._url.concat(`/${articleSlug}/comments/${commentId}`),
-    ).pipe(
-      delay(2000),
     );
   }
 

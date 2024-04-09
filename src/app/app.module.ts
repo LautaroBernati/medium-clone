@@ -23,6 +23,7 @@ import { ArticlesService } from './articles/data-access/services/articles.servic
 import { followProfileFeatureKey, followProfileReducer } from './shared/components/follow-profile/data-access/follow-profile.reducers';
 import * as profileEffects from './profiles/data-access/store/profiles-store.effects';
 import { ProfilesService } from './profiles/data-access/profiles.service';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,6 +34,7 @@ import { ProfilesService } from './profiles/data-access/profiles.service';
     TopbarComponent,
     SettingsModule,
     EffectsModule.forRoot(globalEffects, favArticlesEffects, profileEffects),
+    FooterComponent,
   ],
   providers: [
     provideHttpClient(withInterceptors([authInterceptor])),
