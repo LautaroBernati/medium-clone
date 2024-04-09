@@ -48,6 +48,7 @@
                   "maximumError": "4kb"
                 }
               ],
+              "outputPath": "dist/mediumclone_angular",
               "outputHashing": "all",
               "aot": true,
               "optimization": true,
