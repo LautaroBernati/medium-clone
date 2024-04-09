@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { feedActions } from './store/actions';
 import { Observable, combineLatest, delay } from 'rxjs';
@@ -13,6 +13,7 @@ import queryString from 'query-string';
 import { TagListComponent } from '../tag-list/tag-list.component';
 import { IGetFeedResponse } from './types/feed-response.interface';
 import { FavArticleModule } from '../fav-article/feature/fav-article.module';
+import { PushModule } from '@ngrx/component';
 
 @Component({
   selector: 'mc-feed',
@@ -26,7 +27,9 @@ import { FavArticleModule } from '../fav-article/feature/fav-article.module';
     PaginationComponent,
     TagListComponent,
     FavArticleModule,
+    PushModule,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeedComponent implements OnInit, OnChanges {
   @Input('apiUrl') public apiUrl: string = '';

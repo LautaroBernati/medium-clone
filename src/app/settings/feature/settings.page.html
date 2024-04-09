@@ -1,5 +1,5 @@
 <div class="container">
-  <stg-settings-ui *ngIf="(data$ | async) as data"
+  <stg-settings-ui *ngIf="(data$ | ngrxPush) as data"
     [currentUser]="data.currentUser"
     [errors]="data.error"
     [isSubmitting]="data.isSubmitting"

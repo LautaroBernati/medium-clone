@@ -1,4 +1,4 @@
-<art-form-ui *ngIf="data$ | async as data"
+<art-form-ui *ngIf="(data$ | ngrxPush) as data"
   [action]="'create'"
   [isLoading]="data.isLoading"
   [isSubmitting]="data.isSubmitting"

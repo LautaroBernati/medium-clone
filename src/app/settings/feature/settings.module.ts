@@ -6,6 +6,7 @@ import { SettingsRoutingModule } from './settings-routing.module';
 import { SettingsComponent } from '../ui/settings.component';
 import { provideState } from '@ngrx/store';
 import { settingsFeatureKey, settingsReducer } from '../data-access/store/reducers';
+import { PushModule } from '@ngrx/component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { settingsFeatureKey, settingsReducer } from '../data-access/store/reduce
     CommonModule,
     SettingsRoutingModule,
     SettingsComponent,
+    PushModule,
   ],
   exports: [SettingsPage],
   providers: [

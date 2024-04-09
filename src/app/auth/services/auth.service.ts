@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IRegisterRequest } from '../types/register-request.interface';
-import { Observable, map } from 'rxjs';
+import { Observable, delay, map } from 'rxjs';
 import { ICurrentUser } from '../../shared/types/current-user.interface';
 import { environment } from 'src/environments/environment';
 import { ILoginRequest } from '../types/login-request.interface';
@@ -36,6 +36,7 @@ export class AuthService {
   public login(data: ILoginRequest): Observable<ICurrentUser> {
     return this._http.post<AuthResponseDTO>(this._url.concat('/users/login'), data).pipe(
       map(this._mapResponse),
+      delay(3000),
     );
   }
 
@@ -45,6 +46,7 @@ export class AuthService {
       { user },
     ).pipe(
       map(this._mapResponse),
+      delay(2000)
     );
   }
 

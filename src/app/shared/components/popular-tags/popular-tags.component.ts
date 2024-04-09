@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { popularTagsActions } from './store/actions';
 import { combineLatest } from 'rxjs';
@@ -7,12 +7,14 @@ import { CommonModule } from '@angular/common';
 import { LoadingComponent } from '../loading/loading.component';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { RouterModule } from '@angular/router';
+import { PushModule } from '@ngrx/component';
 
 @Component({
   selector: 'mc-popular-tags',
   templateUrl: 'popular-tags.component.html',
   standalone: true,
-  imports: [CommonModule, LoadingComponent, ErrorMessageComponent, RouterModule]
+  imports: [CommonModule, LoadingComponent, ErrorMessageComponent, RouterModule, PushModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopularTagsComponent implements OnInit {
   private readonly _store = inject(Store);

@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Article, EditableArticle } from '../../data-access/services/articles.service';
 import { BackendErrorMessagesComponent } from '../../../shared/components/backend-error-messages/backend-error-messages.component';
 import { IBackendErrors } from '../../../shared/types/backend-errors.interface';
+import { BehaviorSubject, combineLatest, startWith } from 'rxjs';
+import { LetModule, PushModule } from '@ngrx/component';
 
 @Component({
   selector: 'art-form-ui',
@@ -13,11 +15,18 @@ import { IBackendErrors } from '../../../shared/types/backend-errors.interface';
     CommonModule,
     ReactiveFormsModule,
     BackendErrorMessagesComponent,
+    LetModule,
+    PushModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class ArticleFormComponent implements OnInit {
+export class ArticleFormComponent implements OnInit, OnChanges, OnDestroy {
+  private readonly _isLoadingEmitter$ = new BehaviorSubject(false);
+  private readonly _isSubmittingEmitter$ = new BehaviorSubject(false);
+
+  public isLoading$ = this._isLoadingEmitter$.asObservable();
+  public isSubmitting$ = this._isSubmittingEmitter$.asObservable();
   @Input() public action: 'create' | 'edit' | null = null;
   @Input('articleToEdit') public item: Article | null = null;
   @Input('isLoading') public isLoading = false;
@@ -26,13 +35,20 @@ export class ArticleFormComponent implements OnInit {
   @Output('save') public saveEmitter$ = new EventEmitter<EditableArticle>();
 
   public readonly form = new FormGroup({
-    body: new FormControl('', { validators: [Validators.required], nonNullable: true }),
-    description: new FormControl('', { validators: [Validators.required], nonNullable: true }),
-    title: new FormControl('', { validators: [], nonNullable: true }),
+    body: new FormControl('', { validators: [Validators.required, Validators.minLength(1), Validators.maxLength(800)], nonNullable: true }),
+    description: new FormControl('', { validators: [Validators.required, Validators.minLength(1), Validators.maxLength(40)], nonNullable: true }),
+    title: new FormControl('', { validators: [Validators.required, Validators.minLength(1), Validators.maxLength(30)], nonNullable: true }),
     tagList: new FormControl<string[] | null>(null, { validators: [Validators.required] }),
   });
 
-  public readonly addTagControl = new FormControl('', { validators: [Validators.maxLength(50), Validators.minLength(1)], nonNullable: true });
+  public readonly addTagControl = new FormControl('', { validators: [Validators.maxLength(50), Validators.minLength(1), Validators.required], nonNullable: true });
+
+  public readonly formData = combineLatest({
+    formValues: this.form.valueChanges.pipe(startWith(this.form.getRawValue())),
+    formStatus: this.form.statusChanges.pipe(startWith('INVALID')),
+    addTagValue: this.addTagControl.valueChanges.pipe(startWith('')),
+    addTagStatus: this.addTagControl.statusChanges.pipe(startWith('INVALID')),
+  });
 
   public ngOnInit(): void {
     if (!this.action) {
@@ -47,6 +63,23 @@ export class ArticleFormComponent implements OnInit {
       this.form.controls.tagList.disable({ emitEvent: false });
       this.addTagControl.disable({ emitEvent: false });
     }
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['isLoading']) {
+      console.debug('cambia is loading', changes['isLoading'].currentValue);
+      this._isLoadingEmitter$.next(changes['isLoading'].currentValue);
+    }
+
+    if (changes['isSubmitting']) {
+      console.debug(changes['isSubmitting'].currentValue);
+      this._isSubmittingEmitter$.next(changes['isSubmitting'].currentValue);
+    }
+  }
+
+  public ngOnDestroy(): void {
+    this._isLoadingEmitter$.complete();
+    this._isSubmittingEmitter$.complete();
   }
 
   public addTag(): void {

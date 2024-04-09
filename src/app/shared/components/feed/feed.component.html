@@ -1,4 +1,4 @@
-<ng-container *ngIf="(data$ | async) as data">
+<ng-container *ngIf="(data$ | ngrxPush) as data">
   <mc-loading *ngIf="data.isLoading"></mc-loading>
   <mc-error-message *ngIf="data.error" [errorMessage]="data.error"></mc-error-message>
 
@@ -12,7 +12,7 @@
           <a [routerLink]="['/profiles', article.author.username]">
             {{ article.author.username }}
           </a>
-          <span class="date">{{ article.createdAt }}</span>
+          <span class="date">{{ article.createdAt | date : 'yyyy, MMM dd hh:mm a' }}</span>
         </div>
         <div class="pull-xs-right">
           <app-fav-article

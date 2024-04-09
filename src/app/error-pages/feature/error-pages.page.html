@@ -1,5 +1,5 @@
 <div class="container">
-  <ng-container *ngIf="data$ | async as data">
+  <ng-container *ngIf="(data$ | ngrxPush) as data">
     <err-error-ui
       [errorCode]="data.code"
       [description]="data.description"

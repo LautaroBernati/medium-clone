@@ -2,15 +2,16 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CommentsListPage } from './comments-list.page';
 import { CommentComponent } from '../../ui/comment/comment.component';
-// import { CommentsListRoutingModule } from './comments-list-routing.module';
+import { LetModule, PushModule } from '@ngrx/component';
 
 
 @NgModule({
   declarations: [CommentsListPage],
   imports: [
-    // CommentsListRoutingModule,
     CommonModule,
     CommentComponent,
+    PushModule,
+    LetModule,
   ],
   exports: [CommentsListPage],
   providers: [],

@@ -1,4 +1,4 @@
-<ng-container *ngIf="data$ | async as data">
+<ng-container *ngIf="(data$ | ngrxPush) as data">
   <mc-loading *ngIf="data.isLoading"></mc-loading>
   <mc-error-message *ngIf="data.error" [errorMessage]="data.error"></mc-error-message>
 

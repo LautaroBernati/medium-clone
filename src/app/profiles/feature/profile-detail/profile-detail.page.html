@@ -1,5 +1,5 @@
 <div class="container">
-  <ng-container *ngIf="(data$ | async) as data">
+  <ng-container *ngIf="(data$ | ngrxPush) as data">
     <prf-profile-ui
       [userProfile]="data.profile"
       [isCurrentUserProfile]="data.isCurrentUserProfile"
@@ -8,7 +8,7 @@
       (authorPosts)="onAuthorPosts()"
       (favoritedPosts)="onFavoritedPosts()"
     >
-      <app-follow-profile followProfile></app-follow-profile>
+      <app-follow-profile *ngIf="!data.isCurrentUserProfile" followProfile></app-follow-profile>
       <mc-feed feed [apiUrl]="data.apiUrl"></mc-feed>
     </prf-profile-ui>
   </ng-container>

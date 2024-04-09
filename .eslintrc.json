@@ -1,203 +1,213 @@
 {
-    "root": true,
-    "env": {
-        "browser": true,
-        "es2022": true,
-        "node": true
-    },
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "sourceType": "module",
-        "ecmaVersion": 2022,
-        "project": "tsconfig.json"
-    },
-    "plugins": [
-        "@typescript-eslint"
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2022,
+    "project": "tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "quotes": [
+      "error",
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
     ],
-    "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "prettier"
-    ],
-    "rules": {
-        "quotes": [
-            "error",
-            "single",
-            {
-                "allowTemplateLiterals": true
-            }
-        ],
-        "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/explicit-module-boundary-types": "off",
-        "@typescript-eslint/no-empty-function": [
-            "warn",
-            {
-                "allow": [
-                    "constructors"
-                ]
-            }
-        ],
-        "@typescript-eslint/explicit-member-accessibility": [
-            "warn",
-            {
-                "overrides": {
-                    "constructors": "no-public"
-                }
-            }
-        ],
-        "@typescript-eslint/explicit-function-return-type": [
-            "warn",
-            {
-                "allowExpressions": true,
-                "allowTypedFunctionExpressions": true,
-                "allowHigherOrderFunctions": true,
-                "allowDirectConstAssertionInArrowFunctions": true,
-                "allowConciseArrowFunctionExpressionsStartingWithVoid": false
-            }
-        ],
-        "@typescript-eslint/naming-convention": [
-            "warn",
-            {
-                "selector": "default",
-                "format": [
-                    "camelCase",
-                    "snake_case"
-                ]
-            },
-            {
-                "selector": "typeProperty",
-                "format": [
-                    "camelCase",
-                    "PascalCase"
-                ]
-            },
-            {
-                "selector": "objectLiteralProperty",
-                "format": [
-                    "camelCase",
-                    "PascalCase"
-                ]
-            },
-            {
-                "selector": "variable",
-                "format": [
-                    "camelCase",
-                    "snake_case",
-                    "UPPER_CASE"
-                ]
-            },
-            {
-                "selector": "parameter",
-                "format": [
-                    "camelCase",
-                    "snake_case"
-                ],
-                "leadingUnderscore": "allow"
-            },
-            {
-                "selector": "memberLike",
-                "modifiers": [
-                    "private"
-                ],
-                "format": [
-                    "camelCase",
-                    "snake_case"
-                ],
-                "leadingUnderscore": "require"
-            },
-            {
-                "selector": "typeLike",
-                "format": [
-                    "PascalCase"
-                ]
-            }
-        ],
-        "semi": [
-            "warn",
-            "always"
-        ],
-        "camelcase": "off",
-        "no-prototype-builtins": "off",
-        "no-case-declarations": "off",
-        "curly": "warn",
-        "eqeqeq": "error",
-        "no-var": "error",
-        "padding-line-between-statements": [
-            "warn",
-            {
-                "blankLine": "always",
-                "prev": "*",
-                "next": [
-                    "return",
-                    "block-like",
-                    "const",
-                    "let",
-                    "var"
-                ]
-            },
-            {
-                "blankLine": "always",
-                "prev": [
-                    "import",
-                    "block-like",
-                    "const",
-                    "let",
-                    "var"
-                ],
-                "next": "*"
-            },
-            {
-                "blankLine": "any",
-                "prev": [
-                    "const",
-                    "let",
-                    "var"
-                ],
-                "next": [
-                    "const",
-                    "let",
-                    "var"
-                ]
-            },
-            {
-                "blankLine": "any",
-                "prev": [
-                    "import"
-                ],
-                "next": [
-                    "import"
-                ]
-            }
-        ],
-        "no-console": [
-            "warn",
-            {
-                "allow": [
-                    "error",
-                    "debug"
-                ]
-            }
-        ],
-        "no-duplicate-imports": "error",
-        "no-debugger": "warn",
-        "no-restricted-imports": [
-            "error",
-            {
-                "patterns": [
-                    {
-                        "group": [
-                            "src/app/*"
-                        ],
-                        "message": "Use relative imports '../../'"
-                    },
-                    {
-                        "group": [
-                            "*/internal/"
-                        ],
-                        "message": "Don't use CommonJS imports. Use 'rxjs' or 'rxjs/operators' without internal or moduleName"
-                    }
-                ]
-            }
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-empty-function": [
+      "warn",
+      {
+        "allow": [
+          "constructors"
         ]
+      }
+    ],
+    "@typescript-eslint/explicit-member-accessibility": [
+      "warn",
+      {
+        "overrides": {
+          "constructors": "no-public"
+        }
+      }
+    ],
+    "@typescript-eslint/explicit-function-return-type": [
+      "warn",
+      {
+        "allowExpressions": true,
+        "allowTypedFunctionExpressions": true,
+        "allowHigherOrderFunctions": true,
+        "allowDirectConstAssertionInArrowFunctions": true,
+        "allowConciseArrowFunctionExpressionsStartingWithVoid": false
+      }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "warn",
+      {
+        "selector": "default",
+        "format": [
+          "camelCase",
+          "snake_case"
+        ]
+      },
+      {
+        "selector": "typeProperty",
+        "format": [
+          "camelCase",
+          "PascalCase"
+        ]
+      },
+      {
+        "selector": "objectLiteralProperty",
+        "format": [
+          "camelCase",
+          "PascalCase"
+        ]
+      },
+      {
+        "selector": "variable",
+        "format": [
+          "camelCase",
+          "snake_case",
+          "UPPER_CASE"
+        ]
+      },
+      {
+        "selector": "parameter",
+        "format": [
+          "camelCase",
+          "snake_case"
+        ],
+        "leadingUnderscore": "allow"
+      },
+      {
+        "selector": "memberLike",
+        "modifiers": [
+          "private"
+        ],
+        "format": [
+          "camelCase",
+          "snake_case"
+        ],
+        "leadingUnderscore": "require"
+      },
+      {
+        "selector": "typeLike",
+        "format": [
+          "PascalCase"
+        ]
+      }
+    ],
+    "semi": [
+      "warn",
+      "always"
+    ],
+    "camelcase": "off",
+    "no-prototype-builtins": "off",
+    "no-case-declarations": "off",
+    "curly": "warn",
+    "eqeqeq": "error",
+    "no-var": "error",
+    "padding-line-between-statements": [
+      "warn",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": [
+          "return",
+          "block-like",
+          "const",
+          "let",
+          "var"
+        ]
+      },
+      {
+        "blankLine": "always",
+        "prev": [
+          "import",
+          "block-like",
+          "const",
+          "let",
+          "var"
+        ],
+        "next": "*"
+      },
+      {
+        "blankLine": "any",
+        "prev": [
+          "const",
+          "let",
+          "var"
+        ],
+        "next": [
+          "const",
+          "let",
+          "var"
+        ]
+      },
+      {
+        "blankLine": "any",
+        "prev": [
+          "import"
+        ],
+        "next": [
+          "import"
+        ]
+      }
+    ],
+    "no-console": [
+      "warn",
+      {
+        "allow": [
+          "error",
+          "debug"
+        ]
+      }
+    ],
+    "no-duplicate-imports": "error",
+    "no-debugger": "warn",
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          {
+            "group": [
+              "src/app/*"
+            ],
+            "message": "Use relative imports '../../'"
+          },
+          {
+            "group": [
+              "*/internal/"
+            ],
+            "message": "Don't use CommonJS imports. Use 'rxjs' or 'rxjs/operators' without internal or moduleName"
+          }
+        ]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:@ngrx/all-requiring-type-checking"
+      ]
     }
+  ]
 }

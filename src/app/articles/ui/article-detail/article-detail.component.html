@@ -1,4 +1,4 @@
-<ng-container *ngIf="article && !showConfirmation; else confirmation">
+<ng-container *ngIf="(article) && !(showConfirmation$ | ngrxPush); else confirmation;">
   <div class="article-page">
     <div class="banner">
       <div class="container">
@@ -56,13 +56,14 @@
       <h1>Are you sure?</h1>
     </span>
     <span>
-      <div style="display: flex; align-items: center; justify-content: space-evenly; gap: 2rem">
+      <div style="display: flex; align-items: center; justify-content: space-evenly; gap: 2rem" *ngIf="inputValues$ | ngrxPush as inputs">
         <button type="button" class="btn btn-danger"
-          (click)="deleteArticleEmitter$.emit(true); showConfirmation = false;">
+          [disabled]="inputs.isLoading"
+          (click)="handleConfirmDeletion(true)">
           Yes
         </button>
         <button type="button" class="btn btn-secondary"
-          (click)="showConfirmation = false;">
+          (click)="handleConfirmDeletion(false)">
           No
         </button>
       </div>
@@ -80,7 +81,8 @@
   &nbsp;
   <button type="button" class="btn btn-outline-danger"
     [disabled]="isLoading"
-    (click)="showConfirmation = true;">
+    (click)="handleShowConfirmation()">
+    <i class="ion-close"></i>
     Delete
   </button>
 </ng-template>

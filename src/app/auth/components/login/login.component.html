@@ -1,4 +1,4 @@
-<ng-container *ngIf="(data$ | async) as data">
+<ng-container *ngrxLet="(data$ | ngrxPush) as data;">
   <div class="auth-page">
     <div class="container page">
       <div class="row">
@@ -7,7 +7,7 @@
           <p class="text-xs-center">
             <a [routerLink]="['/register']">Don't have an account?</a>
           </p>
-          <mc-backend-error-messages *ngIf="data.backendErrors" [errors]="data.backendErrors">
+          <mc-backend-error-messages *ngIf="!!data && data.backendErrors" [errors]="data.backendErrors">
           </mc-backend-error-messages>
           <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <fieldset class="form-group">
@@ -26,7 +26,7 @@
                 [formControl]="form.controls.password"
               />
             </fieldset>
-            <button type="submit" class="btn btn-lg btn-primary pull-xs-right" [disabled]="data.isSubmitting">
+            <button type="submit" class="btn btn-lg btn-primary pull-xs-right" [disabled]="data?.isSubmitting">
               Sign in
             </button>
           </form>

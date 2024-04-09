@@ -8,6 +8,7 @@ import { LoadingComponent } from '../../../shared/components/loading/loading.com
 import { FavArticleModule } from '../../../shared/components/fav-article/feature/fav-article.module';
 import { FollowProfileModule } from '../../../shared/components/follow-profile/feature/follow-profile.module';
 import { CommentsListModule } from '../comments-list/comments-list.module';
+import { PushModule } from '@ngrx/component';
 
 @NgModule({
   declarations: [ArticleDetailPage],
@@ -20,6 +21,7 @@ import { CommentsListModule } from '../comments-list/comments-list.module';
     FavArticleModule,
     FollowProfileModule,
     CommentsListModule,
+    PushModule,
   ],
   exports: [],
   providers: [],

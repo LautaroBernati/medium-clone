@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subject, combineLatest, filter, map, switchMap, take, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, Subject, combineLatest, filter, map, switchMap, take, takeUntil, tap } from 'rxjs';
 import { selectArticleComments, selectArticleData, selectArticleIsLoading, selectArticleIsSubmitting } from '../../data-access/store/reducers';
 import { articleActions } from '../../data-access/store/actions';
 import { Article, Comment } from '../../data-access/services/articles.service';
@@ -14,9 +14,10 @@ import { ICurrentUser } from '../../../shared/types/current-user.interface';
 })
 export class CommentsListPage implements OnDestroy {
   private readonly _store = inject(Store);
-  public showNewCommentDialog = false;
   private readonly _destroyEmitter$ = new Subject<boolean>();
+  private readonly _showNewCommentDialogEmitter$ = new BehaviorSubject(true);
 
+  public readonly showNewCommentDialog$ = this._showNewCommentDialogEmitter$.asObservable();
   public readonly data$ = combineLatest({
     comments: this._store.select(selectArticleData).pipe(
       filter((article): article is Article => Boolean(article)),
@@ -33,15 +34,17 @@ export class CommentsListPage implements OnDestroy {
   });
 
   constructor() {
+    // every time a new comment is pushed, it will emit a new false value to the showNewCommentDialog subject.
     this._store.select(selectArticleComments).pipe(
       takeUntil(this._destroyEmitter$),
       filter(data => Boolean(data)),
-    ).subscribe(() => this.showNewCommentDialog = false);
+    ).subscribe(() => this._showNewCommentDialogEmitter$.next(false));
   }
 
   public ngOnDestroy(): void {
     this._destroyEmitter$.next(true);
     this._destroyEmitter$.complete();
+    this._showNewCommentDialogEmitter$.complete();
   }
 
   public onCreateComment(commentBody: string): void {
@@ -65,5 +68,13 @@ export class CommentsListPage implements OnDestroy {
     ).subscribe(articleSlug => {
       this._store.dispatch(articleActions.deleteArticleComment({ articleSlug, commentId: id }));
     });
+  }
+
+  public handleAddCommentBtn(): void {
+    this._showNewCommentDialogEmitter$.next(true);
+  }
+
+  public onCancelComment(): void {
+    this._showNewCommentDialogEmitter$.next(false);
   }
 }

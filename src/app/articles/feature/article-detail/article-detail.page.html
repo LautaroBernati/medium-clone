@@ -1,4 +1,4 @@
-<div *ngIf="data$ | async as data">
+<div *ngIf="(data$ | ngrxPush) as data">
   <mc-backend-error-messages *ngIf="data.error" [errors]="data.error"></mc-backend-error-messages>
   <ng-container *ngIf="data.article">
     <art-article-detail-ui

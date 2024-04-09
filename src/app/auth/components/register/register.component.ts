@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -7,13 +7,15 @@ import { CommonModule } from '@angular/common';
 import { selectIsSubmitting, selectValidationErrors } from '../../store/store.reducers';
 import { combineLatest } from 'rxjs';
 import { BackendErrorMessagesComponent } from '../../../shared/components/backend-error-messages/backend-error-messages.component';
+import { PushModule } from '@ngrx/component';
 
 
 @Component({
   selector: 'mc-register',
   templateUrl: 'register.component.html',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, CommonModule, BackendErrorMessagesComponent],
+  imports: [RouterModule, ReactiveFormsModule, CommonModule, BackendErrorMessagesComponent, PushModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent {
   public readonly form = new FormGroup({

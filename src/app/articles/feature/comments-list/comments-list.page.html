@@ -1,4 +1,4 @@
-<ng-container *ngIf="data$ | async as data">
+<ng-container *ngIf="(data$ | ngrxPush) as data">
   <div class="container-fluid">
     <h2>Comment List</h2>
     <br />
@@ -13,13 +13,13 @@
         ></art-comment-ui>
       </ng-container>
     </ng-container>
-    <div class="row mt-5">
+    <div class="row mt-5" *ngrxLet="showNewCommentDialog$ | ngrxPush as showNewCommentDialog">
       <div class="col text-end">
         <button
           type="button"
           class="btn btn-lg btn-success"
           [hidden]="showNewCommentDialog || !data.currentUser"
-          (click)="showNewCommentDialog = true;"
+          (click)="handleAddCommentBtn()"
         >
           Add Comment
         </button>
@@ -30,7 +30,7 @@
         <art-comment-ui
           [isLoading]="data.isLoading"
           [isSubmitting]="data.isSubmitting"
-          (cancel)="showNewCommentDialog = false;"
+          (cancel)="onCancelComment()"
           (createComment)="onCreateComment($event)"
         ></art-comment-ui>
       </ng-container>

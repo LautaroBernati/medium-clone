@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 
 export const getArticleEffect = createEffect(
   (actions$ = inject(Actions), articlesService = inject(ArticlesService)) =>
-    actions$.pipe(
+    { return actions$.pipe(
       ofType(articleActions.getArticle),
       switchMap(({ slug }) => {
         return articlesService.getArticlesBySlug(slug).pipe(
@@ -21,13 +21,13 @@ export const getArticleEffect = createEffect(
           }),
         );
       }),
-    ),
+    ); },
   { functional: true },
 );
 
 export const getArticleCommentsEffect = createEffect(
   (actions$ = inject(Actions), articlesService = inject(ArticlesService)) =>
-    actions$.pipe(
+    { return actions$.pipe(
       ofType(articleActions.getArticleComments),
       switchMap(({ slug }) => {
         return articlesService.getCommentsBySlug(slug).pipe(
@@ -39,13 +39,13 @@ export const getArticleCommentsEffect = createEffect(
           }),
         );
       }),
-    ),
+    ); },
   { functional: true },
 );
 
 export const createArticleCommentEffect = createEffect(
   (actions$ = inject(Actions), articlesService = inject(ArticlesService)) =>
-    actions$.pipe(
+    { return actions$.pipe(
       ofType(articleActions.createArticleComment),
       switchMap(({ articleSlug, data }) => {
         return articlesService.createArticleComment(articleSlug, data).pipe(
@@ -57,13 +57,13 @@ export const createArticleCommentEffect = createEffect(
           }),
         );
       }),
-    ),
+    ); },
   { functional: true },
 );
 
 export const deleteArticleCommentEffect = createEffect(
   (actions$ = inject(Actions), articlesService = inject(ArticlesService)) =>
-    actions$.pipe(
+    { return actions$.pipe(
       ofType(articleActions.deleteArticleComment),
       switchMap(({ articleSlug, commentId }) => {
         return articlesService.deleteArticleComment(articleSlug, commentId).pipe(
@@ -75,25 +75,25 @@ export const deleteArticleCommentEffect = createEffect(
           }),
         );
       }),
-    ),
+    ); },
   { functional: true },
 );
 
 export const reloadAfterCommentSuccessEffect = createEffect(
   (actions$ = inject(Actions), store = inject(Store)) =>
-    actions$.pipe(
+    { return actions$.pipe(
       ofType(
         articleActions.createArticleCommentSuccess,
         articleActions.deleteArticleCommentSuccess,
       ),
       tap((data) => store.dispatch(articleActions.getArticleComments({ slug: data.articleSlug }))),
-    ),
+    ); },
   { functional: true, dispatch: false },
 );
 
 export const createArticleEffect = createEffect(
   (actions$ = inject(Actions), articlesService = inject(ArticlesService)) =>
-    actions$.pipe(
+    { return actions$.pipe(
       ofType(articleActions.createArticle),
       switchMap(({ data }) => {
         return articlesService.createArticle(data).pipe(
@@ -105,13 +105,13 @@ export const createArticleEffect = createEffect(
           }),
         );
       }),
-    ),
+    ); },
   { functional: true },
 );
 
 export const redirectAfterSuccessEffect = createEffect(
   (actions$ = inject(Actions), router = inject(Router)) =>
-    actions$.pipe(
+    { return actions$.pipe(
       ofType(
         articleActions.createArticleSuccess,
         articleActions.editArticleSuccess,
@@ -119,13 +119,13 @@ export const redirectAfterSuccessEffect = createEffect(
       tap((data) => {
         router.navigate([`./articles/${data.article.slug}`]);
       }),
-    ),
+    ); },
   { functional: true, dispatch: false },
 );
 
 export const editArticleEffect = createEffect(
   (actions$ = inject(Actions), articlesService = inject(ArticlesService)) =>
-    actions$.pipe(
+    { return actions$.pipe(
       ofType(articleActions.editArticle),
       switchMap(({ data, slug }) => {
         return articlesService.editArticle({
@@ -141,13 +141,13 @@ export const editArticleEffect = createEffect(
           }),
         );
       }),
-    ),
+    ); },
   { functional: true },
 );
 
 export const deleteArticleEffect = createEffect(
   (actions$ = inject(Actions), articlesService = inject(ArticlesService)) =>
-    actions$.pipe(
+    { return actions$.pipe(
       ofType(articleActions.deleteArticle),
       switchMap(({ slug }) => {
         return articlesService.deleteArticle(slug).pipe(
@@ -157,15 +157,15 @@ export const deleteArticleEffect = createEffect(
           }),
         );
       }),
-    ),
+    ); },
   { functional: true },
 );
 
 export const redirectAfterDeleteSuccess = createEffect(
   (actions$ = inject(Actions), router = inject(Router)) =>
-    actions$.pipe(
+    { return actions$.pipe(
       ofType(articleActions.deleteArticleSuccess),
       tap(() => router.navigate(['/home'])),
-    ),
+    ); },
   { functional: true, dispatch: false },
 );

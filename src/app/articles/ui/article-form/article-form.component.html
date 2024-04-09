@@ -6,7 +6,12 @@
     Article
   </h1>
   <hr>
-  <form #formTemplate="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form #formTemplate="ngForm"
+    *ngrxLet="{ isLoading: isLoading$, isSubmitting: isSubmitting$, formData } | ngrxPush as data"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+  >
+  {{ data | json }}
     <fieldset class="form-group">
       <input
         type="text"
@@ -46,7 +51,7 @@
           />
           <button
             type="button"
-            [disabled]="action === 'edit' || isLoading"
+            [disabled]="action === 'edit' || data?.isLoading"
             class="btn btn-sm btn-warning"
             (click)="removeTag(i)"
           >X</button>
@@ -59,10 +64,10 @@
           placeholder="New tag"
           [formControl]="addTagControl"
         />
-        <button
+        <button *ngIf="!!data && data.formData"
           type="button"
           class="btn btn-lg btn-primary"
-          [disabled]="addTagControl.invalid || !addTagControl.value"
+          [disabled]="data.formData.addTagStatus === 'INVALID' || !data.formData.addTagValue"
           (click)="addTag()"
         >Add tag</button>
       </div>
@@ -70,7 +75,8 @@
     <ng-container *ngIf="errors">
       <mc-backend-error-messages [errors]="errors"></mc-backend-error-messages>
     </ng-container>
-    <button type="submit" class="btn btn-lg btn-primary pull-xs-right" [disabled]="form.invalid || isLoading || isSubmitting">
+    <button *ngIf="!!data && data.formData" type="submit" class="btn btn-lg btn-primary pull-xs-right"
+      [disabled]="(data.formData.formStatus === 'INVALID') || data.isLoading || data.isSubmitting">
       Save
     </button>
   </form>

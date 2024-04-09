@@ -1,4 +1,4 @@
-<button *ngIf="data$ | async as data" type="button" class="btn btn-sm btn-outline-secondary"
+<button *ngIf="(data$ | ngrxPush) as data" type="button" class="btn btn-sm btn-outline-secondary"
   [disabled]="data.isLoading"
   (click)="onFollow()"
 >
