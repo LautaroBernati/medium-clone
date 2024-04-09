@@ -1,0 +1,32 @@
+name: Angular App CI/CD
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Angular CLI
+      run: npm install -g @angular/cli
+
+    - name: Install project dependencies
+      run: npm install
+
+    - name: Build Angular App
+      run: ng build --configuration production
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist/mediumclone_angular
+        publish_branch: gh-pages
+        force_orphan: true
