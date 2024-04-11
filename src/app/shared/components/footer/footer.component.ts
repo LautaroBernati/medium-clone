@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LetModule, PushModule } from '@ngrx/component';
 import packageJson from '../../../../../package.json';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'mc-footer-ui',
@@ -9,9 +9,8 @@ import packageJson from '../../../../../package.json';
   styleUrls: ['footer.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PushModule, LetModule]
+  imports: [PushModule, LetModule, TranslateModule]
 })
 export class FooterComponent {
-  private readonly _http = inject(HttpClient);
   public readonly version = packageJson.version;
 }

@@ -6,6 +6,7 @@ import { BackendErrorMessagesComponent } from '../../../shared/components/backen
 import { IBackendErrors } from '../../../shared/types/backend-errors.interface';
 import { BehaviorSubject, combineLatest, startWith } from 'rxjs';
 import { LetModule, PushModule } from '@ngrx/component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'art-form-ui',
@@ -17,6 +18,7 @@ import { LetModule, PushModule } from '@ngrx/component';
     BackendErrorMessagesComponent,
     LetModule,
     PushModule,
+    TranslateModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -67,12 +69,10 @@ export class ArticleFormComponent implements OnInit, OnChanges, OnDestroy {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['isLoading']) {
-      console.debug('cambia is loading', changes['isLoading'].currentValue);
       this._isLoadingEmitter$.next(changes['isLoading'].currentValue);
     }
 
     if (changes['isSubmitting']) {
-      console.debug(changes['isSubmitting'].currentValue);
       this._isSubmittingEmitter$.next(changes['isSubmitting'].currentValue);
     }
   }

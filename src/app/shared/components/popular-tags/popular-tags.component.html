@@ -3,7 +3,9 @@
   <mc-error-message *ngIf="data.error" [errorMessage]="data.error"></mc-error-message>
 
   <div class="sidebar" *ngIf="data.popularTags">
-    <p>Popular Tags</p>
+    <p *ngrxLet="(('app' | translate) | ngrxPush) as translate">
+      {{ translate.tagsText }}
+    </p>
     <div class="tag-list">
       <a *ngFor="let item of data.popularTags" [routerLink]="['/tags', item]" class="tag-default tag-pill">
         {{ item }}

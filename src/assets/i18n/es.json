@@ -1,0 +1,114 @@
+{
+  "app": {
+    "loadingText": "Cargando",
+    "tagsText": "Etiquetas Populares"
+  },
+  "banner": {
+    "title": "Medium Clone",
+    "subTitle": "Un lugar para compartir conocimiento"
+  },
+  "topbar": {
+    "home": "Inicio",
+    "newPost": "Nuevo Post",
+    "settings": "Ajustes",
+    "logOut": "Salir",
+    "logIn": "Ingresar",
+    "register": "Registrarse"
+  },
+  "login": {
+    "title": "Ingreso",
+    "link": "¿No tiene una cuenta?",
+    "inputs": {
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password"
+    },
+    "buttons": {
+      "submit": "Ingresar"
+    }
+  },
+  "register": {
+    "title": "Registro",
+    "link": "¿Ya tiene una cuenta?",
+    "inputs": {
+      "usernamePlaceholder": "Nombre de Usuario",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Contraseña"
+    },
+    "buttons": {
+      "submit": "Registrarse"
+    }
+  },
+  "feed": {
+    "tabs": {
+      "yours": "Tu Feed",
+      "global": "Feed Global"
+    },
+    "readMore": "Leer más..."
+  },
+  "article": {
+    "create": "Crear Articulo",
+    "edit": "Editar Articulo",
+    "inputs": {
+      "placeholders": {
+        "title": "Titulo",
+        "body": "Contenido",
+        "description": "Descripción",
+        "newTag": "Nueva Etiqueta"
+      }
+    },
+    "tagsTitle": "Etiquetas",
+    "confirmationText": "¿Está seguro que desea borrar este articulo?",
+    "buttons": {
+      "yes": "Si",
+      "no": "No",
+      "edit": "Editar",
+      "delete": "Borrar",
+      "submit": "Guardar",
+      "addTag": "Agregar Etiqueta"
+    }
+  },
+  "comment": {
+    "title": "Lista de Comentarios",
+    "noComments": "Este post aún no tiene comentarios.",
+    "newComment": {
+      "title": "Nuevo Comentario",
+      "placeholder": "Escribe tu comentario..."
+    },
+    "buttons": {
+      "add": "Agregar Comentario",
+      "new": "Nuevo Comentario",
+      "delete": "Borrar Comentario",
+      "confirm": "Confirmar",
+      "cancel": "Cancelar",
+      "post": "Enviar Comentario"
+    }
+  },
+  "profile": {
+    "tabs": {
+      "myPosts": "Mis Posts",
+      "favPosts": "Posts favoritos"
+    },
+    "buttons": {
+      "editProfile": "Editar Ajustes de Perfil"
+    }
+  },
+  "settings": {
+    "title": "Ajustes",
+    "inputs": {
+      "placeholders": {
+        "url": "URL de imagen de perfil",
+        "username": "Nombre de usuario",
+        "bio": "Biografía de tu persona",
+        "email": "Email"
+      }
+    },
+    "buttons": {
+      "submit": "Guardar",
+      "logOut": "Cerrar sesión"
+    }
+  },
+  "footer": {
+    "title": "Desarrollado para motivos demostrativos",
+    "subTitle": "Lautaro Bernati @ 2024"
+  }
+}

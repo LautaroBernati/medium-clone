@@ -1,6 +1,7 @@
 <div class="banner">
-  <div class="container">
-    <h1>Medium clone</h1>
-    <p>A place to share knowledge</p>
+  <div class="container"
+    *ngrxLet="(('banner' | translate) | ngrxPush) as translate">
+    <h1>{{ translate.title }}</h1>
+    <p>{{ translate.subTitle }}</p>
   </div>
 </div>

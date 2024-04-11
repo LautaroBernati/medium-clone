@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { TagListComponent } from '../../../shared/components/tag-list/tag-list.component';
 import { BehaviorSubject, filter, take } from 'rxjs';
 import { LetModule, PushModule } from '@ngrx/component';
+import { TranslateModule } from '@ngx-translate/core';
 
 type InputValues = {
   article: Article | null;
@@ -18,7 +19,7 @@ type InputValues = {
   templateUrl: 'article-detail.component.html',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, RouterModule, TagListComponent, PushModule, LetModule],
+  imports: [CommonModule, RouterModule, TagListComponent, PushModule, LetModule, TranslateModule],
 })
 export class ArticleDetailComponent implements OnInit, OnChanges, OnDestroy, InputValues {
   @Input('article') public article: Article | null = null;

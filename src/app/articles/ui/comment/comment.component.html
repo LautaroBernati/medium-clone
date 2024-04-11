@@ -1,4 +1,5 @@
-<div class="container">
+<div class="container"
+  *ngrxLet="(('comment' | translate) | ngrxPush) as translate">
   <div class="row">
     <div class="col">
       <div style="border: 1px solid lightgrey; border-radius: 5px; padding: 1rem;">
@@ -10,7 +11,7 @@
               <textarea
                 type="text"
                 class="form-control form-control-lg"
-                placeholder="Write your comment..."
+                [placeholder]="translate.newComment.placeholder"
                 [formControl]="form.controls.commentDesc"
                 [readonly]="!!data.inputValues.comment || data.inputValues.isLoading"
                 [rows]="4"
@@ -36,14 +37,14 @@
                   <button type="button" class="btn btn-md btn-secondary pull-xs-right"
                     [disabled]="data.inputValues.isLoading || data.inputValues.isSubmitting"
                     (click)="cancelEmitter$.emit()">
-                    Cancel
+                    {{ translate.buttons.cancel }}
                   </button>
                   <button
                     type="submit"
                     class="btn btn-md btn-primary pull-xs-right"
                     [disabled]="data.formStatus === 'INVALID' || data.inputValues.isLoading || data.inputValues.isSubmitting"
                   >
-                    Post Comment
+                  {{ translate.buttons.post }}
                   </button>
                 </span>
                 <button
@@ -53,7 +54,7 @@
                   [disabled]="data.inputValues.isLoading || data.inputValues.isSubmitting"
                   (click)="handleShowConfirmation(true)"
                 >
-                  Delete Comment
+                {{ translate.buttons.delete }}
                 </button>
               </span>
               <span *ngIf="data.showConfirmation" class="btn-options">
@@ -64,7 +65,7 @@
                   [disabled]="data.inputValues.isLoading || data.inputValues.isSubmitting"
                   (click)="emitDeleteComment(data.inputValues.comment.id)"
                 >
-                  Confirm
+                {{ translate.buttons.confirm }}
                 </button>
                 <button
                   *ngIf="data.inputValues.comment && data.inputValues.showAuthorOptions"
@@ -73,7 +74,7 @@
                   [disabled]="data.inputValues.isLoading || data.inputValues.isSubmitting"
                   (click)="handleShowConfirmation(false)"
                 >
-                  Cancel
+                {{ translate.buttons.cancel }}
                 </button>
               </span>
             </span>

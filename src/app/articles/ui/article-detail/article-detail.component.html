@@ -30,13 +30,10 @@
               "
             ></ng-container>
           </ng-container>
-          <!-- <span > -->
-          <!-- </span> -->
         </div>
       </div>
     </div>
     <div class="container page">
-      <!-- loading... -->
       <div class="row article-content">
         <div class="col-xs-12">
           <div>
@@ -51,20 +48,20 @@
 </ng-container>
 
 <ng-template #confirmation>
-  <div style="display: flex; flex-direction: column; align-items: center;">
+  <div style="display: flex; flex-direction: column; align-items: center;" *ngrxLet="(('article' | translate) | ngrxPush) as translate">
     <span>
-      <h1>Are you sure?</h1>
+      <h1>{{ translate.confirmationText }}</h1>
     </span>
     <span>
       <div style="display: flex; align-items: center; justify-content: space-evenly; gap: 2rem" *ngIf="inputValues$ | ngrxPush as inputs">
         <button type="button" class="btn btn-danger"
           [disabled]="inputs.isLoading"
           (click)="handleConfirmDeletion(true)">
-          Yes
+          {{ translate.buttons.yes }}
         </button>
         <button type="button" class="btn btn-secondary"
           (click)="handleConfirmDeletion(false)">
-          No
+          {{ translate.buttons.no }}
         </button>
       </div>
     </span>
@@ -72,19 +69,22 @@
 </ng-template>
 
 <ng-template #sameAuthor>
-  <button type="button" class="btn btn-outline-secondary"
-    [disabled]="isLoading"
-    (click)="editArticleEmitter$.emit()">
-    <i class="ion-edit"></i>
-    Edit
-  </button>
-  &nbsp;
-  <button type="button" class="btn btn-outline-danger"
-    [disabled]="isLoading"
-    (click)="handleShowConfirmation()">
-    <i class="ion-close"></i>
-    Delete
-  </button>
+  <ng-container 
+    *ngrxLet="(('article' | translate) | ngrxPush) as translate">
+    <button type="button" class="btn btn-outline-secondary"
+      [disabled]="isLoading"
+      (click)="editArticleEmitter$.emit()">
+      <i class="ion-edit"></i>
+      {{ translate.buttons.edit }}
+    </button>
+    &nbsp;
+    <button type="button" class="btn btn-outline-danger"
+      [disabled]="isLoading"
+      (click)="handleShowConfirmation()">
+      <i class="ion-close"></i>
+      {{ translate.buttons.delete }}
+    </button>
+  </ng-container>
 </ng-template>
 
 <ng-template #diffAuthor let-data>

@@ -5,6 +5,7 @@ import { Comment } from '../../data-access/services/articles.service';
 import { LetModule, PushModule } from '@ngrx/component';
 import { BehaviorSubject, combineLatest, startWith } from 'rxjs';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'art-comment-ui',
@@ -12,7 +13,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['comment.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule, LetModule, PushModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, LetModule, PushModule, RouterModule, TranslateModule],
 })
 export class CommentComponent implements OnInit, OnChanges, OnDestroy {
   @Input('comment') public comment?: Comment;

@@ -1,22 +1,22 @@
 <ng-container *ngIf="(data$ | ngrxPush) as data">
-  <nav class="navbar navbar-light">
+  <nav class="navbar navbar-light" *ngrxLet="(('topbar' | translate) | ngrxPush) as translate">
     <div class="container">
       <a class="navbar-brand" routerLink="/home">Medium</a>
       <ul class="nav navbar-nav pull-xs-right" style="display: flex; flex-direction: row;">
         <li class="nav-item">
-          <a routerLink="/home" class="nav-link">Home</a>
+          <a routerLink="/home" class="nav-link">{{ translate.home }}</a>
         </li>
         <ng-container *ngIf="data.currentUser">
           <li class="nav-item">
             <a routerLink="/articles/create" class="nav-link">
               <i class="ion-compose"></i>
-              &nbsp; New Post
+              &nbsp; {{ translate.newPost }}
             </a>
           </li>
           <li class="nav-item">
             <a routerLink="/settings" class="nav-link">
               <i class="ion-gear-a"></i>
-              &nbsp; Settings
+              &nbsp; {{ translate.settings }}
             </a>
           </li>
           <li class="nav-item">
@@ -27,18 +27,25 @@
           </li>
           <li class="nav-item">
             <a type="button" class="nav-link" (click)="onLogout()">
-              Log out
+              {{ translate.logOut }}
             </a>
           </li>
         </ng-container>
         <ng-container *ngIf="data.currentUser === null">
           <li class="nav-item">
-            <a routerLink="/login" class="nav-link">Sign in</a>
+            <a routerLink="/login" class="nav-link">{{ translate.logIn }}</a>
           </li>
           <li class="nav-item">
-            <a routerLink="/register" class="nav-link">Sign up</a>
+            <a routerLink="/register" class="nav-link">{{ translate.register }}</a>
           </li>
         </ng-container>
+        <li class="nav-item">
+          <select class="form-select" [formControl]="langControl">
+            <option *ngFor="let item of langList" [value]="item.value">
+              {{ item.description }}
+            </option>
+          </select>
+        </li>
       </ul>
     </div>
   </nav>

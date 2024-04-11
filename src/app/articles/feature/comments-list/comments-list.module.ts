@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommentsListPage } from './comments-list.page';
 import { CommentComponent } from '../../ui/comment/comment.component';
 import { LetModule, PushModule } from '@ngrx/component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { LetModule, PushModule } from '@ngrx/component';
     CommentComponent,
     PushModule,
     LetModule,
+    TranslateModule,
   ],
   exports: [CommentsListPage],
   providers: [],

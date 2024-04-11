@@ -1,6 +1,6 @@
 <ng-container *ngIf="(data$ | ngrxPush) as data">
-  <div class="container-fluid">
-    <h2>Comment List</h2>
+  <div class="container-fluid" *ngrxLet="(('comment' | translate) | ngrxPush) as translate">
+    <h2 style="text-align: center;">{{ translate.title }}</h2>
     <br />
     <ng-container *ngIf="data.comments as comments">
       <ng-container *ngFor="let item of comments">
@@ -12,6 +12,9 @@
           (deleteComment)="onDeleteComment($event)"
         ></art-comment-ui>
       </ng-container>
+      <div *ngIf="!comments || comments.length === 0" style="text-align: center;">
+        {{ translate.noComments }}
+      </div>
     </ng-container>
     <div class="row mt-5" *ngrxLet="showNewCommentDialog$ | ngrxPush as showNewCommentDialog">
       <div class="col text-end">
@@ -21,12 +24,14 @@
           [hidden]="showNewCommentDialog || !data.currentUser"
           (click)="handleAddCommentBtn()"
         >
-          Add Comment
+          {{ translate.buttons.add }}
         </button>
       </div>
       <ng-container *ngIf="data.currentUser && showNewCommentDialog">
         <hr class="mt-2">
-        <h4 style="text-align: center;" class="mt-3 mb-3">New Comment</h4>
+        <h4 style="text-align: center;" class="mt-3 mb-3">
+          {{ translate.buttons.new }}
+        </h4>
         <art-comment-ui
           [isLoading]="data.isLoading"
           [isSubmitting]="data.isSubmitting"

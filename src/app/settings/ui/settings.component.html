@@ -1,7 +1,8 @@
-<div class="container page">
+<div class="container page"
+  *ngrxLet="(('settings' | translate) | ngrxPush) as translate">
   <div class="row">
     <div class="col-md-6 offset-md-3 col-xs-12">
-      <h1 class="text-xs-center">Settings</h1>
+      <h1 class="text-xs-center">{{ translate.title }}</h1>
       <hr>
       <mc-backend-error-messages *ngIf="errors"
         [errors]="errors"
@@ -13,35 +14,35 @@
               type="text"
               class="form-control form-control-lg"
               [formControl]="form.controls.image"
-              placeholder="URL of profile picture"
+              [placeholder]="translate.inputs.placeholders.url"
             />
             <input
               type="text"
               class="form-control form-control-lg"
               [formControl]="form.controls.username"
-              placeholder="Username"
+              [placeholder]="translate.inputs.placeholders.username"
             />
             <textarea
               type="text"
               class="form-control form-control-lg"
               [formControl]="form.controls.bio"
-              placeholder="Biography about you"
+              [placeholder]="translate.inputs.placeholders.bio"
               rows="4"
             ></textarea>
             <input
               type="text"
               class="form-control form-control-lg"
               [formControl]="form.controls.email"
-              placeholder="Email"
+              [placeholder]="translate.inputs.placeholders.email"
             />
           </fieldset>
           <button type="button" class="btn btn-lg btn-warning" (click)="onLogout()"
             [disabled]="isSubmitting">
-            Log Out
+            {{ translate.buttons.logOut }}
           </button>
           <button type="submit" class="btn btn-lg btn-primary pull-xs-right"
             [disabled]="form.invalid || isSubmitting">
-            Save
+            {{ translate.buttons.submit }}
           </button>
         </fieldset>
       </form>

@@ -1,11 +1,16 @@
 <ng-container *ngrxLet="(data$ | ngrxPush) as data;">
-  <div class="auth-page">
+  <div class="auth-page"
+    *ngrxLet="(('login' | translate) | ngrxPush) as translate">
     <div class="container page">
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Sign in</h1>
+          <h1 class="text-xs-center">
+            {{ translate.title }}
+          </h1>
           <p class="text-xs-center">
-            <a [routerLink]="['/register']">Don't have an account?</a>
+            <a [routerLink]="['/register']">
+              {{ translate.link }}
+            </a>
           </p>
           <mc-backend-error-messages *ngIf="!!data && data.backendErrors" [errors]="data.backendErrors">
           </mc-backend-error-messages>
@@ -14,7 +19,7 @@
               <input
                 type="text"
                 class="form-control form-control-lg"
-                placeholder="Email"
+                [placeholder]="translate.inputs.emailPlaceholder"
                 [formControl]="form.controls.email"
                 maxlength="35"
                 minlength="6"
@@ -24,13 +29,13 @@
               <input
                 type="password"
                 class="form-control form-control-lg"
-                placeholder="Password"
+                [placeholder]="translate.inputs.passwordPlaceholder"
                 [formControl]="form.controls.password"
                 maxlength="35"
               />
             </fieldset>
             <button type="submit" class="btn btn-lg btn-primary pull-xs-right" [disabled]="data?.isSubmitting">
-              Sign in
+              {{ translate.buttons.submit }}
             </button>
           </form>
         </div>

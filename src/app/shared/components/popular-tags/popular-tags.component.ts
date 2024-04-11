@@ -7,13 +7,14 @@ import { CommonModule } from '@angular/common';
 import { LoadingComponent } from '../loading/loading.component';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { RouterModule } from '@angular/router';
-import { PushModule } from '@ngrx/component';
+import { LetModule, PushModule } from '@ngrx/component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'mc-popular-tags',
   templateUrl: 'popular-tags.component.html',
   standalone: true,
-  imports: [CommonModule, LoadingComponent, ErrorMessageComponent, RouterModule, PushModule],
+  imports: [CommonModule, LoadingComponent, ErrorMessageComponent, RouterModule, PushModule, LetModule, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopularTagsComponent implements OnInit {

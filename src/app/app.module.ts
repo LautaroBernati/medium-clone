@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { authFeatureKey, authReducer } from './auth/store/store.reducers';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { EffectsModule, provideEffects } from '@ngrx/effects';
 import * as authEffects from './auth/store/store.effects';
 import * as feedEffects from './shared/components/feed/store/effects';
@@ -24,11 +24,25 @@ import { followProfileFeatureKey, followProfileReducer } from './shared/componen
 import * as profileEffects from './profiles/data-access/store/profiles-store.effects';
 import { ProfilesService } from './profiles/data-access/profiles.service';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function httpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(httpClient, './assets/i18n/');
+}
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient],
+      },
+      defaultLanguage: 'en',
+    }),
     AppRoutingModule,
     ErrorPagesModule,
     TopbarComponent,

@@ -5,13 +5,15 @@ import { ICurrentUser } from '../../shared/types/current-user.interface';
 import { BackendErrorMessagesComponent } from '../../shared/components/backend-error-messages/backend-error-messages.component';
 import { IBackendErrors } from '../../shared/types/backend-errors.interface';
 import { ProfileSettings } from '../../auth/services/auth.service';
+import { LetModule, PushModule } from '@ngrx/component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'stg-settings-ui',
   templateUrl: 'settings.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, BackendErrorMessagesComponent]
+  imports: [CommonModule, ReactiveFormsModule, BackendErrorMessagesComponent, LetModule, PushModule, TranslateModule]
 })
 export class SettingsComponent implements OnInit {
   @Input('currentUser') public currentUser?: ICurrentUser;

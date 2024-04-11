@@ -8,22 +8,24 @@ import { selectIsSubmitting, selectValidationErrors } from '../../store/store.re
 import { combineLatest } from 'rxjs';
 import { BackendErrorMessagesComponent } from '../../../shared/components/backend-error-messages/backend-error-messages.component';
 import { LetModule, PushModule } from '@ngrx/component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'mc-login',
   templateUrl: 'login.component.html',
   standalone: true,
-  imports: [RouterModule, LetModule, ReactiveFormsModule, CommonModule, BackendErrorMessagesComponent, PushModule],
+  imports: [RouterModule, LetModule, ReactiveFormsModule, CommonModule, BackendErrorMessagesComponent, PushModule, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
+  private readonly _store = inject(Store);
+
   public readonly form = new FormGroup({
     email: new FormControl('', { validators: [Validators.required], nonNullable: true }),
     password: new FormControl('', { validators: [Validators.required], nonNullable: true }),
   });
 
-  private readonly _store = inject(Store);
   public readonly data$ = combineLatest({
     isSubmitting: this._store.select(selectIsSubmitting),
     backendErrors: this._store.select(selectValidationErrors),

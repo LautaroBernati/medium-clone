@@ -14,6 +14,7 @@ import { TagListComponent } from '../tag-list/tag-list.component';
 import { IGetFeedResponse } from './types/feed-response.interface';
 import { FavArticleModule } from '../fav-article/feature/fav-article.module';
 import { PushModule } from '@ngrx/component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'mc-feed',
@@ -28,6 +29,7 @@ import { PushModule } from '@ngrx/component';
     TagListComponent,
     FavArticleModule,
     PushModule,
+    TranslateModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

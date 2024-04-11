@@ -1,7 +1,7 @@
-<footer class="footer">
+<footer class="footer" *ngrxLet="(('footer' | translate) | ngrxPush) as translate">
   <div class="container">
     <span class="text-muted">
-      Developed for showcase purposes only | Lautaro Bernati @ 2024 | v{{ version }}
+      {{ translate.title + ' | ' + translate.subTitle }} | v{{ version }}
     </span>
   </div>
 </footer>

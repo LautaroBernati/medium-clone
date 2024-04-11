@@ -1,11 +1,11 @@
 <ng-container *ngIf="(data$ | ngrxPush) as data">
   <div class="auth-page">
-    <div class="container page">
+    <div class="container page" *ngrxLet="(('register' | translate) | ngrxPush) as translate">
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Sign up</h1>
+          <h1 class="text-xs-center">{{ translate.title }}</h1>
           <p class="text-xs-center">
-            <a [routerLink]="['/login']"> Have an account? </a>
+            <a [routerLink]="['/login']">{{ translate.link }}</a>
           </p>
           <mc-backend-error-messages *ngIf="data.backendErrors" [errors]="data.backendErrors">
           </mc-backend-error-messages>
@@ -14,7 +14,7 @@
               <input
                 type="text"
                 class="form-control form-control-lg"
-                placeholder="Username"
+                [placeholder]="translate.inputs.usernamePlaceholder"
                 [formControl]="form.controls.username"
               />
             </fieldset>
@@ -22,7 +22,7 @@
               <input
                 type="text"
                 class="form-control form-control-lg"
-                placeholder="Email"
+                [placeholder]="translate.inputs.emailPlaceholder"
                 [formControl]="form.controls.email"
               />
             </fieldset>
@@ -30,12 +30,12 @@
               <input
                 type="password"
                 class="form-control form-control-lg"
-                placeholder="Password"
+                [placeholder]="translate.inputs.passwordPlaceholder"
                 [formControl]="form.controls.password"
               />
             </fieldset>
             <button type="submit" class="btn btn-lg btn-primary pull-xs-right" [disabled]="data.isSubmitting">
-              Sign up
+              {{ translate.buttons.submit }}
             </button>
           </form>
         </div>
