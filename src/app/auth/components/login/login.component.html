@@ -16,6 +16,8 @@
                 class="form-control form-control-lg"
                 placeholder="Email"
                 [formControl]="form.controls.email"
+                maxlength="35"
+                minlength="6"
               />
             </fieldset>
             <fieldset class="form-group">
@@ -24,6 +26,7 @@
                 class="form-control form-control-lg"
                 placeholder="Password"
                 [formControl]="form.controls.password"
+                maxlength="35"
               />
             </fieldset>
             <button type="submit" class="btn btn-lg btn-primary pull-xs-right" [disabled]="data?.isSubmitting">

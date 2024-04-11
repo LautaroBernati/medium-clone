@@ -1,7 +1,28 @@
-<ul class="pagination">
-  <li *ngFor="let page of pages" class="page-item" [ngClass]="{active: currentPage === page}">
+<ul class="pagination" style="display: flex; flex-direction: column; justify-content: center;">
+  <!-- <li *ngFor="let page of pages" class="page-item" [ngClass]="{ active: currentPage === page }">
     <a [routerLink]="url" class="page-link" [queryParams]="{ page }">
       {{ page }}
     </a>
+  </li> -->
+  <li class="page-item" style="display: flex; justify-content: center; gap: 1rem;">
+    <button type="button" class="page-link"
+      [routerLink]="url"
+      [queryParams]="{ 'page': (currentPage - 1) }"
+      [disabled]="currentPage === 1"
+      [ngStyle]="{ backgroundColor: (currentPage === 1) ? 'lightgrey' : undefined }"
+      >
+      &lt;
+    </button>
+    <button class="page-link" type="button"
+      [routerLink]="url"
+      [queryParams]="{ 'page': (currentPage + 1) }"
+      [disabled]="currentPage === pages.length"
+      [ngStyle]="{ backgroundColor: (currentPage === pages.length) ? 'lightgrey' : undefined }"
+      >
+      &gt;
+    </button>
   </li>
+  <div style="text-align: center;">
+    {{ currentPage + ' - ' + pages.length }}
+  </div>
 </ul>

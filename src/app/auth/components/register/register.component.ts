@@ -34,7 +34,10 @@ export class RegisterComponent {
     this._store.dispatch(
       authActions.register({
         request: {
-          user: this.form.getRawValue(),
+          user: {
+            ...this.form.getRawValue(),
+            email: this.form.controls.email.getRawValue().toLowerCase(),
+          },
         },
       }),
     );

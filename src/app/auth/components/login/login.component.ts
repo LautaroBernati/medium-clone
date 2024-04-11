@@ -33,7 +33,10 @@ export class LoginComponent {
     this._store.dispatch(
       authActions.login({
         request: {
-          user: this.form.getRawValue(),
+          user: {
+            ...this.form.getRawValue(),
+            email: this.form.controls.email.getRawValue().toLowerCase(),
+          },
         },
       }),
     );
