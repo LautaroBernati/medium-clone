@@ -15,6 +15,24 @@
     "logIn": "Ingresar",
     "register": "Registrarse"
   },
+  "sidebar": {
+    "titles": {
+      "articles": "Articulos",
+      "preferences": "Preferencias",
+      "user": "Usuario"
+    },
+    "newPost": "Nuevo Post",
+    "settings": "Ajustes",
+    "logOut": "Salir",
+    "logIn": "Ingresar",
+    "register": "Registrarse",
+    "lang": "Idioma",
+    "theme": "Tema",
+    "themes": {
+      "light": "Claro",
+      "dark": "Oscuro"
+    }
+  },
   "login": {
     "title": "Ingreso",
     "link": "¿No tiene una cuenta?",

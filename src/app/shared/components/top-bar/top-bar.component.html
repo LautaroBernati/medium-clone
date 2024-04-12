@@ -1,35 +1,40 @@
 <ng-container *ngIf="(data$ | ngrxPush) as data">
   <nav class="navbar navbar-light" *ngrxLet="(('topbar' | translate) | ngrxPush) as translate">
     <div class="container">
+      <span>
+        <button class="btn btn-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+          <i class="ion-navicon"></i>
+        </button>
+      </span>
       <a class="navbar-brand" routerLink="/home">Medium</a>
       <ul class="nav navbar-nav pull-xs-right" style="display: flex; flex-direction: row;">
         <li class="nav-item">
           <a routerLink="/home" class="nav-link">{{ translate.home }}</a>
         </li>
         <ng-container *ngIf="data.currentUser">
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a routerLink="/articles/create" class="nav-link">
               <i class="ion-compose"></i>
               &nbsp; {{ translate.newPost }}
             </a>
-          </li>
-          <li class="nav-item">
+          </li> -->
+          <!-- <li class="nav-item">
             <a routerLink="/settings" class="nav-link">
               <i class="ion-gear-a"></i>
               &nbsp; {{ translate.settings }}
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a [routerLink]="['/profiles', data.currentUser.username]" class="nav-link">
               <img class="user-pic" [src]="data.currentUser.image" alt="profilePic" />
               &nbsp; {{ data.currentUser.username }}
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a type="button" class="nav-link" (click)="onLogout()">
               {{ translate.logOut }}
             </a>
-          </li>
+          </li> -->
         </ng-container>
         <ng-container *ngIf="data.currentUser === null">
           <li class="nav-item">
@@ -39,13 +44,13 @@
             <a routerLink="/register" class="nav-link">{{ translate.register }}</a>
           </li>
         </ng-container>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <select class="form-select" [formControl]="langControl">
             <option *ngFor="let item of langList" [value]="item.value">
               {{ item.description }}
             </option>
           </select>
-        </li>
+        </li> -->
       </ul>
     </div>
   </nav>

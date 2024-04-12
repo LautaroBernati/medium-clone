@@ -4,10 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'mc-loading',
-  template: `
-    <div *ngrxLet="(('app' | translate) | ngrxPush) as translate">
-      {{ translate.loadingText }}
-    </div>`,
+  templateUrl: 'loading.component.html',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [PushModule, LetModule, TranslateModule],

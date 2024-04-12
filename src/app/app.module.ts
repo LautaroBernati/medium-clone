@@ -26,6 +26,7 @@ import { ProfilesService } from './profiles/data-access/profiles.service';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 
 export function httpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(httpClient, './assets/i18n/');
@@ -46,6 +47,7 @@ export function httpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     AppRoutingModule,
     ErrorPagesModule,
     TopbarComponent,
+    SidebarComponent,
     SettingsModule,
     EffectsModule.forRoot(globalEffects, favArticlesEffects, profileEffects),
     FooterComponent,

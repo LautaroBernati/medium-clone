@@ -1,0 +1,95 @@
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel"
+  *ngrxLet="(('sidebar' | translate) | ngrxPush) as translate">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Medium</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body"
+    *ngrxLet="{ isAuth: (isAuthenticated$ | ngrxPush), titles: (('sidebar.titles' | translate) | ngrxPush) } as data">
+    <div style="display: flex; flex-direction: column;">
+      <div class="nav-section">
+        <h3 style="text-align: center;">{{ data.titles.preferences }}</h3>
+        <span class="preference-item">
+          <span>{{ translate.lang }}</span>
+          <span>
+            <select class="form-select" [formControl]="langControl">
+              <option *ngFor="let item of langList" [value]="item.value">
+                {{ item.description }}
+              </option>
+            </select>
+          </span>
+        </span>
+        <span class="preference-item">
+          <span>
+            {{ translate.theme }}
+            <small><i>(BETA)</i></small>
+          </span>
+          <span>
+            <!-- I had to use it like this here to avoid some weird reading error -->
+            <select class="form-select" [formControl]="themesControl" *ngrxLet="(('sidebar.themes' | translate) | ngrxPush) as themes">
+              <option value="light">
+                {{ themes.light }}
+              </option>
+              <option value="dark">
+                {{ themes.dark }}
+              </option>
+            </select>
+          </span>
+        </span>
+      </div>
+      <hr>
+      <h3 style="text-align: center;">{{ data.titles.articles }}</h3>
+      <span>
+        <button type="button"
+          class="btn btn-sm btn-outline-secondary"
+          routerLink="/articles/create"
+          [disabled]="!data.isAuth"
+          data-bs-dismiss="offcanvas"
+        >
+          <i class="ion-compose"></i>
+          &nbsp;
+          {{ translate.newPost }}
+        </button>
+      </span>
+      <hr>
+      <div class="nav-section">
+        <h3 style="text-align: center;">{{ data.titles.user }}</h3>
+        <ng-container *ngIf="!data.isAuth">
+          <span>
+            <button type="button" routerLink="/login" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="offcanvas">
+              <i class="ion-log-in"></i>
+              &nbsp;
+              {{ translate.logIn }}
+            </button>
+          </span>
+          <span>
+            <button type="button" routerLink="/register" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="offcanvas">
+              <i class="ion-person-add"></i>
+              &nbsp;
+              {{ translate.register }}
+            </button>
+          </span>
+        </ng-container>
+        <ng-container *ngIf="data.isAuth">
+          <span>
+            <button type="button" routerLink="/settings" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="offcanvas">
+              <i class="ion-gear-a"></i>
+              &nbsp; {{ translate.settings }}
+            </button>
+          </span>
+          <span>
+            <button type="button" class="btn btn-sm btn-outline-warning" (click)="handleLogout()" data-bs-dismiss="offcanvas">
+              <i class="ion-log-out"></i>
+              &nbsp;
+              {{ translate.logOut }}
+            </button>
+          </span>
+        </ng-container>
+      </div>
+      <hr>
+      <div class="nav-section">
+        <h3 style="text-align: center;">About <small>Coming soon</small></h3>
+      </div>
+    </div>
+  </div>
+</div>
