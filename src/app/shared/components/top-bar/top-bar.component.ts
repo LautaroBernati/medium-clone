@@ -4,7 +4,7 @@ import { combineLatest, filter } from 'rxjs';
 import { selectCurrentUser } from '../../../auth/store/store.reducers';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { authActions } from '../../../auth/store/store.actions';
+// import { authActions } from '../../../auth/store/store.actions';
 import { LetModule, PushModule } from '@ngrx/component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { getLangList } from '../../util/lang-list.function';
@@ -34,7 +34,7 @@ export class TopbarComponent {
     ).subscribe((value) => this._translate.use(value));
   }
 
-  public onLogout(): void {
-    this._store.dispatch(authActions.logOut());
-  }
+  // public onLogout(): void {
+  //   this._store.dispatch(authActions.logOut());
+  // }
 }

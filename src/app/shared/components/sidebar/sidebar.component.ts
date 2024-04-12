@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LetModule, PushModule } from '@ngrx/component';
 import { Store } from '@ngrx/store';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { filter, map } from 'rxjs';
+import { filter, map, take } from 'rxjs';
 import { selectCurrentUser } from '../../../auth/store/store.reducers';
 import { CommonModule } from '@angular/common';
 import { getLangList } from '../../util/lang-list.function';
@@ -11,6 +11,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AppLanguageValue } from '../../types/language-list.interface';
 import { authActions } from '../../../auth/store/store.actions';
 import { AppTheme } from '../../types/themes.interface';
+import { ThemesService } from '../../services/themes.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -23,7 +24,7 @@ import { AppTheme } from '../../types/themes.interface';
 export class SidebarComponent {
   private readonly _store = inject(Store);
   private readonly _translate = inject(TranslateService);
-  private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly _themesService = inject(ThemesService);
 
   public readonly langList = getLangList();
   public readonly langControl = new FormControl<AppLanguageValue>('en');
@@ -40,11 +41,13 @@ export class SidebarComponent {
     this.themesControl.valueChanges.pipe(
       filter((value): value is AppTheme => !!value),
     ).subscribe(theme => {
-      document.body.setAttribute('data-bs-theme', theme);
-      this._cdr.detectChanges();
+      this._themesService.setTheme(theme);
     });
-  }
 
+    this._themesService.appThemes$.pipe(
+      take(1),
+    ).subscribe(themeValue => this.themesControl.patchValue(themeValue, { emitEvent: false }));
+  }
 
   public handleLogout(): void {
     this._store.dispatch(authActions.logOut());

@@ -1,6 +1,7 @@
-<footer class="footer" *ngrxLet="(('footer' | translate) | ngrxPush) as translate">
+<footer class="footer" *ngrxLet="currentTheme$ | ngrxPush as theme"
+  [ngStyle]="{ backgroundColor: ( theme === 'light' ? 'lightgrey' : 'rgb(70, 70, 70)' ) }">
   <div class="container">
-    <span class="text-muted">
+    <span class="text-muted" *ngrxLet="(('footer' | translate) | ngrxPush) as translate">
       {{ translate.title + ' | ' + translate.subTitle }} | v{{ version }}
     </span>
   </div>

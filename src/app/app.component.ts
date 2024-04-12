@@ -30,7 +30,7 @@ export class AppComponent {
     this._translate.use(defLang);
     this._translate.addLangs(languages);
 
-    this._translate.onLangChange.pipe(delay(200)).subscribe(() => {
+    this._translate.onLangChange.pipe(delay(300)).subscribe(() => {
       this._cdr.detectChanges();
     });
 
