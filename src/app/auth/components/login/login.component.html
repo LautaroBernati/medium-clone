@@ -1,6 +1,6 @@
-<ng-container *ngrxLet="(data$ | ngrxPush) as data;">
+<ng-container *ngrxLet="(data$) as data;">
   <div class="auth-page"
-    *ngrxLet="(('login' | translate) | ngrxPush) as translate">
+    *ngrxLet="(('login' | translate)) as translate">
     <div class="container page">
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">

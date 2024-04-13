@@ -1,10 +1,10 @@
 <div class="container"
-  *ngrxLet="(('comment' | translate) | ngrxPush) as translate">
+  *ngrxLet="(('comment' | translate)) as translate">
   <div class="row">
     <div class="col">
       <div style="border: 1px solid lightgrey; border-radius: 5px; padding: 1rem;">
         <form #formTemplate="ngForm"
-          *ngrxLet="data$ | ngrxPush as data"
+          *ngrxLet="data$ as data"
           [formGroup]="form" (ngSubmit)="onSubmit()">
           <ng-container *ngIf="!!data">
             <fieldset class="form-group">

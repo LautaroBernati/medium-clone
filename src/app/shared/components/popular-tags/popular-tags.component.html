@@ -3,7 +3,7 @@
   <mc-error-message *ngIf="data.error" [errorMessage]="data.error"></mc-error-message>
 
   <div class="sidebar" *ngIf="data.popularTags">
-    <p *ngrxLet="(('app' | translate) | ngrxPush) as translate">
+    <p *ngrxLet="('app' | translate) as translate">
       {{ translate.tagsText }}
     </p>
     <div class="tag-list">

@@ -5,7 +5,7 @@ import { ICurrentUser } from '../../shared/types/current-user.interface';
 import { BackendErrorMessagesComponent } from '../../shared/components/backend-error-messages/backend-error-messages.component';
 import { IBackendErrors } from '../../shared/types/backend-errors.interface';
 import { ProfileSettings } from '../../auth/services/auth.service';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetModule } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: 'settings.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, BackendErrorMessagesComponent, LetModule, PushModule, TranslateModule]
+  imports: [CommonModule, ReactiveFormsModule, BackendErrorMessagesComponent, LetModule, TranslateModule]
 })
 export class SettingsComponent implements OnInit {
   @Input('currentUser') public currentUser?: ICurrentUser;

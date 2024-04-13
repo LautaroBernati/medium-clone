@@ -16,7 +16,7 @@
         {{ translate.noComments }}
       </div>
     </ng-container>
-    <div class="row mt-5" *ngrxLet="showNewCommentDialog$ | ngrxPush as showNewCommentDialog">
+    <div class="row mt-5" *ngrxLet="showNewCommentDialog$ as showNewCommentDialog">
       <div class="col text-end">
         <button
           type="button"

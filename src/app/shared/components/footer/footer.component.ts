@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetModule } from '@ngrx/component';
 import packageJson from '../../../../../package.json';
 import { TranslateModule } from '@ngx-translate/core';
 import { ThemesService } from '../../services/themes.service';
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['footer.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PushModule, LetModule, TranslateModule, CommonModule],
+  imports: [LetModule, TranslateModule, CommonModule],
 })
 export class FooterComponent {
   private readonly _themesService = inject(ThemesService);

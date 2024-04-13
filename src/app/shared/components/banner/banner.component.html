@@ -1,6 +1,6 @@
 <div class="banner">
   <div class="container"
-    *ngrxLet="(('banner' | translate) | ngrxPush) as translate">
+    *ngrxLet="('banner' | translate) as translate">
     <h1>{{ translate.title }}</h1>
     <p>{{ translate.subTitle }}</p>
   </div>
