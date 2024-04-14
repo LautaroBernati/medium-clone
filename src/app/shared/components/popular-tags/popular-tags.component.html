@@ -1,13 +1,15 @@
-<ng-container *ngIf="(data$ | ngrxPush) as data">
+<ng-container *ngrxLet="(data$) as data">
   <mc-loading *ngIf="data.isLoading"></mc-loading>
   <mc-error-message *ngIf="data.error" [errorMessage]="data.error"></mc-error-message>
 
-  <div class="sidebar" *ngIf="data.popularTags">
+  <div class="sidebar" *ngIf="data.popularTags"
+    [ngStyle]="{ backgroundColor: data.theme === 'dark' ? 'rgb(110, 110, 110)' : undefined }">
     <p *ngrxLet="('app' | translate) as translate">
       {{ translate.tagsText }}
     </p>
     <div class="tag-list">
-      <a *ngFor="let item of data.popularTags" [routerLink]="['/tags', item]" class="tag-default tag-pill">
+      <a *ngFor="let item of data.popularTags" [routerLink]="['/tags', item]" class="tag-default tag-pill pill"
+        [ngClass]="data.theme === 'dark' ? 'dark' : undefined">
         {{ item }}
       </a>
     </div>

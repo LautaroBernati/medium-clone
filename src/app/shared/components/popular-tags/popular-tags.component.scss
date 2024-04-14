@@ -1,0 +1,7 @@
+.pill {
+  color: white !important;
+  &.dark {
+    background-color: rgb(216, 216, 216);
+    color: black !important;
+  }
+}
