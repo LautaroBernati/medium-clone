@@ -10,19 +10,15 @@
       [queryParams]="{ 'page': (currentPage - 1) }"
       [disabled]="currentPage === 1"
       [ngStyle]="{ backgroundColor: (currentPage === 1) ? 'lightgrey' : undefined }"
-      >
-      &lt;
-    </button>
+      ><i class="ion-chevron-left"></i></button>
     <button class="page-link" type="button"
       [routerLink]="url"
       [queryParams]="{ 'page': (currentPage + 1) }"
-      [disabled]="currentPage === pages.length"
-      [ngStyle]="{ backgroundColor: (currentPage === pages.length) ? 'lightgrey' : undefined }"
-      >
-      &gt;
-    </button>
+      [disabled]="currentPage >= pages.length"
+      [ngStyle]="{ backgroundColor: (currentPage >= pages.length) ? 'lightgrey' : undefined }"
+      ><i class="ion-chevron-right"></i></button>
   </li>
-  <div style="text-align: center;">
-    {{ currentPage + ' - ' + pages.length }}
+  <div style="text-align: center;" *ngrxLet="('paginator' | translate) as translate">
+    {{ currentPage + ' ' + translate.ofText + ' ' + (pages.length || 1) + ' ' + translate.pagesText }}
   </div>
 </ul>

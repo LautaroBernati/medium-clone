@@ -75,14 +75,16 @@
       [disabled]="isLoading"
       (click)="editArticleEmitter$.emit()">
       <i class="ion-edit"></i>
+      &nbsp;
       {{ translate.buttons.edit }}
     </button>
     &nbsp;
     <button type="button" class="btn btn-outline-danger"
       [disabled]="isLoading"
       (click)="handleShowConfirmation()">
-      <i class="ion-close"></i>
-      {{ translate.buttons.delete }}
+        <i class="ion-trash-a"></i>
+        &nbsp;
+        {{ translate.buttons.delete }}
     </button>
   </ng-container>
 </ng-template>

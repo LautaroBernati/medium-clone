@@ -37,6 +37,8 @@
                   <button type="button" class="btn btn-md btn-secondary pull-xs-right"
                     [disabled]="data.inputValues.isLoading || data.inputValues.isSubmitting"
                     (click)="cancelEmitter$.emit()">
+                    <i class="ion-close"></i>
+                    &nbsp;
                     {{ translate.buttons.cancel }}
                   </button>
                   <button
@@ -44,7 +46,9 @@
                     class="btn btn-md btn-primary pull-xs-right"
                     [disabled]="data.formStatus === 'INVALID' || data.inputValues.isLoading || data.inputValues.isSubmitting"
                   >
-                  {{ translate.buttons.post }}
+                    <i class="ion-android-send"></i>
+                    &nbsp;
+                    {{ translate.buttons.post }}
                   </button>
                 </span>
                 <button
@@ -54,7 +58,9 @@
                   [disabled]="data.inputValues.isLoading || data.inputValues.isSubmitting"
                   (click)="handleShowConfirmation(true)"
                 >
-                {{ translate.buttons.delete }}
+                  <i class="ion-trash-a"></i>
+                  &nbsp;
+                  {{ translate.buttons.delete }}
                 </button>
               </span>
               <span *ngIf="data.showConfirmation" class="btn-options">

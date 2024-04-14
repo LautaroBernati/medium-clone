@@ -2,12 +2,14 @@ import { Component, Input, OnInit, inject } from '@angular/core';
 import { UtilityService } from '../../services/utils.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { LetModule } from '@ngrx/component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'mc-pagination',
   templateUrl: 'pagination.component.html',
   standalone: true,
-  imports: [CommonModule, RouterModule]
+  imports: [CommonModule, RouterModule, LetModule, TranslateModule]
 })
 export class PaginationComponent implements OnInit {
   /**

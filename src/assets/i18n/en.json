@@ -125,6 +125,10 @@
       "logOut": "Log out"
     }
   },
+  "paginator": {
+    "ofText": "of",
+    "pagesText": "pages"
+  },
   "footer": {
     "title": "Developed for showcase purposes only",
     "subTitle": "Lautaro Bernati @ 2024"

@@ -125,6 +125,10 @@
       "logOut": "Cerrar sesión"
     }
   },
+  "paginator": {
+    "ofText": "de",
+    "pagesText": "páginas"
+  },
   "footer": {
     "title": "Desarrollado para motivos demostrativos",
     "subTitle": "Lautaro Bernati @ 2024"

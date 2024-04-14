@@ -36,12 +36,16 @@
               [placeholder]="translate.inputs.placeholders.email"
             />
           </fieldset>
-          <button type="button" class="btn btn-lg btn-warning" (click)="onLogout()"
+          <button type="button" class="btn btn-lg btn-danger" (click)="onLogout()"
             [disabled]="isSubmitting">
+            <i class="ion-log-out"></i>
+            &nbsp;
             {{ translate.buttons.logOut }}
           </button>
           <button type="submit" class="btn btn-lg btn-primary pull-xs-right"
             [disabled]="form.invalid || isSubmitting">
+            <i class="ion-checkmark-circled"></i>
+            &nbsp;
             {{ translate.buttons.submit }}
           </button>
         </fieldset>

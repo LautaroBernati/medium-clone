@@ -53,10 +53,10 @@
             [disabled]="action === 'edit' || data?.isLoading"
             class="btn btn-sm btn-warning"
             (click)="removeTag(i)"
-          >X</button>
+          ><i class="ion-android-close"></i></button>
         </div>
       </div>
-      <div *ngIf="action === 'create'" style="display: flex; gap: 5px; margin-top: 1rem;">
+      <div *ngIf="action === 'create'" style="display: flex; gap: 1rem; margin-top: 1rem;">
         <input
           type="text"
           class="form-control form-control-sm"
@@ -65,17 +65,20 @@
         />
         <button *ngIf="!!data && data.formData"
           type="button"
-          class="btn btn-lg btn-primary"
+          class="btn btn-lg btn-primary rounded-circle"
           [disabled]="data.formData.addTagStatus === 'INVALID' || !data.formData.addTagValue"
+          [title]="translate.buttons.addTag"
           (click)="addTag()"
-        >{{ translate.buttons.addTag }}</button>
+        ><i class="ion-android-add"></i></button>
       </div>
     </fieldset>
     <ng-container *ngIf="errors">
       <mc-backend-error-messages [errors]="errors"></mc-backend-error-messages>
     </ng-container>
-    <button *ngIf="!!data && data.formData" type="submit" class="btn btn-lg btn-primary pull-xs-right"
+    <button *ngIf="!!data && data.formData" type="submit" class="btn btn-lg btn-success pull-xs-right"
       [disabled]="(data.formData.formStatus === 'INVALID') || data.isLoading || data.isSubmitting">
+      <i class="ion-checkmark"></i>
+      &nbsp;
       {{ translate.buttons.submit }}
     </button>
   </form>

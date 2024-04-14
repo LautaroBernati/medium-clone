@@ -41,7 +41,7 @@
       <h3 style="text-align: center;">{{ titles.articles }}</h3>
       <span>
         <button type="button"
-          class="btn btn-sm btn-outline-secondary"
+          class="btn btn-sm btn-outline-success pull-xs-right"
           routerLink="/articles/create"
           [disabled]="!isAuth"
           data-bs-dismiss="offcanvas"
@@ -56,14 +56,14 @@
         <h3 style="text-align: center;">{{ titles.user }}</h3>
         <ng-container *ngIf="!isAuth">
           <span>
-            <button type="button" routerLink="/login" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="offcanvas">
+            <button type="button" routerLink="/login" class="btn btn-sm btn-outline-primary pull-xs-right" data-bs-dismiss="offcanvas">
               <i class="ion-log-in"></i>
               &nbsp;
               {{ translate.logIn }}
             </button>
           </span>
           <span>
-            <button type="button" routerLink="/register" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="offcanvas">
+            <button type="button" routerLink="/register" class="btn btn-sm btn-outline-primary pull-xs-right" data-bs-dismiss="offcanvas">
               <i class="ion-person-add"></i>
               &nbsp;
               {{ translate.register }}
@@ -72,13 +72,13 @@
         </ng-container>
         <ng-container *ngIf="isAuth">
           <span>
-            <button type="button" routerLink="/settings" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="offcanvas">
+            <button type="button" routerLink="/settings" class="btn btn-sm btn-outline-secondary pull-xs-right" data-bs-dismiss="offcanvas">
               <i class="ion-gear-a"></i>
               &nbsp; {{ translate.settings }}
             </button>
           </span>
           <span>
-            <button type="button" class="btn btn-sm btn-outline-warning" (click)="handleLogout()" data-bs-dismiss="offcanvas">
+            <button type="button" class="btn btn-sm btn-outline-danger pull-xs-right" (click)="handleLogout()" data-bs-dismiss="offcanvas">
               <i class="ion-log-out"></i>
               &nbsp;
               {{ translate.logOut }}
