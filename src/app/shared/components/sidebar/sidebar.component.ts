@@ -12,6 +12,7 @@ import { AppLanguageValue } from '../../types/language-list.interface';
 import { authActions } from '../../../auth/store/store.actions';
 import { AppTheme } from '../../types/themes.interface';
 import { ThemesService } from '../../services/themes.service';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -25,6 +26,7 @@ export class SidebarComponent {
   private readonly _store = inject(Store);
   private readonly _translate = inject(TranslateService);
   private readonly _themesService = inject(ThemesService);
+  private readonly _langService = inject(LanguageService);
 
   public readonly langList = getLangList();
   public readonly langControl = new FormControl<AppLanguageValue>('en');
@@ -36,7 +38,7 @@ export class SidebarComponent {
   constructor() {
     this.langControl.valueChanges.pipe(
       filter((value): value is AppLanguageValue => !!value),
-    ).subscribe((value) => this._translate.use(value));
+    ).subscribe((value) => this._langService.setLanguage(value));
 
     this.themesControl.valueChanges.pipe(
       filter((value): value is AppTheme => !!value),

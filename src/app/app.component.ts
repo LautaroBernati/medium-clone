@@ -7,6 +7,7 @@ import { delay, filter } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { AppLanguageValue } from './shared/types/language-list.interface';
 import { getLangList } from './shared/util/lang-list.function';
+import { prefsActions } from './shared/store/preferences/preferences.actions';
 
 @Component({
   selector: 'app-root',
@@ -35,6 +36,8 @@ export class AppComponent {
     });
 
     this._store.dispatch(authActions.getcurrentuser());
+    this._store.dispatch(prefsActions.getLanguage());
+    this._store.dispatch(prefsActions.getTheme());
 
     this._router.events.pipe(
       filter(e => e instanceof NavigationEnd),

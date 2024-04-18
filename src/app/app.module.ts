@@ -22,11 +22,13 @@ import { SettingsModule } from './settings/feature/settings.module';
 import { ArticlesService } from './articles/data-access/services/articles.service';
 import { followProfileFeatureKey, followProfileReducer } from './shared/components/follow-profile/data-access/follow-profile.reducers';
 import * as profileEffects from './profiles/data-access/store/profiles-store.effects';
+import * as preferencesEffects from './shared/store/preferences/preferences.effects';
 import { ProfilesService } from './profiles/data-access/profiles.service';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { preferencesFeatureKey, preferencesReducer } from './shared/store/preferences/preferences.reducers';
 
 export function httpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(httpClient, './assets/i18n/');
@@ -49,7 +51,7 @@ export function httpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     TopbarComponent,
     SidebarComponent,
     SettingsModule,
-    EffectsModule.forRoot(globalEffects, favArticlesEffects, profileEffects),
+    EffectsModule.forRoot(globalEffects, favArticlesEffects, profileEffects, preferencesEffects),
     FooterComponent,
   ],
   providers: [
@@ -65,6 +67,7 @@ export function httpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     provideState(popularTagsFeatureKey, popularTagsReducer),
     provideState(followProfileFeatureKey, followProfileReducer),
     provideEffects(authEffects, feedEffects, popularTagsEffects),
+    provideState(preferencesFeatureKey, preferencesReducer),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),

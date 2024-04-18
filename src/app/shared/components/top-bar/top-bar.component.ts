@@ -34,7 +34,4 @@ export class TopbarComponent {
     ).subscribe((value) => this._translate.use(value));
   }
 
-  // public onLogout(): void {
-  //   this._store.dispatch(authActions.logOut());
-  // }
 }

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 export const registerEffect = createEffect(
   (actions$ = inject(Actions), authService = inject(AuthService), persistanceService = inject(PersistanceService)) =>
-    actions$.pipe(
+    { return actions$.pipe(
       ofType(authActions.register),
       switchMap(({ request }) => {
         return authService.registerUser(request).pipe(
@@ -23,7 +23,7 @@ export const registerEffect = createEffect(
           }),
         );
       }),
-    ),
+    ); },
   { functional: true },
 );
 
@@ -39,7 +39,7 @@ export const redirectAfterRegistrationEffect = createEffect(
 
 export const loginEffect = createEffect(
   (actions$ = inject(Actions), authService = inject(AuthService), persistanceService = inject(PersistanceService)) =>
-    actions$.pipe(
+    { return actions$.pipe(
       ofType(authActions.login),
       switchMap(({ request }) => {
         return authService.login(request).pipe(
@@ -53,7 +53,7 @@ export const loginEffect = createEffect(
           }),
         );
       }),
-    ),
+    ); },
   { functional: true },
 );
 
@@ -69,7 +69,7 @@ export const redirectAfterLoginEffect = createEffect(
 
 export const getCurrentUserEffect = createEffect(
   (actions$ = inject(Actions), authService = inject(AuthService), persistanceService = inject(PersistanceService)) =>
-    actions$.pipe(
+    { return actions$.pipe(
       ofType(authActions.getcurrentuser),
       switchMap(() => {
         const token = persistanceService.get('accessToken');
@@ -87,40 +87,40 @@ export const getCurrentUserEffect = createEffect(
           }),
         );
       }),
-    ),
+    ); },
   { functional: true },
 );
 
 export const logOutEffect = createEffect(
   (actions$ = inject(Actions), persistanceService = inject(PersistanceService)) =>
-    actions$.pipe(
+    { return actions$.pipe(
       ofType(authActions.logOut),
       tap(() => persistanceService.deleteData()),
       map(() => {
         return authActions.logOutSuccess();
       }),
       catchError(() => of(authActions.logOutFailure())),
-    ),
+    ); },
   { functional: true },
 );
 
 export const redirectAfterLogoutEffect = createEffect(
   (actions$ = inject(Actions), router = inject(Router)) =>
-    actions$.pipe(
+    { return actions$.pipe(
       ofType(authActions.logOutSuccess),
       tap(() => router.navigate(['/home'])),
-    ),
+    ); },
   { functional: true, dispatch: false },
 );
 
 export const updateCurrentUserEffect = createEffect(
   (actions$ = inject(Actions), authService = inject(AuthService)) =>
-    actions$.pipe(
+    { return actions$.pipe(
       ofType(authActions.updateCurrentUser),
       switchMap(({ currentUserReq }) => authService.updateCurrentUser(currentUserReq).pipe(
         map(data => authActions.updateCurrentUserSuccess({ currentUser: data })),
         catchError((err: HttpErrorResponse) => of(authActions.updateCurrentUserFailure({ errors: err.error.errors }))),
       )),
-    ),
+    ); },
   { functional: true },
 );
