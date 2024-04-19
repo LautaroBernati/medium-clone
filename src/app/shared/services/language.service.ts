@@ -10,6 +10,8 @@ export class LanguageService {
   private readonly _store = inject(Store);
   private readonly _translateService = inject(TranslateService);
 
+  public readonly appLanguage$ = this._store.select(selectAppLang);
+
   constructor() {
     this._store.select(selectAppLang).subscribe(lang => this._translateService.use(lang));
   }

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LetModule, PushModule } from '@ngrx/component';
 import { Store } from '@ngrx/store';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { filter, map, take } from 'rxjs';
 import { selectCurrentUser } from '../../../auth/store/store.reducers';
 import { CommonModule } from '@angular/common';
@@ -24,7 +24,6 @@ import { LanguageService } from '../../services/language.service';
 })
 export class SidebarComponent {
   private readonly _store = inject(Store);
-  private readonly _translate = inject(TranslateService);
   private readonly _themesService = inject(ThemesService);
   private readonly _langService = inject(LanguageService);
 
@@ -49,6 +48,10 @@ export class SidebarComponent {
     this._themesService.appThemes$.pipe(
       take(1),
     ).subscribe(themeValue => this.themesControl.patchValue(themeValue, { emitEvent: false }));
+
+    this._langService.appLanguage$.pipe(
+      take(1),
+    ).subscribe(lang => this.langControl.patchValue(lang, { emitEvent: false }));
   }
 
   public handleLogout(): void {

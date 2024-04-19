@@ -41,6 +41,10 @@ const routes: Routes = [
     loadChildren: () => import('./profiles/feature/profiles-shell/profiles.module').then(m => m.ProfilesModule),
   },
   {
+    path: 'about',
+    loadChildren: () => import('./about/feature/about.module').then(m => m.AboutModule),
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'home',

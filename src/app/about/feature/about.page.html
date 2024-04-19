@@ -1,0 +1,77 @@
+<div class="container" *ngrxLet="('about' | translate) as translate" @fadeIn>
+  <ng-container *ngrxLet="appTheme$ as theme">
+    <div class="row mt-5">
+      <div class="col" *ngrxLet="collapseAboutApp$ as collapseAboutApp">
+        <section>
+          <span class="titulo" (click)="handleCollapseAboutApp()" [ngClass]="theme === 'dark' ? 'dark-theme' : undefined">
+            <span class="custom-header">
+              <h1>{{ translate.title }}</h1>
+            </span>
+            <span>
+              <button
+                class="btn btn-secondary btn-sm rounded-circle" type="button">
+                <i [ngClass]="collapseAboutApp ? 'ion-chevron-down' : 'ion-chevron-up'"></i>
+              </button>
+            </span>
+          </span>
+          <!-- content start -->
+          <div [@collapse]="collapseAboutApp">
+            <hr>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            we
+          </div>
+          <!-- content end -->
+        </section>
+      </div>
+    </div>
+    <div class="row mt-1" *ngrxLet="collapseAboutMe$ as collapseAboutMe">
+      <div class="col">
+        <section>
+          <span class="titulo" (click)="handleCollapseAboutMe()" [ngClass]="theme === 'dark' ? 'dark-theme' : undefined">
+            <span class="custom-header">
+              <h1>{{ translate.subtitle }}</h1>
+            </span>
+            <span>
+              <button class="btn btn-secondary btn-sm rounded-circle" type="button">
+                <i [ngClass]="collapseAboutMe ? 'ion-chevron-down' : 'ion-chevron-up'"></i>
+              </button>
+            </span>
+          </span>
+          <!-- content start -->
+          <div [@collapse]="collapseAboutMe">
+            <hr>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+              <span>
+                <img [src]="'assets/images/pic.jpg'" alt="profilePicture" width="200" height="200">
+              </span>
+              <span style="max-width: 40%;">
+                <p style="text-align: justify;">
+                  {{ translate.description.part1 + yearsPassedSince2020() + translate.description.part2 }}
+                </p>
+              </span>
+            </div>
+            <h3 class="text-center">{{ translate.contact }}</h3>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+              <span>
+                <a type="button" class="btn btn-lg btn-success rounded-circle" href="https://github.com/LautaroBernati/" target="_blank">
+                  <i class="ion-social-github"></i>
+                </a>
+              </span>
+              <span>
+                <a type="button" class="btn btn-lg btn-success rounded-circle" href="https://www.linkedin.com/in/lautarobernati/" target="_blank">
+                  <i class="ion-social-linkedin"></i>
+                </a>
+              </span>
+              <span>
+                <a type="button" class="btn btn-lg btn-success rounded-circle" href="mailto:lautarobernati@gmail.com">
+                  <i class="ion-android-mail"></i>
+                </a>
+              </span>
+            </div>
+          </div>
+          <!-- content end -->
+        </section>
+      </div>
+    </div>
+  </ng-container>
+</div>

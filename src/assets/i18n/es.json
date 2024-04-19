@@ -13,7 +13,8 @@
     "settings": "Ajustes",
     "logOut": "Salir",
     "logIn": "Ingresar",
-    "register": "Registrarse"
+    "register": "Registrarse",
+    "about": "Acerca De"
   },
   "sidebar": {
     "titles": {
@@ -132,5 +133,14 @@
   "footer": {
     "title": "Desarrollado para motivos demostrativos",
     "subTitle": "Lautaro Bernati @ 2024"
+  },
+  "about": {
+    "title": "Acerca de esta aplicación",
+    "subtitle": "Quién soy yo",
+    "description": {
+      "part1": "Hola, mi nombre es Lautaro. Soy un desarrollador web, con más de ",
+      "part2": " años de experiencia. Mi trayectoria en el desarrollo web comenzó durante mi tiempo en el ejército, donde pasé un año y medio sumergiéndome en el desarrollo full-stack, a su vez que en simultáneo estudiaba. Después de graduarme en 2022 con una especialización en desarrollo web, me sumergí en el mundo corporativo en Coto CICSA. Aquí, he perfeccionado mis habilidades, especializándome en desarrollo front-end (aunque también con habilidades de back-end) y ahora sirviendo como Desarrollador Semi-Senior. Soy la persona a la que recurren para los conceptos e ideas clave de front-end, y me encanta mentorear a colegas. A veces, incluso me piden que comparta mi experiencia en Angular a través de pequeñas charlas para otros equipos dentro de mi empresa."
+    },
+    "contact": "Contacto"
   }
 }

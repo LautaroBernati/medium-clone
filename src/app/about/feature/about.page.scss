@@ -1,0 +1,30 @@
+img {
+  border-radius: 5px;
+}
+
+.titulo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: rgb(236, 236, 236);
+
+    &.dark-theme {
+      background-color: rgb(75, 75, 75);
+    }
+  }
+}
+
+section {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  margin: 3rem;
+  padding: 2rem;
+}
+
+.custom-header {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
