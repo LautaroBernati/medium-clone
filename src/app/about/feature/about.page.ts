@@ -1,7 +1,7 @@
 import { trigger, state, style, AUTO_STYLE, transition, animate } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import { BehaviorSubject, take } from 'rxjs';
-import { ThemesService } from '../../shared/services/themes.service';
+import { PreferencesService } from '../../shared/services/preferences.service';
 
 @Component({
   selector: 'app-about',
@@ -33,9 +33,9 @@ import { ThemesService } from '../../shared/services/themes.service';
 export class AboutPage implements OnDestroy {
   private readonly _collapseAboutAppEmitter$ = new BehaviorSubject(false);
   private readonly _collapseAboutMeEmitter$ = new BehaviorSubject(false);
-  private readonly _themesService = inject(ThemesService);
+  private readonly _prefsService = inject(PreferencesService);
 
-  public readonly appTheme$ = this._themesService.appThemes$;
+  public readonly appTheme$ = this._prefsService.appThemes$;
   public readonly collapseAboutApp$ = this._collapseAboutAppEmitter$.asObservable();
   public readonly collapseAboutMe$ = this._collapseAboutMeEmitter$.asObservable();
 

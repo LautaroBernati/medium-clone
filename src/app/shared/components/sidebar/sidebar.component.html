@@ -1,4 +1,4 @@
-<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="offcanvasExampleLabel"
+<div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="offcanvasExampleLabel"
   *ngrxLet="('sidebar' | translate) as translate">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasExampleLabel">Medium</h5>
@@ -9,6 +9,12 @@
     <div style="display: flex; flex-direction: column;" *ngrxLet="('sidebar.titles' | translate) as titles">
       <div class="nav-section">
         <h3 style="text-align: center;">{{ titles.preferences }}</h3>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [formControl]="savePreferencesControl">
+          <label class="form-check-label" for="flexSwitchCheckDefault">
+            {{ translate.savePrefs }}
+          </label>
+        </div>
         <span class="preference-item">
           <span>{{ translate.lang }}</span>
           <span>
@@ -88,7 +94,14 @@
       </div>
       <hr>
       <div class="nav-section">
-        <h3 style="text-align: center;">About <small>Coming soon</small></h3>
+        <h3 style="text-align: center;">{{ translate.about }}</h3>
+        <span>
+          <a routerLink="/about" class="btn btn-sm btn-outline-info pull-xs-right" data-bs-dismiss="offcanvas">
+            <i class="ion-information-circled"></i>
+            &nbsp;
+            {{ translate.about }}
+          </a>
+        </span>
       </div>
     </div>
   </div>

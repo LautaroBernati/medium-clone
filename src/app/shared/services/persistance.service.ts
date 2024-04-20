@@ -37,4 +37,29 @@ export class PersistanceService {
       localStorage.removeItem(arr[i]!);
     }
   }
+
+  public deletePreferences(): void {
+    const length = localStorage.length;
+    const itemKeysToRemove: string[] = [];
+
+    for (let i = 0; i < length; i++) {
+      const key = localStorage.key(i);
+
+      if (key && key.includes('pref_')) {
+        itemKeysToRemove.push(key);
+      }
+    }
+
+    for (let index = 0; index < itemKeysToRemove.length; index++) {
+      this._findAndDelete(itemKeysToRemove[index]);
+    }
+  }
+
+  private _findAndDelete(key: string): void {
+    try {
+      localStorage.removeItem(key);
+    } catch {
+      console.error('error deleting storage');
+    }
+  }
 }

@@ -32,7 +32,9 @@
     "themes": {
       "light": "Claro",
       "dark": "Oscuro"
-    }
+    },
+    "about": "Acerca De",
+    "savePrefs": "Guardar Preferencias"
   },
   "login": {
     "title": "Ingreso",

@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { LetModule } from '@ngrx/component';
 import packageJson from '../../../../../package.json';
 import { TranslateModule } from '@ngx-translate/core';
-import { ThemesService } from '../../services/themes.service';
 import { CommonModule } from '@angular/common';
+import { PreferencesService } from '../../services/preferences.service';
 
 @Component({
   selector: 'mc-footer-ui',
@@ -14,8 +14,8 @@ import { CommonModule } from '@angular/common';
   imports: [LetModule, TranslateModule, CommonModule],
 })
 export class FooterComponent {
-  private readonly _themesService = inject(ThemesService);
+  private readonly _prefsService = inject(PreferencesService);
 
   public readonly version = packageJson.version;
-  public readonly currentTheme$ = this._themesService.appThemes$;
+  public readonly currentTheme$ = this._prefsService.appThemes$;
 }

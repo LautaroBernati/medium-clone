@@ -32,7 +32,9 @@
     "themes": {
       "light": "Light",
       "dark": "Dark"
-    }
+    },
+    "about": "About",
+    "savePrefs": "Save Preferences"
   },
   "login": {
     "title": "Sign in",
@@ -137,6 +139,11 @@
   "about": {
     "title": "About this web app",
     "subtitle": "Who am I",
+    "aboutApp": {
+      "tools": ["Angular 15", "Bootstrap 5", "NgRx"],
+      "desc1": "This application was built for showcase purposes, all data is deleted after 24 hours. It was built using a special render mechanism called zoneless, in which it cancels out zone.js in Angular, levereging the developer with no render backbone, and having to manually detect and act upon changes in the template. For this purpose, @ngrx/component library was used, making use of the LetModule and PushModule which facilitates the objective. The main idea behind disabling zone.js is to push Angular's speed to the fullest extent, as well as attempting to convert this app into an almost all-declarative type of app.",
+      "desc2": "For backend purposes, this project utilizes the Real World API provided by Bump.sh. All rights reserved to them."
+    },
     "description": {
       "part1": "Hi, my name is Lautaro. I'm an accomplished web developer, with now more than ",
       "part2": " years of experience. My journey into web development began during my time in the military, where I spent a year and a half diving into full-stack development. After graduating in 2022 with a specialization in web development, I jumped into the corporate world at Coto CICSA. Here, I've honed my skills, specializing in front-end development and now serving as a Semi-Senior Developer. I'm the go-to person for key front-end concepts and ideas, and I love mentoring colleagues. Sometimes, I'm even asked to share my expertise in Angular through small lectures for other teams within my company."

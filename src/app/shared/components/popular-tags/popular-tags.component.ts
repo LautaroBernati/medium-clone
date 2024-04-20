@@ -9,7 +9,7 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
 import { RouterModule } from '@angular/router';
 import { LetModule, PushModule } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
-import { ThemesService } from '../../services/themes.service';
+import { PreferencesService } from '../../services/preferences.service';
 
 @Component({
   selector: 'mc-popular-tags',
@@ -21,13 +21,13 @@ import { ThemesService } from '../../services/themes.service';
 })
 export class PopularTagsComponent implements OnInit {
   private readonly _store = inject(Store);
-  private readonly _themesService = inject(ThemesService);
+  private readonly _prefsService = inject(PreferencesService);
 
   public readonly data$ = combineLatest({
     popularTags: this._store.select(selectpopularTagsData),
     isLoading: this._store.select(selectIsLoading),
     error: this._store.select(selectError),
-    theme: this._themesService.appThemes$,
+    theme: this._prefsService.appThemes$,
 });
 
   public ngOnInit(): void {

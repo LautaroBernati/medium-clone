@@ -6,6 +6,12 @@ import { AppTheme } from '../../types/themes.interface';
 export const prefsActions = createActionGroup({
   source: 'preferences',
   events: {
+    'Save Preferences': props<{ value: boolean }>(),
+
+    'Get Save Preferences': emptyProps(),
+    'Get Save Preferences Success': props<{ value: boolean }>(),
+    'Get Save Preferences Failure': props<{ value: boolean }>(),
+
     'Get Theme': emptyProps(),
     'Get Theme Success': props<{ theme: AppTheme }>(),
     'Get Theme Failure': emptyProps(),

@@ -11,8 +11,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AppLanguageValue } from '../../types/language-list.interface';
 import { authActions } from '../../../auth/store/store.actions';
 import { AppTheme } from '../../types/themes.interface';
-import { ThemesService } from '../../services/themes.service';
-import { LanguageService } from '../../services/language.service';
+import { PreferencesService } from '../../services/preferences.service';
+import { prefsActions } from '../../store/preferences/preferences.actions';
 
 @Component({
   selector: 'app-sidebar',
@@ -24,11 +24,11 @@ import { LanguageService } from '../../services/language.service';
 })
 export class SidebarComponent {
   private readonly _store = inject(Store);
-  private readonly _themesService = inject(ThemesService);
-  private readonly _langService = inject(LanguageService);
+  private readonly _preferencesService = inject(PreferencesService);
 
   public readonly langList = getLangList();
   public readonly langControl = new FormControl<AppLanguageValue>('en');
+  public readonly savePreferencesControl = new FormControl<boolean>(false, { nonNullable: true });
   public readonly themesControl = new FormControl<AppTheme>('light');
   public readonly isAuthenticated$ = this._store.select(selectCurrentUser).pipe(
     map(user => Boolean(user)),
@@ -37,21 +37,35 @@ export class SidebarComponent {
   constructor() {
     this.langControl.valueChanges.pipe(
       filter((value): value is AppLanguageValue => !!value),
-    ).subscribe((value) => this._langService.setLanguage(value));
+    ).subscribe((value) => this._preferencesService.setLanguage(value));
 
     this.themesControl.valueChanges.pipe(
       filter((value): value is AppTheme => !!value),
     ).subscribe(theme => {
-      this._themesService.setTheme(theme);
+      this._preferencesService.setTheme(theme);
     });
 
-    this._themesService.appThemes$.pipe(
+    this._preferencesService.appThemes$.pipe(
       take(1),
     ).subscribe(themeValue => this.themesControl.patchValue(themeValue, { emitEvent: false }));
 
-    this._langService.appLanguage$.pipe(
+    this._preferencesService.appLanguage$.pipe(
       take(1),
     ).subscribe(lang => this.langControl.patchValue(lang, { emitEvent: false }));
+
+    this._preferencesService.savePreferences$.pipe(
+      take(1),
+    ).subscribe(value => this.savePreferencesControl.patchValue(value, { emitEvent: false }));
+
+    this.savePreferencesControl.valueChanges.subscribe(
+      (value) => {
+        this._store.dispatch(prefsActions.savePreferences({ value }));
+
+        if (value) {
+          this._preferencesService.savePreferences();
+        }
+      }
+    );
   }
 
   public handleLogout(): void {
