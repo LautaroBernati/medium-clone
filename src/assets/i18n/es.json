@@ -139,6 +139,33 @@
   "about": {
     "title": "Acerca de esta aplicación",
     "subtitle": "Quién soy yo",
+    "render": {
+      "title": "Mecanismo de Renderizado",
+      "desc": "Hay 3 tipos de técnicas de renderizado en Angular, 2 de ellas son ampliamente conocidas.",
+      "default": {
+        "title": "Por Defecto (o AlwaysCheck)",
+        "p1": "El mecanismo de renderizado por defecto de Angular utiliza Zone.js, una librería para interceptar y rastrear operaciones asíncronas en JavaScript. Cuando se ejecutan aplicaciones de Angular, Zone.js parchea varias API del navegador para detectar cambios en el estado de la aplicación, como cambios en las propiedades del componente o interacciones del usuario. Cuando se detecta un cambio, Angular vuelve a renderizar los componentes afectados para reflejar el estado actualizado. Este mecanismo proporciona detección automática de cambios, donde Angular actualiza el DOM en respuesta a cambios en el estado de la aplicación sin requerir instrucciones explícitas de los desarrolladores. Simplifica el desarrollo (aunque a expensas de rendimiento) automatizando muchos aspectos de la gestión del estado de la aplicación y la interfaz de usuario."
+      },
+      "onPush": {
+        "title": "Estrategia On Push",
+        "p1": "Esta estrategia indica a Angular que actualice el DOM cuando:",
+        "reasons": {
+          "one": "Las propiedades de entrada del componente cambian.",
+          "two": "Un evento originado desde el componente o alguno de sus hijos dispara la detección de cambios.",
+          "three": "El componente solicita explícitamente la detección de cambios utilizando métodos como markForCheck()."
+        },
+        "p2": "Esto puede conducir a mejoras significativas en el rendimiento, especialmente en aplicaciones grandes con árboles de componentes complejos, al reducir el número de ciclos de detección de cambios innecesarios."
+      },
+      "zoneless": {
+        "title": "Zoneless (esta aplicación)",
+        "p1": "El modo zoneless en Angular se refiere a un mecanismo de renderizado donde los desarrolladores desactivan la librería zone.js, lo que permite el control manual sobre la detección de cambios y la gestión de tareas asíncronas. En este modo, los desarrolladores activan la detección de cambios manualmente, manejan las tareas asíncronas de manera explícita y apuntan a obtener el máximo rendimiento al eliminar la sobrecarga de zone.js. Si bien el modo sin zonas ofrece flexibilidad y beneficios potenciales en rendimiento, requiere una consideración e implementación cuidadosas para manejar la complejidad y garantizar la compatibilidad con las características de Angular y las librerias de terceros. Para este propósito, se utilizó la librería ngrx/component, con su Push Pipe y Directiva Let, para ayudar con el modo zoneless."
+      }
+    },
+    "aboutApp": {
+      "tools": "Herramientas",
+      "desc1": "Esta aplicación fue construida con fines de demostración, todos los datos son eliminados después de 24 horas. Se construyó utilizando un mecanismo de renderizado especial llamado zoneless, en el cual se cancela zone.js en Angular, proporcionando al desarrollador sin un esqueleto de renderizado y teniendo que detectar y actuar manualmente sobre los cambios en los templates. Para este propósito, se utilizó la librería @ngrx/component, haciendo uso del LetModule y PushModule que facilitan el objetivo. La idea principal detrás de deshabilitar zone.js es impulsar la velocidad de Angular al máximo, así como intentar convertir esta aplicación en un tipo de aplicación casi totalmente declarativa.",
+      "desc2": "Para propósitos de backend, este proyecto utiliza la API Real World proporcionada por Bump.sh. Todos los derechos reservados a ellos."
+    },
     "description": {
       "part1": "Hola, mi nombre es Lautaro. Soy un desarrollador web, con más de ",
       "part2": " años de experiencia. Mi trayectoria en el desarrollo web comenzó durante mi tiempo en el ejército, donde pasé un año y medio sumergiéndome en el desarrollo full-stack, a su vez que en simultáneo estudiaba. Después de graduarme en 2022 con una especialización en desarrollo web, me sumergí en el mundo corporativo en Coto CICSA. Aquí, he perfeccionado mis habilidades, especializándome en desarrollo front-end (aunque también con habilidades de back-end) y ahora sirviendo como Desarrollador Semi-Senior. Soy la persona a la que recurren para los conceptos e ideas clave de front-end, y me encanta mentorear a colegas. A veces, incluso me piden que comparta mi experiencia en Angular a través de pequeñas charlas para otros equipos dentro de mi empresa."

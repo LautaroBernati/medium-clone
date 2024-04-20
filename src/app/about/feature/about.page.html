@@ -17,8 +17,49 @@
           <!-- content start -->
           <div [@collapse]="collapseAboutApp">
             <hr>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            we
+            <p>
+              {{ translate.aboutApp.desc1 }}
+            </p>
+            <br>
+            <div>
+              <h3>{{ translate.render.title }}</h3>
+              <p>{{ translate.render.desc }}</p>
+              <ul>
+                <li>
+                  <h4>
+                    {{ translate.render.default.title }}:
+                  </h4>
+                  <p>
+                    {{ translate.render.default.p1 }}
+                  </p>
+                </li>
+                <li>
+                  <h4>{{ translate.render.onPush.title }}:</h4>
+                  <p>{{ translate.render.onPush.p1 }}</p>
+                  <ol>
+                    <li>{{ translate.render.onPush.reasons.one }}</li>
+                    <li>{{ translate.render.onPush.reasons.two }}</li>
+                    <li>{{ translate.render.onPush.reasons.three }}</li>
+                  </ol>
+                  <p style="margin-top: 1rem;">{{ translate.render.onPush.p2 }}</p>
+                </li>
+                <li>
+                  <h4>{{ translate.render.zoneless.title }}</h4>
+                  <p>{{ translate.render.zoneless.p1 }}</p>
+                </li>
+              </ul>
+            </div>
+            <h3>Backend</h3>
+            <p>
+              {{ translate.aboutApp.desc2 }}
+            </p>
+            <br>
+            <h3>{{ translate.aboutApp.tools }}</h3>
+              <ul>
+                <li>Angular 15</li>
+                <li>NgRx 15</li>
+                <li>Bootstrap 5</li>
+              </ul>
           </div>
           <!-- content end -->
         </section>
@@ -44,7 +85,7 @@
               <span>
                 <img [src]="'assets/images/pic.jpg'" alt="profilePicture" width="200" height="200">
               </span>
-              <span style="max-width: 40%;">
+              <span>
                 <p style="text-align: justify;">
                   {{ translate.description.part1 + yearsPassedSince2020() + translate.description.part2 }}
                 </p>

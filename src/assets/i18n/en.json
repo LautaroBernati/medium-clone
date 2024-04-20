@@ -139,9 +139,31 @@
   "about": {
     "title": "About this web app",
     "subtitle": "Who am I",
+    "render": {
+      "title": "Render Mechanism",
+      "desc": "There are 3 types of render techniques in Angular, 2 of them are widely known.",
+      "default": {
+        "title": "Default (or CheckAlways)",
+        "p1": "The default rendering mechanism of Angular utilizes Zone.js, a library for intercepting and tracking asynchronous operations in JavaScript. When Angular applications run, Zone.js patches various browser APIs to detect changes in the application state, such as changes to component properties or user interactions. When a change is detected, Angular re-renders affected components to reflect the updated state. This mechanism provides automatic change detection, where Angular updates the DOM in response to changes in the application state without requiring explicit instructions from developers. It simplifies development (though at the expense of performance) by automating many aspects of managing the application's state and user interface."
+      },
+      "onPush": {
+        "title": "On Push Strategy",
+        "p1": "This strategy tells Angular to update the DOM when:",
+        "reasons": {
+          "one": "The component's input properties change.",
+          "two": "An event originated from the component or one of its children triggers change detection.",
+          "three": "The component explicitly requests change detection using methods like markForCheck()."
+        },
+        "p2": "This can lead to significant performance improvements, especially in large applications with complex component trees, by reducing the number of unnecessary change detection cycles."
+      },
+      "zoneless": {
+        "title": "Zoneless (this app)",
+        "p1": "Zoneless mode in Angular refers to a rendering mechanism where developers disable the zone.js library, enabling manual control over change detection and asynchronous task management. In this mode, developers trigger change detection manually, handle asynchronous tasks explicitly, and aim for maximum performance by eliminating the overhead of zone.js. While zoneless mode offers flexibility and potential performance benefits, it requires careful consideration and implementation to manage complexity and ensure compatibility with Angular features and third-party libraries. For this purpose, ngrx/component library, with its Push Pipe and Let Directive was used to help with zoneless."
+      }
+    },
     "aboutApp": {
-      "tools": ["Angular 15", "Bootstrap 5", "NgRx"],
-      "desc1": "This application was built for showcase purposes, all data is deleted after 24 hours. It was built using a special render mechanism called zoneless, in which it cancels out zone.js in Angular, levereging the developer with no render backbone, and having to manually detect and act upon changes in the template. For this purpose, @ngrx/component library was used, making use of the LetModule and PushModule which facilitates the objective. The main idea behind disabling zone.js is to push Angular's speed to the fullest extent, as well as attempting to convert this app into an almost all-declarative type of app.",
+      "tools": "Tools",
+      "desc1": "This application was built for showcase purposes. All data is deleted after 24 hours. It was developed using a special rendering mechanism called 'zoneless,' which eliminates the need for zone.js in Angular. The primary goal of disabling zone.js is to maximize Angular's performance and transform the app into an almost entirely declarative type of application.",
       "desc2": "For backend purposes, this project utilizes the Real World API provided by Bump.sh. All rights reserved to them."
     },
     "description": {
