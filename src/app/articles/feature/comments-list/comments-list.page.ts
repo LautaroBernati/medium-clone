@@ -6,6 +6,7 @@ import { articleActions } from '../../data-access/store/actions';
 import { Article, Comment } from '../../data-access/services/articles.service';
 import { selectCurrentUser } from '../../../auth/store/store.reducers';
 import { ICurrentUser } from '../../../shared/types/current-user.interface';
+import { PreferencesService } from '../../../shared/services/preferences.service';
 
 @Component({
   selector: 'art-comments-list',
@@ -16,6 +17,7 @@ export class CommentsListPage implements OnDestroy {
   private readonly _store = inject(Store);
   private readonly _destroyEmitter$ = new Subject<boolean>();
   private readonly _showNewCommentDialogEmitter$ = new BehaviorSubject(true);
+  private readonly _prefsService = inject(PreferencesService);
 
   public readonly showNewCommentDialog$ = this._showNewCommentDialogEmitter$.asObservable();
   public readonly data$ = combineLatest({
@@ -27,6 +29,7 @@ export class CommentsListPage implements OnDestroy {
       filter((comments): comments is Comment[] => (Boolean(comments) && Array.isArray(comments))),
     ),
     isLoading: this._store.select(selectArticleIsLoading),
+    theme: this._prefsService.appThemes$,
     isSubmitting: this._store.select(selectArticleIsSubmitting),
     currentUser: this._store.select(selectCurrentUser).pipe(
       filter((currentUser): currentUser is ICurrentUser | null => currentUser !== undefined),

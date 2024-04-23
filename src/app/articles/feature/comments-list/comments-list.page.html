@@ -8,6 +8,7 @@
           style="padding: 0.5rem"
           [comment]="item"
           [isLoading]="data.isLoading"
+          [theme]="data.theme"
           [showAuthorOptions]="item.author.username === data.currentUser?.username"
           (deleteComment)="onDeleteComment($event)"
         ></art-comment-ui>

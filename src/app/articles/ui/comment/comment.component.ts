@@ -6,6 +6,7 @@ import { LetModule, PushModule } from '@ngrx/component';
 import { BehaviorSubject, combineLatest, startWith } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { AppTheme } from '../../../shared/types/themes.interface';
 
 @Component({
   selector: 'art-comment-ui',
@@ -20,7 +21,9 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
   @Input('isLoading') public isLoading = false;
   @Input('isSubmitting') public isSubmitting = false;
   @Input('showAuthorOptions') public showAuthorOptions = false;
+  @Input() public theme: null | AppTheme = null;
 
+  private readonly _themeEmitter$ = new BehaviorSubject<AppTheme | null>(null);
   private readonly _inputValuesEmitter$ = new BehaviorSubject<{
     comment?: Comment;
     isLoading: boolean;
@@ -39,7 +42,7 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
   public readonly form = new FormGroup({
     commentDesc: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),
   });
-
+  public readonly theme$ = this._themeEmitter$.asObservable();
   public readonly data$ = combineLatest({
     formValues: this.form.valueChanges.pipe(startWith(this.form.getRawValue())),
     formStatus: this.form.statusChanges.pipe(startWith(this.form.status)),
@@ -58,6 +61,10 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
       showAuthorOptions: this.showAuthorOptions,
       comment: this.comment,
     });
+
+    if (this.theme) {
+      this._themeEmitter$.next(this.theme);
+    }
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -68,11 +75,16 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
         isSubmitting: changes['isSubmitting'] ? changes['isSubmitting'].currentValue : this._inputValuesEmitter$.getValue().isSubmitting,
       });
     }
+
+    if (changes['theme']) {
+      this._themeEmitter$.next(changes['theme'].currentValue);
+    }
   }
 
   public ngOnDestroy(): void {
     this._inputValuesEmitter$.complete();
     this._showConfirmationEmitter$.complete();
+    this._themeEmitter$.complete();
   }
 
   public handleShowConfirmation(value: boolean): void {

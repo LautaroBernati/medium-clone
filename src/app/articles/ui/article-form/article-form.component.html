@@ -1,5 +1,5 @@
 <div class="container"
-  *ngrxLet="(('article' | translate) | ngrxPush) as translate">
+  *ngrxLet="('article' | translate) as translate">
   <h1 [ngSwitch]="action">
     <ng-container *ngSwitchCase="'create'">{{ translate.create }}</ng-container>
     <ng-container *ngSwitchCase="'edit'">{{ translate.edit }}</ng-container>
@@ -7,7 +7,7 @@
   </h1>
   <hr>
   <form #formTemplate="ngForm"
-    *ngrxLet="{ isLoading: isLoading$, isSubmitting: isSubmitting$, formData } | ngrxPush as data"
+    *ngrxLet="{ isLoading: isLoading$, isSubmitting: isSubmitting$, formData: formData$, theme: theme$ } as data"
     [formGroup]="form"
     (ngSubmit)="onSubmit()"
   >
@@ -46,6 +46,7 @@
             type="text"
             [value]="tag"
             [readonly]="true"
+            [ngStyle]="{ backgroundColor: data.theme === 'dark' ? '#373a3c' : undefined }"
             class="form-control form-control-sm"
           />
           <button

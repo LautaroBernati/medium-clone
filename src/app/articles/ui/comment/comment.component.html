@@ -13,6 +13,7 @@
                 class="form-control form-control-lg"
                 [placeholder]="translate.newComment.placeholder"
                 [formControl]="form.controls.commentDesc"
+                [ngStyle]="{ backgroundColor: (theme$ | ngrxPush) === 'dark' ? '#373a3c' : undefined }"
                 [readonly]="!!data.inputValues.comment || data.inputValues.isLoading"
                 [rows]="4"
               ></textarea>

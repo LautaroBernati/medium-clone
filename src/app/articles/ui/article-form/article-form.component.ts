@@ -7,6 +7,7 @@ import { IBackendErrors } from '../../../shared/types/backend-errors.interface';
 import { BehaviorSubject, combineLatest, startWith } from 'rxjs';
 import { LetModule, PushModule } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
+import { AppTheme } from '../../../shared/types/themes.interface';
 
 @Component({
   selector: 'art-form-ui',
@@ -22,18 +23,22 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class ArticleFormComponent implements OnInit, OnChanges, OnDestroy {
   private readonly _isLoadingEmitter$ = new BehaviorSubject(false);
   private readonly _isSubmittingEmitter$ = new BehaviorSubject(false);
+  private readonly _themeEmitter$ = new BehaviorSubject<AppTheme | null>(null);
 
   public isLoading$ = this._isLoadingEmitter$.asObservable();
   public isSubmitting$ = this._isSubmittingEmitter$.asObservable();
+  public readonly theme$ = this._themeEmitter$.asObservable();
+
   @Input() public action: 'create' | 'edit' | null = null;
   @Input('articleToEdit') public item: Article | null = null;
   @Input('isLoading') public isLoading = false;
   @Input('isSubmitting') public isSubmitting = false;
   @Input('errors') public errors: IBackendErrors | null = null;
+  @Input() public theme: AppTheme | null = null;
+
   @Output('save') public saveEmitter$ = new EventEmitter<EditableArticle>();
 
   public readonly form = new FormGroup({
@@ -45,7 +50,7 @@ export class ArticleFormComponent implements OnInit, OnChanges, OnDestroy {
 
   public readonly addTagControl = new FormControl('', { validators: [Validators.maxLength(50), Validators.minLength(1), Validators.required], nonNullable: true });
 
-  public readonly formData = combineLatest({
+  public readonly formData$ = combineLatest({
     formValues: this.form.valueChanges.pipe(startWith(this.form.getRawValue())),
     formStatus: this.form.statusChanges.pipe(startWith('INVALID')),
     addTagValue: this.addTagControl.valueChanges.pipe(startWith('')),
@@ -65,6 +70,10 @@ export class ArticleFormComponent implements OnInit, OnChanges, OnDestroy {
       this.form.controls.tagList.disable({ emitEvent: false });
       this.addTagControl.disable({ emitEvent: false });
     }
+
+    if (this.theme) {
+      this._themeEmitter$.next(this.theme);
+    }
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -75,11 +84,16 @@ export class ArticleFormComponent implements OnInit, OnChanges, OnDestroy {
     if (changes['isSubmitting']) {
       this._isSubmittingEmitter$.next(changes['isSubmitting'].currentValue);
     }
+
+    if (changes['theme']) {
+      this._themeEmitter$.next(changes['theme'].currentValue);
+    }
   }
 
   public ngOnDestroy(): void {
     this._isLoadingEmitter$.complete();
     this._isSubmittingEmitter$.complete();
+    this._themeEmitter$.complete();
   }
 
   public addTag(): void {
