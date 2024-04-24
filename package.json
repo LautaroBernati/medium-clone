@@ -1,6 +1,6 @@
 {
   "name": "mediumclone-angular",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --configuration development",

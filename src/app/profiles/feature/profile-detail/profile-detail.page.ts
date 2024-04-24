@@ -7,6 +7,7 @@ import { selectProfileData, selectProfileIsLoading, selectProfileValidationError
 import { selectCurrentUser } from '../../../auth/store/store.reducers';
 import { ICurrentUser } from '../../../shared/types/current-user.interface';
 import { Profile } from '../../../shared/services/profiles-main.service';
+import { PreferencesService } from '../../../shared/services/preferences.service';
 
 export declare type ProfileLinks = 'favorites' | 'author';
 
@@ -19,7 +20,9 @@ export class ProfileDetailPage implements OnDestroy {
   private readonly _route = inject(ActivatedRoute);
   private readonly _router = inject(Router);
   private readonly _store = inject(Store);
+  private readonly _prefsService = inject(PreferencesService);
   private readonly _apiUrlEmitter$ = new BehaviorSubject<ProfileLinks>('author');
+
   public readonly apiUrl$ = this._apiUrlEmitter$.pipe(
     map(data => {
       const isFavorites = data === 'favorites';
@@ -68,6 +71,7 @@ export class ProfileDetailPage implements OnDestroy {
     ),
     apiUrl: this.apiUrl$,
     activeLink: this._apiUrlEmitter$,
+    theme: this._prefsService.appThemes$,
   });
 
   public onAuthorPosts(): void {
