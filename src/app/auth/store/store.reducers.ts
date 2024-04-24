@@ -14,6 +14,7 @@ const authFeature = createFeature({
   name: 'auth',
   reducer: createReducer(
     initialState,
+
     on(authActions.register, (state) => ({ ...state, isSubmitting: true, validationErrors: null })),
     on(authActions.registersuccess, (state, action) => ({
       ...state,
@@ -74,7 +75,8 @@ export const {
   name: authFeatureKey,
   reducer: authReducer,
   selectIsSubmitting,
-  selectIsLoading,
+  selectIsLoading: selectAuthIsLoading,
   selectCurrentUser,
   selectValidationErrors,
+  selectAuthState: selectAuthData,
 } = authFeature;

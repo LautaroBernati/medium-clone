@@ -22,8 +22,8 @@ export class CommentsListPage implements OnDestroy {
   public readonly showNewCommentDialog$ = this._showNewCommentDialogEmitter$.asObservable();
   public readonly data$ = combineLatest({
     comments: this._store.select(selectArticleData).pipe(
-      filter((article): article is Article => Boolean(article)),
-      map((article: Article) => (article.slug)),
+      filter(Boolean),
+      map((article) => (article.slug)),
       tap((slug: string) => this._store.dispatch(articleActions.getArticleComments({ slug }))),
       switchMap(() => this._store.select(selectArticleComments)),
       filter((comments): comments is Comment[] => (Boolean(comments) && Array.isArray(comments))),

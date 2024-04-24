@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { isLoginGuard } from './shared/guards/is-login.guard';
 
 const routes: Routes = [
   {
     path: 'register',
     pathMatch: 'full',
     title: 'Register',
+    canMatch: [isLoginGuard],
     loadChildren: () => import('./auth/auth.routes').then(m => m.registerRoutes),
   },
   {
     path: 'login',
     title: 'Log In',
     pathMatch: 'full',
+    canMatch: [isLoginGuard],
     loadChildren: () => import('./auth/auth.routes').then(m => m.loginRoutes),
   },
   {
