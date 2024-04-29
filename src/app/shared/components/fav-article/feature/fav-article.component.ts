@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { favArticleActions } from '../data-access/fav-article.actions';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
+import { selectCurrentUser } from '../../../../auth/store/store.reducers';
 
 /**
  * Because likes or favorites are deemed 'not as important', this component uses the 'optimistic update' approach.
@@ -18,6 +19,10 @@ export class FavArticleComponent implements OnInit, OnDestroy {
   private readonly _favCountEmitter$ = new BehaviorSubject(0);
   private readonly _isFavoritedEmitter$ = new BehaviorSubject(false);
   private readonly _store = inject(Store);
+  
+  public readonly isAuth$ = this._store.select(selectCurrentUser).pipe(
+    map(user => !!user),
+  );
 
   @Input('isFavorited')
   public isFavorited = false;

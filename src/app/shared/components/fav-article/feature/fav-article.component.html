@@ -1,7 +1,9 @@
-<ng-container *ngrxLet="{ count: favCount$, isFavorited: isFavorited$ } as data">
+<ng-container *ngrxLet="{ count: favCount$, isFavorited: isFavorited$, isAuth: isAuth$ } as data">
   <button type="button"
+    [disabled]="!data.isAuth"
+    [ngClass]="{btn: true, 'btn-sm': true, 'btn-primary': data.isFavorited, 'btn-outline-primary': !data.isFavorited}"
     (click)="onFavorite()"
-    [ngClass]="{btn: true, 'btn-sm': true, 'btn-primary': data.isFavorited, 'btn-outline-primary': !data.isFavorited}">
+  >
     <i class="ion-heart"></i>
     <span>&nbsp;{{ data.count }}</span>
   </button>
