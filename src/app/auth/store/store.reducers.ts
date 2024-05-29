@@ -15,59 +15,59 @@ const authFeature = createFeature({
   reducer: createReducer(
     initialState,
 
-    on(authActions.register, (state) => ({ ...state, isSubmitting: true, validationErrors: null })),
-    on(authActions.registersuccess, (state, action) => ({
+    on(authActions.register, (state): IAuthState => ({ ...state, isSubmitting: true, validationErrors: null })),
+    on(authActions.registerSuccess, (state, action): IAuthState => ({
       ...state,
       isSubmitting: false,
       currentUser: action.currentUser,
     })),
-    on(authActions.registerfailure, (state, action) => ({
+    on(authActions.registerFailure, (state, action): IAuthState => ({
       ...state,
       isSubmitting: false,
       validationErrors: action.errors,
     })),
 
-    on(authActions.login, (state) => ({ ...state, isSubmitting: true, validationErrors: null })),
-    on(authActions.loginsuccess, (state, action) => ({
+    on(authActions.login, (state): IAuthState => ({ ...state, isSubmitting: true, validationErrors: null })),
+    on(authActions.loginSuccess, (state, action): IAuthState => ({
       ...state,
       isSubmitting: false,
       currentUser: action.currentUser,
     })),
-    on(authActions.loginfailure, (state, action) => ({
+    on(authActions.loginFailure, (state, action): IAuthState => ({
       ...state,
       isSubmitting: false,
       validationErrors: action.errors,
     })),
 
-    on(authActions.getcurrentuser, (state) => ({ ...state, isLoading: true, validationErrors: null })),
-    on(authActions.getcurrentusersuccess, (state, action) => ({
+    on(authActions.getCurrentUser, (state): IAuthState => ({ ...state, isLoading: true, validationErrors: null })),
+    on(authActions.getCurrentUserSuccess, (state, action): IAuthState => ({
       ...state,
       isLoading: false,
       currentUser: action.currentUser,
     })),
-    on(authActions.getcurrentuserfailure, (state) => ({
+    on(authActions.getCurrentUserFailure, (state): IAuthState => ({
       ...state,
       isLoading: false,
       currentUser: null, // unauthorized
     })),
 
-    on(authActions.logOut, (state) => ({ ...state })),
-    on(authActions.logOutSuccess, (state) => ({ ...state, isLoading: false, currentUser: null })),
-    on(authActions.logOutFailure, () => initialState),
+    on(authActions.logOut, (state): IAuthState => ({ ...state })),
+    on(authActions.logOutSuccess, (state): IAuthState => ({ ...state, isLoading: false, currentUser: null })),
+    on(authActions.logOutFailure, (): IAuthState => initialState),
 
-    on(authActions.updateCurrentUser, (state) => ({ ...state, isSubmitting: true })),
-    on(authActions.updateCurrentUserSuccess, (state, { currentUser }) => ({
+    on(authActions.updateCurrentUser, (state): IAuthState => ({ ...state, isSubmitting: true })),
+    on(authActions.updateCurrentUserSuccess, (state, { currentUser }): IAuthState => ({
       ...state,
       isSubmitting: false,
       currentUser,
     })),
-    on(authActions.updateCurrentUserFailure, (state, { errors }) => ({
+    on(authActions.updateCurrentUserFailure, (state, { errors }): IAuthState => ({
       ...state,
       isSubmitting: false,
       validationErrors: errors,
     })),
 
-    on(routerNavigatedAction, (state) => ({ ...state, validationErrors: null })),
+    on(routerNavigatedAction, (state): IAuthState => ({ ...state, validationErrors: null })),
   ),
 });
 

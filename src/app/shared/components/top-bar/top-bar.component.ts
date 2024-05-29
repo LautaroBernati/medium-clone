@@ -5,7 +5,7 @@ import { selectCurrentUser } from '../../../auth/store/store.reducers';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 // import { authActions } from '../../../auth/store/store.actions';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { getLangList } from '../../util/lang-list.function';
 import { AppLanguageValue } from '../../types/language-list.interface';
@@ -15,7 +15,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   selector: 'mc-topbar',
   templateUrl: 'top-bar.component.html',
   standalone: true,
-  imports: [CommonModule, RouterModule, PushModule, LetModule, ReactiveFormsModule, TranslateModule],
+  imports: [CommonModule, RouterModule, PushPipe, LetDirective, ReactiveFormsModule, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopbarComponent {

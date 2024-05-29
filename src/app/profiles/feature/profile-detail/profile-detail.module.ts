@@ -5,7 +5,7 @@ import { ProfileDetailRoutingModule } from './profile-detail-routing.module';
 import { ProfileComponent } from '../../ui/profile/profile.component';
 import { FeedComponent } from '../../../shared/components/feed/feed.component';
 import { FollowProfileModule } from '../../../shared/components/follow-profile/feature/follow-profile.module';
-import { PushModule } from '@ngrx/component';
+import { PushPipe } from '@ngrx/component';
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import { PushModule } from '@ngrx/component';
     ProfileComponent,
     FeedComponent,
     FollowProfileModule,
-    PushModule,
+    PushPipe,
   ],
   exports: [ProfileDetailPage],
   providers: [],

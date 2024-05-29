@@ -5,7 +5,7 @@ import { ArticleEditPage } from './article-edit.page';
 import { ArticleFormComponent } from '../../ui/article-form/article-form.component';
 import { BackendErrorMessagesComponent } from '../../../shared/components/backend-error-messages/backend-error-messages.component';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
-import { PushModule } from '@ngrx/component';
+import { PushPipe } from '@ngrx/component';
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import { PushModule } from '@ngrx/component';
     ArticleFormComponent,
     BackendErrorMessagesComponent,
     LoadingComponent,
-    PushModule,
+    PushPipe,
   ],
   exports: [],
   providers: [],

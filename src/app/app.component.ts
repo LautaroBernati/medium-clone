@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { authActions } from './auth/store/store.actions';
-import { NavigationEnd, Router } from '@angular/router';
 import { RenderScheduler } from '@ngrx/component';
 import { delay, filter, take } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { getLangList } from './shared/util/lang-list.function';
 import { prefsActions } from './shared/store/preferences/preferences.actions';
 import { selectAppSavePrefs } from './shared/store/preferences/preferences.reducers';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +32,7 @@ export class AppComponent {
       this._cdr.detectChanges();
     });
 
-    this._store.dispatch(authActions.getcurrentuser());
+    this._store.dispatch(authActions.getCurrentUser());
     this._store.dispatch(prefsActions.getSavePreferences());
 
     this._store.select(selectAppSavePrefs).pipe(

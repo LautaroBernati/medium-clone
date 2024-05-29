@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Comment } from '../../data-access/services/articles.service';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { BehaviorSubject, combineLatest, startWith } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -14,7 +14,7 @@ import { AppTheme } from '../../../shared/types/themes.interface';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['comment.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule, LetModule, PushModule, RouterModule, TranslateModule],
+  imports: [CommonModule, ReactiveFormsModule, LetDirective, PushPipe, RouterModule, TranslateModule],
 })
 export class CommentComponent implements OnInit, OnChanges, OnDestroy {
   @Input('comment') public comment?: Comment;

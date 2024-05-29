@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { selectIsSubmitting, selectValidationErrors } from '../../store/store.reducers';
 import { combineLatest } from 'rxjs';
 import { BackendErrorMessagesComponent } from '../../../shared/components/backend-error-messages/backend-error-messages.component';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 
 
@@ -15,7 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'mc-register',
   templateUrl: 'register.component.html',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, CommonModule, BackendErrorMessagesComponent, PushModule, TranslateModule, LetModule],
+  imports: [RouterModule, ReactiveFormsModule, CommonModule, BackendErrorMessagesComponent, PushPipe, TranslateModule, LetDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent {

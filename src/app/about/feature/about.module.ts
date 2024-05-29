@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AboutPage } from './about.page';
 import { AboutRoutingModule } from './about-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 
 
 @NgModule({
@@ -11,8 +11,8 @@ import { LetModule, PushModule } from '@ngrx/component';
   imports: [
     AboutRoutingModule,
     CommonModule,
-    LetModule,
-    PushModule,
+    LetDirective,
+    PushPipe,
     TranslateModule,
   ],
   exports: [AboutPage],
