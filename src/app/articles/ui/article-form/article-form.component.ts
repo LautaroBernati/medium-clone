@@ -5,7 +5,7 @@ import { Article, EditableArticle } from '../../data-access/services/articles.se
 import { BackendErrorMessagesComponent } from '../../../shared/components/backend-error-messages/backend-error-messages.component';
 import { IBackendErrors } from '../../../shared/types/backend-errors.interface';
 import { BehaviorSubject, combineLatest, startWith } from 'rxjs';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppTheme } from '../../../shared/types/themes.interface';
 
@@ -17,8 +17,8 @@ import { AppTheme } from '../../../shared/types/themes.interface';
     CommonModule,
     ReactiveFormsModule,
     BackendErrorMessagesComponent,
-    LetModule,
-    PushModule,
+    LetDirective,
+    PushPipe,
     TranslateModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

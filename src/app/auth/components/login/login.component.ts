@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { selectIsSubmitting, selectValidationErrors } from '../../store/store.reducers';
 import { combineLatest } from 'rxjs';
 import { BackendErrorMessagesComponent } from '../../../shared/components/backend-error-messages/backend-error-messages.component';
-import { LetModule } from '@ngrx/component';
+import { LetDirective } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 
 
@@ -15,7 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'mc-login',
   templateUrl: 'login.component.html',
   standalone: true,
-  imports: [RouterModule, LetModule, ReactiveFormsModule, CommonModule, BackendErrorMessagesComponent, TranslateModule],
+  imports: [RouterModule, LetDirective, ReactiveFormsModule, CommonModule, BackendErrorMessagesComponent, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {

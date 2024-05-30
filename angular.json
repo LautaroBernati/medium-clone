@@ -17,12 +17,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/mediumclone_angular",
+            "outputPath": "dist/mediumclone_angular/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "baseHref": "/medium-clone/",
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -115,6 +114,76 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/mediumclone_angular/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.production.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "vendorChunk": false
+            },
+            "development": {
+              "buildOptimizer": false,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ],
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "mediumclone_angular:build:development",
+              "serverTarget": "mediumclone_angular:server:development"
+            },
+            "production": {
+              "browserTarget": "mediumclone_angular:build:production",
+              "serverTarget": "mediumclone_angular:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/", "/home", "/feed", "/login", "/register", "/tags", "/articles", "/profiles", "/about", "/settings"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "mediumclone_angular:build:production",
+              "serverTarget": "mediumclone_angular:server:production"
+            },
+            "development": {
+              "browserTarget": "mediumclone_angular:build:development",
+              "serverTarget": "mediumclone_angular:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

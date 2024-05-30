@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { filter, map, take } from 'rxjs';
@@ -20,7 +20,7 @@ import { prefsActions } from '../../store/preferences/preferences.actions';
   styleUrls: ['sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [TranslateModule, CommonModule, RouterModule, LetModule, PushModule, ReactiveFormsModule]
+  imports: [TranslateModule, CommonModule, RouterModule, LetDirective, PushPipe, ReactiveFormsModule]
 })
 export class SidebarComponent {
   private readonly _store = inject(Store);

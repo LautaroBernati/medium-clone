@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -7,6 +7,6 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: 'loading.component.html',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PushModule, LetModule, TranslateModule],
+  imports: [PushPipe, LetDirective, TranslateModule],
 })
 export class LoadingComponent { }

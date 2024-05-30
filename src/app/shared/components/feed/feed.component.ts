@@ -13,7 +13,7 @@ import queryString from 'query-string';
 import { TagListComponent } from '../tag-list/tag-list.component';
 import { IGetFeedResponse } from './types/feed-response.interface';
 import { FavArticleModule } from '../fav-article/feature/fav-article.module';
-import { PushModule } from '@ngrx/component';
+import { PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -28,7 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
     PaginationComponent,
     TagListComponent,
     FavArticleModule,
-    PushModule,
+    PushPipe,
     TranslateModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

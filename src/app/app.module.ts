@@ -1,4 +1,4 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule, inject, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { authFeatureKey, authReducer } from './auth/store/store.reducers';
-import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { EffectsModule, provideEffects } from '@ngrx/effects';
 import * as authEffects from './auth/store/store.effects';
 import * as feedEffects from './shared/components/feed/store/effects';
@@ -26,14 +26,14 @@ import * as profileEffects from './profiles/data-access/store/profiles-store.eff
 import * as preferencesEffects from './shared/store/preferences/preferences.effects';
 import { ProfilesService } from './profiles/data-access/profiles.service';
 import { FooterComponent } from './shared/components/footer/footer.component';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule, TranslateStore } from '@ngx-translate/core';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { preferencesFeatureKey, preferencesReducer } from './shared/store/preferences/preferences.reducers';
+import { PersistanceService, PersistanceServiceServer } from './shared/services/persistance.service';
+import { PersistanceClass } from './shared/classes/persistance.class';
+import { TranslateJsonLoader } from './shared/classes/translate-json-loader';
+import { PlatformService } from './shared/services/platform.service';
 
-export function httpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(httpClient, './assets/i18n/');
-}
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,8 +43,9 @@ export function httpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: httpLoaderFactory,
-        deps: [HttpClient],
+        useFactory: () => {
+          return new TranslateJsonLoader();
+        },
       },
       defaultLanguage: 'en',
     }),
@@ -57,6 +58,20 @@ export function httpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     FooterComponent,
   ],
   providers: [
+    TranslateJsonLoader,
+    TranslateStore,
+    {
+      provide: PersistanceService,
+      useFactory: (): PersistanceClass => {
+        const service = inject(PlatformService);
+
+        if (service.isBrowser()) {
+          return new PersistanceService();
+        } else {
+          return new PersistanceServiceServer();
+        }
+      },
+    },
     provideHttpClient(withInterceptors([authInterceptor])),
     ArticlesService,
     ProfilesService,

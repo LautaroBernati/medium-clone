@@ -3,7 +3,7 @@ import { ErrorPagesPage } from './error-pages.page';
 import { CommonModule } from '@angular/common';
 import { ErrorPagesRoutingModule } from './error-pages-routing.module';
 import { ErrorComponent } from '../ui/error.component';
-import { PushModule } from '@ngrx/component';
+import { PushPipe } from '@ngrx/component';
 
 
 @NgModule({
@@ -11,7 +11,7 @@ import { PushModule } from '@ngrx/component';
     CommonModule,
     ErrorPagesRoutingModule,
     ErrorComponent,
-    PushModule,
+    PushPipe,
   ],
   declarations: [ErrorPagesPage],
   exports: [ErrorPagesPage],

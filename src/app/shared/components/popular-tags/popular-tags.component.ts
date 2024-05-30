@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { LoadingComponent } from '../loading/loading.component';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { RouterModule } from '@angular/router';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 import { PreferencesService } from '../../services/preferences.service';
 
@@ -16,7 +16,7 @@ import { PreferencesService } from '../../services/preferences.service';
   templateUrl: 'popular-tags.component.html',
   styleUrls: ['popular-tags.component.scss'],
   standalone: true,
-  imports: [CommonModule, LoadingComponent, ErrorMessageComponent, RouterModule, PushModule, LetModule, TranslateModule],
+  imports: [CommonModule, LoadingComponent, ErrorMessageComponent, RouterModule, PushPipe, LetDirective, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopularTagsComponent implements OnInit {

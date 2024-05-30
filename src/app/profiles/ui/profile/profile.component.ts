@@ -3,7 +3,7 @@ import { Profile } from '../../../shared/services/profiles-main.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProfileLinks } from '../../feature/profile-detail/profile-detail.page';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject } from 'rxjs';
 import { AppTheme } from '../../../shared/types/themes.interface';
@@ -13,7 +13,7 @@ import { AppTheme } from '../../../shared/types/themes.interface';
   templateUrl: 'profile.component.html',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, RouterModule, PushModule, LetModule, TranslateModule]
+  imports: [CommonModule, RouterModule, PushPipe, LetDirective, TranslateModule]
 })
 export class ProfileComponent implements OnInit, OnChanges, OnDestroy {
   private readonly _themesEmitter$ = new BehaviorSubject<AppTheme | null>(null);

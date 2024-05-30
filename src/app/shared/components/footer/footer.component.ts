@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { LetModule } from '@ngrx/component';
+import { LetDirective } from '@ngrx/component';
 import packageJson from '../../../../../package.json';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { PreferencesService } from '../../services/preferences.service';
   styleUrls: ['footer.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [LetModule, TranslateModule, CommonModule],
+  imports: [LetDirective, TranslateModule, CommonModule],
 })
 export class FooterComponent {
   private readonly _prefsService = inject(PreferencesService);
