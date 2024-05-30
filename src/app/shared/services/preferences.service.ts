@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Inject, Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { AppLanguageValue } from '../types/language-list.interface';
@@ -6,6 +6,7 @@ import { prefsActions } from '../store/preferences/preferences.actions';
 import { selectAppLang, selectAppSavePrefs, selectAppTheme } from '../store/preferences/preferences.reducers';
 import { AppTheme } from '../types/themes.interface';
 import { take } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 export class PreferencesService {
@@ -16,11 +17,11 @@ export class PreferencesService {
   public readonly appThemes$ = this._store.select(selectAppTheme);
   public readonly savePreferences$ = this._store.select(selectAppSavePrefs);
 
-  constructor() {
+  constructor(@Inject(DOCUMENT) private _document: Document) {
     this._store.select(selectAppLang).subscribe((lang) => this._translateService.use(lang));
 
     this._store.select(selectAppTheme).subscribe((theme) => {
-      document.body.setAttribute('data-bs-theme', theme);
+      this._document.body.setAttribute('data-bs-theme', theme);
     });
   }
 
