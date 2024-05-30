@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/medium-clone/",
             "outputPath": "dist/mediumclone_angular/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -169,7 +170,6 @@
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
-            "baseHref": "/medium-clone/",
             "routes": [
               "/", "/home", "/feed", "/login", "/register", "/tags", "/articles", "/profiles", "/about", "/settings"
             ]
