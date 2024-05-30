@@ -164,7 +164,9 @@
     "aboutApp": {
       "tools": "Tools",
       "desc1": "This application was built for showcase purposes. All data is deleted after 24 hours. It was developed using a special rendering mechanism called 'zoneless,' which eliminates the need for zone.js in Angular. The primary goal of disabling zone.js is to maximize Angular's performance and transform the app into an almost entirely declarative type of application.",
-      "desc2": "For backend purposes, this project utilizes the Real World API provided by Bump.sh. All rights reserved to them."
+      "desc2": "For backend purposes, this project utilizes the Real World API provided by Bump.sh. All rights reserved to them.",
+      "v2": "Server-Side Rendering",
+      "v2desc": "In version 2.0.0, I introduced support for Angular Universal (Server-Side Rendering), facilitating even faster first-contentful-paint and reduced bundle sizes. This update replaces the need for the Hash Routing strategy with native routing, offering a more streamlined approach."
     },
     "description": {
       "part1": "Hi, my name is Lautaro. I'm an accomplished web developer, with now more than ",

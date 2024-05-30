@@ -17,7 +17,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref": "/medium-clone/",
             "outputPath": "dist/mediumclone_angular/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -37,6 +36,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/medium-clone/",
               "budgets": [
                 {
                   "type": "initial",

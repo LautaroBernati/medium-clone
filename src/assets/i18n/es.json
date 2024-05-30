@@ -164,7 +164,9 @@
     "aboutApp": {
       "tools": "Herramientas",
       "desc1": "Esta aplicación fue construida con fines de demostración, todos los datos son eliminados después de 24 horas. Se construyó utilizando un mecanismo de renderizado especial llamado zoneless, en el cual se cancela zone.js en Angular, proporcionando al desarrollador sin un esqueleto de renderizado y teniendo que detectar y actuar manualmente sobre los cambios en los templates. Para este propósito, se utilizó la librería @ngrx/component, haciendo uso del LetModule y PushModule que facilitan el objetivo. La idea principal detrás de deshabilitar zone.js es impulsar la velocidad de Angular al máximo, así como intentar convertir esta aplicación en un tipo de aplicación casi totalmente declarativa.",
-      "desc2": "Para propósitos de backend, este proyecto utiliza la API Real World proporcionada por Bump.sh. Todos los derechos reservados a ellos."
+      "desc2": "Para propósitos de backend, este proyecto utiliza la API Real World proporcionada por Bump.sh. Todos los derechos reservados a ellos.",
+      "v2": "Server-Side Rendering",
+      "v2desc": "En la versión 2.0.0, introduje soporte para Angular Universal (Renderización del lado del servidor), lo que permite una primera carga de contenido aún más rápida y tamaños de paquete reducidos. Esta adición también elimina la necesidad de usar la estrategia de enrutamiento de hash, a favor de enrutar la app nativamente."
     },
     "description": {
       "part1": "Hola, mi nombre es Lautaro. Soy un desarrollador web, con más de ",
