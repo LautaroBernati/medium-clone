@@ -169,6 +169,7 @@
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
+            "baseHref": "/medium-clone/",
             "routes": [
               "/", "/home", "/feed", "/login", "/register", "/tags", "/articles", "/profiles", "/about", "/settings"
             ]
