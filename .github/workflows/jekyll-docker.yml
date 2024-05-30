@@ -21,7 +21,7 @@ jobs:
 
     - name: Install Angular CLI
       run: |
-        npm install -g @angular/cli@16.2.12
+        npm install -g @angular/cli@16.2.12 --skip-confirmation
         ng add @angular/platform-server@16.2.12
 
     - name: Install project dependencies
